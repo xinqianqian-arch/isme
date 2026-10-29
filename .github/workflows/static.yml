@@ -1,12 +1,11 @@
-# Cloudflare Pages publishes from the connected Git repository.
-# This workflow validates and packages the site; it does NOT deploy to GitHub Pages.
+# 11edu.cc 由 Cloudflare Worker「11ai」从 main 自动构建发布（见 docs/cloudflare-deployment.md）。
+# 这个工作流只做构建检查和打包，不负责发布。
 name: Website build checks (Cloudflare publishes)
 
 on:
   push:
     branches:
       - main
-      - feature/eleventy-content-seo
   pull_request:
     branches:
       - main

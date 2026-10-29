@@ -1,0 +1,15 @@
+// Cloudflare Worker「11ai」：只托管 npm run build 生成的 dist/ 静态文件，自定义域名 11edu.cc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "11ai",
+  "compatibility_date": "2026-10-23",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "11edu.cc", "custom_domain": true }],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": { "enabled": true }
+}
