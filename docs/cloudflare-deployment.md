@@ -5,7 +5,7 @@
 
 ## 自动发布（Workers Builds）
 
-`11ai` → Settings → Build 连接 GitHub 仓库 `xinqianqian-arch/isme`：
+`11ai` → Settings → Build 已连接 GitHub 仓库 `xinqianqian-arch/isme`（2026-10-29 配好）：
 
 | 项目 | 值 |
 | --- | --- |
@@ -13,7 +13,9 @@
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
 | Root directory | `/` |
-| 环境变量 | `NODE_VERSION` = `22` |
+| Node 版本 | 自动读取 `.nvmrc`（22），无需环境变量 |
+
+构建命令不能留空：留空时不会生成 `dist/`，部署会报 “assets.directory ... does not exist”。
 
 之后每次推送到 `main`，Cloudflare 会安装依赖、运行 `npm run build`（构建自带检查，失败就不会发布），再用 `wrangler deploy` 把 `dist/` 发布到 11edu.cc。
 GitHub Actions（`.github/workflows/static.yml`）只做构建检查，不负责发布。
