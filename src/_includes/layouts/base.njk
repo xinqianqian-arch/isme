@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ title or site.name }} - 十一课件</title>
+<meta name="description" content="{{ description or site.description }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="{{ title or site.name }}">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<link rel="icon" href="/assets/avatar.webp" type="image/webp">
+<link rel="stylesheet" href="/css/site.css">
+{% if lesson and not lesson.seoReady %}<meta name="robots" content="noindex,follow">{% endif %}
+{% if lesson %}<script type="application/ld+json">{{ lesson.schema | json | safe }}</script>{% elif unit %}<script type="application/ld+json">{{ unit.schema | json | safe }}</script>{% endif %}
+</head>
+<body>
+<a class="skip" href="#main">跳至正文</a>
+<header class="topbar">
+  <div class="top-inner">
+    <a class="logo" href="/"><img src="/assets/avatar.webp" width="38" height="38" alt="">十一课件</a>
+    <nav aria-label="主导航"><a href="/">首页</a><a href="/textbooks/bsd/">北师大版</a><a href="/courses/">课件展厅</a><a href="/articles/">教学文章</a><a href="/about/">关于我</a></nav>
+  </div>
+</header>
+<main class="container" id="main">{{ content | safe }}</main>
+<footer class="footer">
+  <div class="footer-inner"><strong>十一课件 · 让数学课动起来</strong>
+  <p>面向小学数学教师的教材导航、备课思路与原创交互课件。</p>
+  <p><a href="/textbooks/bsd/">北师大版教材目录</a> · <a href="/about/">关于创作者</a> · <a href="{{ site.social.xiaohongshu }}" target="_blank" rel="noopener noreferrer nofollow">小红书主页</a></p>
+  <small>本网站为独立原创教学参考平台，非教材出版社官方网站。不同教材修订版次可能调整章节；购买资源请以实际发布页面为准。</small></div>
+</footer>
+</body>
+</html>

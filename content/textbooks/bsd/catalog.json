@@ -1,0 +1,2558 @@
+{
+  "version": "2026-10-30",
+  "note": "教材主题与课题目录来源于多处公开教育目录核对；2024修订与既有版并行。本网站为独立原创备课内容，教材印次变化请以实际教科书为准。",
+  "books": [
+    {
+      "edition": "bsd",
+      "grade": 1,
+      "volume": 1,
+      "revision": "2024课标修订版",
+      "source": "https://www.dzkbw.org/book/5128.html",
+      "unitListVerified": true,
+      "unitCount": 5,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "生活中的数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "走进美丽乡村"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "玩具"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "小猫钓鱼"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "文具"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "数鸡蛋"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "快乐的午餐"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "动物乐园"
+            }
+          ],
+          "focus": "从真实物品的数量出发建立数感，理解0到10的数、顺序、大小和一一对应。",
+          "pitfall": "把物体大小当成数量多少，或数数时漏数、重复数。",
+          "activity": "用玩具排队、数字卡片和配对游戏，让学生边摆边说“几个”“第几个”。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "5以内数加与减",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "一共有多少"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "还剩下多少"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "可爱的小猫"
+            }
+          ],
+          "focus": "理解合起来用加法、去掉一部分用减法，能用图示和算式表达数量变化。",
+          "pitfall": "只记算式不理解加减含义，把“还剩”误当作加法。",
+          "activity": "让学生用两组圆片合并、拿走，再为同一情境口头解释式子。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "整理与分类",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "整理房间"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "一起来分类"
+            }
+          ],
+          "focus": "尝试按颜色、形状和用途确定分类标准，比较不同分法得到的结果。",
+          "pitfall": "分类时变换标准，造成重复计数或遗漏。",
+          "activity": "让学生分类整理教具，再说出分类规则并检查是否不重不漏。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "10以内数加与减",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "猜数游戏"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "背土豆"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "课间"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "小鸡吃食"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "乘车"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "挖红薯"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "可爱的企鹅"
+            },
+            {
+              "id": "lesson-08",
+              "order": 8,
+              "title": "做个加法表"
+            },
+            {
+              "id": "lesson-09",
+              "order": 9,
+              "title": "做个减法表"
+            }
+          ],
+          "focus": "把10以内的分解组合与加减运算联系起来，逐步形成口算策略和解决问题的能力。",
+          "pitfall": "一图多式时不关注数量关系，连加连减时漏算步骤。",
+          "activity": "利用十格框和数字卡，比较不同算法并制作属于学生自己的加减法表。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "有趣的立体图形",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "认识图形"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "我说你做"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "怎样搭得高"
+            }
+          ],
+          "focus": "观察长方体、正方体、圆柱、球等立体图形的形状与特征，初步发展空间观念。",
+          "pitfall": "把平面图形和立体图形混淆，认为只有正着摆放才能辨认形状。",
+          "activity": "让学生摸一摸、滚一滚、搭一搭，并描述物体能否滚动和稳定堆叠的原因。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 1,
+      "volume": 2,
+      "revision": "2024课标修订版",
+      "source": "https://www.renjiaoshe.com/p/526422.html",
+      "unitListVerified": true,
+      "unitCount": 6,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "20以内数与加法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "古人计数（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "古人计数（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "搭积木"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "开心农场"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "一起做家务"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "小兔子安家"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "做个加法表"
+            }
+          ],
+          "focus": "认识11至20的数及位值，学习十加几、进位加法和凑十策略。",
+          "pitfall": "只数实物而没有形成“一个十和几个一”的十进位结构。",
+          "activity": "用小棒捆十和十格框演示，从直观摆放逐步过渡到心算。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "图形大变身（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "做一做"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "找一找"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "影子剧场"
+            }
+          ],
+          "focus": "通过描面、印面和观察影子，体验从立体物体中发现平面形状。",
+          "pitfall": "误以为立体图形的面都一样，不能区分侧面和正面。",
+          "activity": "用积木、印泥、纸片和光源做“从体到面”的观察活动。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "20以内数与减法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "买文具"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "捉迷藏"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "凑数游戏"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "开会啦"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "跳伞表演"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "美丽的田园"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "做个减法表"
+            }
+          ],
+          "focus": "理解十几减几的退位减法，比较破十法和想加算减等不同思路。",
+          "pitfall": "把被减数个位不够减时直接反过来相减。",
+          "activity": "先摆十根一捆的小棒，再拆十、补差，引导学生解释为什么要退位。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "100以内数的认识",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "身边的数"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "数一数"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "数豆子"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "谁的红果多"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "小小养殖场"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "做个百数表"
+            }
+          ],
+          "focus": "建立十位与个位的数位意识，读写比较100以内的数并观察百数表规律。",
+          "pitfall": "数位混淆，例如把“六十零三”写成603。",
+          "activity": "用计数器、十捆小棒和百数表，研究相邻数与数位变化。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "100以内数加与减（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "小兔请客"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "采松果"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "青蛙吃虫子"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "算一算"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "有趣的算式"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "回收废品"
+            }
+          ],
+          "focus": "借助整十数运算、口算和生活情境解决不进位不退位的简单加减问题。",
+          "pitfall": "把十位数字和个位数字直接混加，忽略数位。",
+          "activity": "展示小棒模型和数位表，讨论先算十位还是先算个位。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "有趣的平面图形（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "认识图形"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "动手做（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "动手做（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "动手做（三）"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "拼图大挑战"
+            }
+          ],
+          "focus": "辨认长方形、正方形、三角形和圆，经历折、剪、拼、摆发展几何直观。",
+          "pitfall": "对旋转后的图形辨识不稳，把“斜放”误当成另一种图形。",
+          "activity": "用七巧板、彩纸和方格纸设计图案，说出每一块图形的特点。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 2,
+      "volume": 1,
+      "revision": "2024课标修订版",
+      "source": "https://www.jyeoo.com/resource/tb/44/99271",
+      "unitListVerified": true,
+      "unitCount": 8,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "100以内数加与减（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "图书角"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "摘苹果"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "借阅图书"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "收玉米"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "跳绳"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "套圈游戏"
+            }
+          ],
+          "focus": "借助两位数加减计算中的进位退位，学习竖式书写并联系生活解决问题。",
+          "pitfall": "相同数位没有对齐，或加法进位、减法退位时漏写。",
+          "activity": "用计数器和数位格对比口算、竖式，再结合购物和借阅情境验算。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "测量（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "教室有多长"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "课桌有多长"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "1米有多长"
+            }
+          ],
+          "focus": "认识厘米和米，选择合适工具测量并培养估测能力。",
+          "pitfall": "从尺子“1”刻度开始测量却直接把末端读数当长度。",
+          "activity": "让学生先估再量，比较身体尺与刻度尺的结果。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "数一数与乘法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "小小清点员"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "儿童乐园"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "电子图中的乘法"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "动物聚会"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "快乐的动物"
+            }
+          ],
+          "focus": "把相同加数连加归纳成乘法，理解“几个几”与乘法算式的对应。",
+          "pitfall": "把每组数量与组数交换时不能解释意义。",
+          "activity": "用点阵图、座位方阵和实物分组建立乘法表象。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "乘法口诀（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "文物中的乘法口诀"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "做家务"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "需要几个轮子"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "回家路上"
+            }
+          ],
+          "focus": "通过重复加法和规律探索掌握2至6的乘法口诀。",
+          "pitfall": "口诀背得熟却无法判断题目中每组数量和组数。",
+          "activity": "让学生结合车轮、手指和节奏活动编口诀、解释口诀。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "分一分与除法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分物游戏"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分水果"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分糖果"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "分香蕉"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "小熊开店"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "花园"
+            }
+          ],
+          "focus": "在等分、包含两种情境中理解除法，建立乘除之间的联系。",
+          "pitfall": "误把“每份几个”和“分成几份”混为一谈。",
+          "activity": "用圆片摆出两种分法，再用乘法口诀检查商。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "图形的运动（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "折一折，做一做"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "好玩的华容道"
+            }
+          ],
+          "focus": "通过对折与平移认识轴对称，观察图形位置变化而形状不变。",
+          "pitfall": "把整体转动误认为平移，对称轴画得不准确。",
+          "activity": "用折纸、剪纸和方格棋移动图形，检验对应点是否重合。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "乘法口诀（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "有多少张贴画"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "《西游记》中的乘法口诀"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "有多少无人机"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "能解决吗"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "做个乘法表"
+            }
+          ],
+          "focus": "掌握7、8、9相关口诀并利用口诀间规律提高计算效率。",
+          "pitfall": "将相近口诀如7×8和8×9混淆。",
+          "activity": "通过贴画阵列和乘法表找对称、倍数及相邻口诀的关系。"
+        },
+        {
+          "id": "unit-08",
+          "order": 8,
+          "title": "乘除法的应用（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "长颈鹿与小鸟"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "农家小院"
+            }
+          ],
+          "focus": "用乘法和除法处理倍数关系与分组问题，辨析求“几倍”和“几倍是多少”。",
+          "pitfall": "见到“倍”字就做乘法，没有判断单位“1”。",
+          "activity": "画条形图表达两种数量关系，再根据问题选择乘除法。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 2,
+      "volume": 2,
+      "revision": "2024课标修订版",
+      "source": "https://www.yuntaigo.com/book.action?recordid=bm1tbGtub2M5Nzg3NTQyMzYzNTY1",
+      "unitListVerified": true,
+      "unitCount": 7,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "100以内数加与减（三）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "谁的得分高"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "去军营"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "星星合唱队"
+            }
+          ],
+          "focus": "在连续加减和加减混合问题中理解运算步骤，培养估算与验算习惯。",
+          "pitfall": "列竖式时漏写进位退位，计算后不检查合理性。",
+          "activity": "用行程和人数变化记录表展示连续变化，口头解释每一步算式。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "图形大变身（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "校园一角"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "小蜗牛慢慢爬"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "蜗牛的家"
+            }
+          ],
+          "focus": "探索长方体、正方体、圆柱和球之间的联系，结合折叠和展开观察面与体。",
+          "pitfall": "只根据物体放置方向判断形状，忽略面与体的对应。",
+          "activity": "折纸盒、拆纸盒、描各个面，比较展开图与立体物体。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "除法的应用",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "搭一搭（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "搭一搭（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分松果"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "租船"
+            }
+          ],
+          "focus": "理解余数的含义，学习有余数除法与竖式，利用“余数小于除数”检验结果。",
+          "pitfall": "余数不小于除数或在“至少需要几组”问题里忽略剩余。",
+          "activity": "用装袋、租船等情境实际分一分，比较“分完”和“还剩”的结论。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "生活中的大数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "福建土楼"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "数一数（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "数一数（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "数说西藏"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "哪座山更高"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "有多少个字"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "有多厚"
+            }
+          ],
+          "focus": "认识千、万以内的数与数位顺序，学习读写比较并感受较大数量。",
+          "pitfall": "把数中间的零漏读漏写或比较大小只看某一位。",
+          "activity": "在计数器上逐位拨珠，结合学校人数与距离理解量级。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "有趣的平面图形（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "图形王国"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "动手做（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "动手做（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "百变七巧板"
+            }
+          ],
+          "focus": "认识平行四边形的特征，用七巧板和拼摆活动发展对图形变化的认识。",
+          "pitfall": "只按外观的“歪斜”判断是否为平行四边形。",
+          "activity": "用活动平行四边形和七巧板拼图比较边、角的特征。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "大数加与减（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "鱼菜共生"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "保护野生鸟类"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "保护野生哺乳动物"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "美丽滇池"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "算得对吗"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "有多远"
+            }
+          ],
+          "focus": "学习万以内数加减和口算策略，利用位值模型解释进位与退位。",
+          "pitfall": "多位数连续退位时遗漏向高位借位的步骤。",
+          "activity": "用数位表和购物账本演示拆分、凑整与笔算验算。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "分类",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "怎样分组"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "水上乐园"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分扣子"
+            }
+          ],
+          "focus": "按不同标准进行逐层分类与记录，用简单统计表表达调查结果。",
+          "pitfall": "中途改变分类标准，导致一项记录被计数两次。",
+          "activity": "统计班级文具或运动爱好，学生自主定标准并交流分类依据。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 3,
+      "volume": 1,
+      "revision": "2024课标修订版",
+      "source": "https://keben.szxuexiao.com/bsd3njsuxues2024.html",
+      "unitListVerified": true,
+      "unitCount": 8,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "混合运算",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "小熊购物"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "买文具"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "过河"
+            }
+          ],
+          "focus": "掌握含乘除与加减、含括号算式的计算顺序，用脱式计算表示解决问题的步骤。",
+          "pitfall": "把“先乘除后加减”误写成从左到右，不理解小括号的必要性。",
+          "activity": "从购物找零和乘船人数问题出发，先列数量关系，再讨论不同算式。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "测量（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "铅笔有多长"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "1千米有多长"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "旗杆有多高"
+            }
+          ],
+          "focus": "认识毫米、分米、千米和吨，建立量感并进行常见单位换算。",
+          "pitfall": "把“1千米”和“1米”凭数字大小直接比较，脱离单位量级。",
+          "activity": "让学生在教室估测、测量并设计校园路线长度记录。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "大数加与减（二)",
+          "lessons": [],
+          "focus": "学习三位数等较大数的加减、连续进退位和验算，读懂里程数量关系。",
+          "pitfall": "混淆里程表中的累计量与路段差量。",
+          "activity": "绘制时间—路程表，用数位模型解释进退位并检查结果。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "我们生活的空间（一)",
+          "lessons": [],
+          "focus": "从不同方向观察立体物体，尝试根据视图搭出模型并说明可见与不可见部分。",
+          "pitfall": "把观察方向和物体转动方向混淆。",
+          "activity": "用积木搭结构，分别记录正面、侧面和上面看到的形状。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "认识图形",
+          "lessons": [],
+          "focus": "认识角以及直角、锐角、钝角和常见四边形特征，建立形状的判别依据。",
+          "pitfall": "认为角的两边越长角越大，忽略张口大小。",
+          "activity": "利用活动角、纸片折角和方格图检验角的大小。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "乘除法的应用（二)",
+          "lessons": [],
+          "focus": "在购物和分组情境中研究单价、数量、总价等关系，解决两步乘除应用题。",
+          "pitfall": "把已知单价当成总价，忽略问题中的单位。",
+          "activity": "用购物清单记录数量关系，画线段图后再列式验证。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "认识小数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "水果店"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "量身高"
+            }
+          ],
+          "focus": "借助元角分和测量认识一位小数的读写、大小比较及简单加减法。",
+          "pitfall": "将小数与整数的比较规则直接混用，例如看小数位数决定大小。",
+          "activity": "用价格标签和身高尺建立0.1等于十分之一的具体感受。"
+        },
+        {
+          "id": "unit-08",
+          "order": 8,
+          "title": "调查与记录",
+          "lessons": [],
+          "focus": "经历提出问题、收集数据、整理记录和解释结果的全过程。",
+          "pitfall": "把统计表中的频数与总人数混淆，或遗漏未回答的人。",
+          "activity": "组织“最喜欢的校园活动”调查，展示原始记录和统计结论。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 3,
+      "volume": 2,
+      "revision": "既有版目录（修订版下册待核实）",
+      "source": "https://www.taozhi.cn/phone_bmi/787",
+      "unitListVerified": true,
+      "unitCount": 7,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "除法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分桃子"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分橘子"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "商是几位数"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "猴子的烦恼"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "节约"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "集邮"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "买新书"
+            },
+            {
+              "id": "lesson-08",
+              "order": 8,
+              "title": "讲故事"
+            }
+          ],
+          "focus": "学习两三位数除以一位数及竖式，经历估商、验算和解决实际问题。",
+          "pitfall": "余数大于等于除数，或忘记商中间和末尾的0。",
+          "activity": "用分桃子、分书本的过程演示分组与余数，再回到竖式。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "图形的运动",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "轴对称（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "轴对称（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "平移和旋转"
+            }
+          ],
+          "focus": "进一步认识轴对称、平移与旋转，关注图形变化前后位置与形状。",
+          "pitfall": "把对称对应点与平移后的对应点混淆。",
+          "activity": "用方格纸和纸片折叠、移动、旋转，记录变化规律。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "乘法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "找规律"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "队列表演（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "队列表演（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "电影院"
+            }
+          ],
+          "focus": "学习两位数乘两位数的计算与估算，理解部分积的来源。",
+          "pitfall": "列竖式时第二行部分积没有对准十位。",
+          "activity": "借助点阵图分拆面积，解释“先分后合”的计算方法。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "千克、克、吨",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "有多重"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "1吨有多重"
+            }
+          ],
+          "focus": "认识常用质量单位，经历估测、称量与简单换算。",
+          "pitfall": "把物体重量的数值当成单位大小，不能合理选择单位。",
+          "activity": "用食物包装的净含量和称量工具建立真实量感。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "面积",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "什么是面积"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "面积单位"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "长方形的面积"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "面积单位的换算"
+            }
+          ],
+          "focus": "理解面积表示面的大小，认识面积单位和长方形面积计算。",
+          "pitfall": "将面积与周长混淆，用边长相加代替面积。",
+          "activity": "用方格纸铺满图形，逐步从数格子过渡到乘法公式。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "认识分数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分一分（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分一分（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "比大小"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "吃西瓜"
+            }
+          ],
+          "focus": "借助平均分理解分数的意义，比较简单分数并尝试同分母加减。",
+          "pitfall": "整体改变后仍把“几分之一”当成同样的数量。",
+          "activity": "折纸条、分水果，强调同一个整体平均分成几份。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "数据的整理和表示",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "小小鞋店"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "快乐成长"
+            }
+          ],
+          "focus": "收集、分类并整理数据，从图表中获得结论。",
+          "pitfall": "条形统计图的刻度与数量没有对应。",
+          "activity": "用班级鞋码或身高资料制作简单统计表。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 4,
+      "volume": 1,
+      "revision": "既有版目录",
+      "source": "https://www.taozhi.cn/phone_bmi/1681",
+      "unitListVerified": true,
+      "unitCount": 8,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "认识更大的数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "数一数"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "认识更大的数"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "人口普查"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "国土面积"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "近似数"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "从结绳计数说起"
+            }
+          ],
+          "focus": "认识万以上整数和位值结构，学习读写、比较、改写与近似数。",
+          "pitfall": "大数分级不准确，数位为0时读写出错。",
+          "activity": "利用人口数据和土地面积绘制数位表，讨论精确数与近似数。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "线与角",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "线的认识"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "相交与垂直"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "平移与平行"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "旋转与角"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "角的度量（一）"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "角的度量（二）"
+            }
+          ],
+          "focus": "辨认直线、射线、线段与平行垂直，使用量角器理解角的大小。",
+          "pitfall": "量角器内外圈读错，认为线段延长后角也变大。",
+          "activity": "用直尺、三角板和活动角测量教室中的角与线。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "乘法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "卫星运行时间"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "有多少名观众"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "神奇的计算工具"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "有趣的算式"
+            }
+          ],
+          "focus": "学习三位数乘两位数等整数乘法运算，利用估算验证结果。",
+          "pitfall": "多位数笔算中间的0和部分积位置出错。",
+          "activity": "分析卫星运行或体育场座位数量，比较不同算法的效率。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "运算律",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "买文具"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "加法交换律和乘法交换律"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "加法结合律"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "乘法结合律"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "乘法分配律"
+            }
+          ],
+          "focus": "理解交换律、结合律和分配律，学习运算简便方法。",
+          "pitfall": "将乘法分配律错用到除法或减法结构上。",
+          "activity": "让学生用两种方法计算长方形阵列中的物品总数并讨论相等原因。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "方向与位置",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "去图书馆"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "确定位置"
+            }
+          ],
+          "focus": "在实际地图上描述路线，学习用有序数对表示位置。",
+          "pitfall": "把横向和纵向坐标次序颠倒。",
+          "activity": "制作校园平面图，用位置坐标找出图书馆和教室。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "除法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "买文具"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "参观花圃"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "秋游"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "商不变的规律"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "路程、时间与速度"
+            }
+          ],
+          "focus": "掌握整数除法笔算和估商，探索商不变规律，研究行程数量关系。",
+          "pitfall": "试商后余数不符合要求，或单位换算后速度计算错误。",
+          "activity": "利用购票和行程题，先估答案范围再笔算验算。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "生活中的负数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "温度"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "正负数"
+            }
+          ],
+          "focus": "从温度和海拔情境认识正负数与0的相对意义。",
+          "pitfall": "认为负数的绝对值越大数值也越大。",
+          "activity": "制作零上零下温度计，比较寒冷天气中的数值。"
+        },
+        {
+          "id": "unit-08",
+          "order": 8,
+          "title": "可能性",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "不确定性"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "摸球游戏"
+            }
+          ],
+          "focus": "通过随机试验认识可能、一定、不可能和简单事件发生机会。",
+          "pitfall": "少量摸球结果就下绝对结论。",
+          "activity": "用不透明袋做摸球试验，记录结果并解释可能性。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 4,
+      "volume": 2,
+      "revision": "既有版目录",
+      "source": "https://www.taozhi.cn/phone_bmi/60",
+      "unitListVerified": true,
+      "unitCount": 6,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "小数的意义和加减法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "小数的意义（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "小数的意义（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "小数的意义（三）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "比大小"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "买菜"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "比身高"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "歌手大赛"
+            }
+          ],
+          "focus": "理解小数与十进分数之间的联系，学习比较小数和按数位对齐进行加减运算。",
+          "pitfall": "小数点没有对齐，误把小数位数多当作数值大。",
+          "activity": "用价格标签、身高尺和数位表比较小数并进行估算验算。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "认识三角形和四边形",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "图形分类"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "三角形分类"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "探索与发现：三角形内角和"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "探索与发现：三角形边的关系"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "四边形分类"
+            }
+          ],
+          "focus": "辨认三角形类别、三角形内角和及三边关系，比较四边形特征。",
+          "pitfall": "用视觉长短判断三角形是否能构成，忽略两边之和大于第三边。",
+          "activity": "剪拼三角形角片，尝试制作不同三边长度的模型。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "小数乘法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "买文具"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "小数点搬家"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "街心广场"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "包装"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "蚕丝"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "手拉手"
+            }
+          ],
+          "focus": "理解小数乘法与整数乘法的联系，探索小数点移动和积的合理范围。",
+          "pitfall": "小数乘法算完没有正确处理小数位数。",
+          "activity": "从商品价格与长方形面积情境解释小数乘法意义。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "观察物体",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "看一看"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "我说你搭"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "搭一搭"
+            }
+          ],
+          "focus": "从多个方向观察组合立体图形，并根据视图推测原来形状。",
+          "pitfall": "认为同一个视图只能对应一种立体搭法。",
+          "activity": "用小正方体做搭建与猜测活动，比较多种可能。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "认识方程",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "字母表示数"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "等量关系"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "方程"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "解方程（一）"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "解方程（二）"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "猜数游戏"
+            }
+          ],
+          "focus": "用字母描述数量关系，理解方程和等式性质并解简单方程。",
+          "pitfall": "移项时只记口诀而不理解等式两边保持相等。",
+          "activity": "利用平衡天平与猜数游戏把未知量表示成等式。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "数据的表示和分析",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "生日"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "栽蒜苗（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "栽蒜苗（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "平均数"
+            }
+          ],
+          "focus": "学习统计表、条形或折线统计图的表达方式，理解平均数反映总体水平。",
+          "pitfall": "把平均数理解为数据中一定存在的某个值。",
+          "activity": "记录一段时间的植物生长数据，制作图表并解读趋势。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 5,
+      "volume": 1,
+      "revision": "既有版目录",
+      "source": "https://www.taozhi.cn/phone_bmi/1682",
+      "unitListVerified": true,
+      "unitCount": 7,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "小数除法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "精打细算"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "打扫卫生"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "谁打电话的时间长"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "人民币兑换"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "除得尽吗"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "调查“生活垃圾”"
+            }
+          ],
+          "focus": "掌握小数除法计算，理解商不变思想和循环小数的特点。",
+          "pitfall": "除数是小数时只移动除数小数点，忘记同步移动被除数。",
+          "activity": "从兑换货币和分配费用出发，估算商的范围后计算。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "轴对称和平移",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "轴对称再认识（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "轴对称再认识（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "平移"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "欣赏与设计"
+            }
+          ],
+          "focus": "研究轴对称图形和对应点，按方向与距离平移图形。",
+          "pitfall": "平移时只移动图形的一部分，或对应点到对称轴距离不等。",
+          "activity": "用方格纸沿对称轴画图，再设计连续平移的图案。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "倍数与因数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "倍数与因数"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "探索活动：2、5的倍数的特征"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "探索活动：3的倍数的特征"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "找因数"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "找质数"
+            }
+          ],
+          "focus": "理解倍数、因数、质数与合数，发现2、3、5的倍数特征。",
+          "pitfall": "把“倍数和因数”的关系脱离具体整数范围。",
+          "activity": "用百数表涂色寻找规律，解释为什么某数满足整除条件。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "多边形的面积",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "比较图形的面积"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "认识底和高"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "探索活动：平行四边形的面积"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "探索活动：三角形的面积"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "探索活动：梯形的面积"
+            }
+          ],
+          "focus": "通过割补与转化推导平行四边形、三角形、梯形面积公式。",
+          "pitfall": "把斜边当成高，或忘记三角形面积需要除以2。",
+          "activity": "用可拆拼纸片转化为长方形，观察面积不变、底高对应。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "分数的意义",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分数的再认识（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分数的再认识（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分饼"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "分数与除法"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "分数基本性质"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "找最大公因数"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "约分"
+            },
+            {
+              "id": "lesson-08",
+              "order": 8,
+              "title": "找最小公倍数"
+            },
+            {
+              "id": "lesson-09",
+              "order": 9,
+              "title": "分数的大小"
+            }
+          ],
+          "focus": "理解分数的意义与分数基本性质，学习约分、通分和分数大小比较。",
+          "pitfall": "整体不固定时混淆“几分之一”的数量大小。",
+          "activity": "用纸条、分数墙和数轴比较不同分数的实际长度。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "组合图形的面积",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "组合图形的面积"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "探索活动：成长的脚印"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "公顷、平方千米"
+            }
+          ],
+          "focus": "把组合图形分割或补成常见图形求面积，认识大面积单位。",
+          "pitfall": "计算组合图形时重叠部分重复计入。",
+          "activity": "描出不规则脚印，用方格纸估算并验证面积。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "可能性",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "谁先走"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "摸球游戏"
+            }
+          ],
+          "focus": "通过公平游戏和重复随机试验讨论等可能性。",
+          "pitfall": "把一次结果当成长期必然发生的结论。",
+          "activity": "设计公平的转盘或摸球规则，用统计结果讨论公正性。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 5,
+      "volume": 2,
+      "revision": "既有版目录",
+      "source": "https://www.taozhi.cn/phone_bmi/789",
+      "unitListVerified": true,
+      "unitCount": 8,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "分数加减法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "折纸"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "星期日的安排"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "“分数王国”与“小数王国”"
+            }
+          ],
+          "focus": "理解同分母、异分母分数加减的计算依据，联系分数与小数。",
+          "pitfall": "异分母直接把分子分母分别相加。",
+          "activity": "用折纸和分数条统一分数单位，再写出通分计算。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "长方体（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "长方体的认识"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "展开与折叠"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "长方体的表面积"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "露在外面的面"
+            }
+          ],
+          "focus": "认识长方体的面、棱、顶点和展开图，计算表面积。",
+          "pitfall": "求表面积时遗漏被遮挡或只计算可见面。",
+          "activity": "拆纸盒、折纸盒，判断哪些展开图能恢复立体。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "分数乘法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分数乘法（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分数乘法（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分数乘法（三）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "倒数"
+            }
+          ],
+          "focus": "理解分数乘法意义并掌握计算，认识倒数。",
+          "pitfall": "把分数乘法与分数加法的通分规则混淆。",
+          "activity": "用涂色模型展示一个量的几分之几，再过渡到算式。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "长方体（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "体积与容积"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "体积单位"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "长方体的体积"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "体积单位的换算"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "有趣的测量"
+            }
+          ],
+          "focus": "理解体积和容积，认识立方厘米、立方分米、立方米等单位并计算长方体体积。",
+          "pitfall": "混淆面积单位与体积单位，单位换算时遗漏立方关系。",
+          "activity": "用单位小方块堆出长方体，推导长×宽×高。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "分数除法",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分数除法（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分数除法（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分数除法（三）"
+            }
+          ],
+          "focus": "理解分数除法与乘法关系，会用倒数计算简单分数除法。",
+          "pitfall": "只记“除以一个数等于乘倒数”而不能解释题意。",
+          "activity": "用等分纸条或数轴表示分数除法，检验所得商是否合理。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "确定位置",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "确定位置（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "确定位置（二）"
+            }
+          ],
+          "focus": "用方向、角度和距离共同描述物体位置。",
+          "pitfall": "只给方向不说明距离或把参照点说错。",
+          "activity": "在校园平面图上标注方向与角度，规划路线。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "用方程解决问题",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "邮票的张数"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "相遇问题"
+            }
+          ],
+          "focus": "分析相等的数量关系，用方程解决实际问题。",
+          "pitfall": "设未知数后数量关系没有保持等量。",
+          "activity": "借助线段图描述邮票数量与相遇行程，再建立等式。"
+        },
+        {
+          "id": "unit-08",
+          "order": 8,
+          "title": "数据的表示和分析",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "复式条形统计图"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "复式折线统计图"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "平均数的再认识"
+            }
+          ],
+          "focus": "比较两组及以上数据的变化，认识复式统计图和平均数。",
+          "pitfall": "只看图形的高低而忽略刻度与单位。",
+          "activity": "用班级两组运动成绩设计统计图，讨论适合的图表。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 6,
+      "volume": 1,
+      "revision": "既有版目录",
+      "source": "https://www.jyeoo.com/resource/tb/44/52710",
+      "unitListVerified": true,
+      "unitCount": 7,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "圆",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "圆的认识（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "圆的认识（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "欣赏与设计"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "圆的周长"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "圆周率的历史"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "圆的面积（一）"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "圆的面积（二）"
+            }
+          ],
+          "focus": "理解圆心、半径、直径与圆的周长面积，感受圆周率的意义。",
+          "pitfall": "计算圆周长与圆面积时混淆公式，半径和直径代入不分。",
+          "activity": "用绳子测圆周，剪拼纸圆推导面积，比较数据寻找规律。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "分数混合运算",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "分数的混合运算（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "分数的混合运算（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分数的混合运算（三）"
+            }
+          ],
+          "focus": "学习分数四则混合运算的顺序，理解单位“1”的作用。",
+          "pitfall": "数量关系未分析就直接套公式，运算顺序出错。",
+          "activity": "先画线段图表达部分与整体，再列分数算式。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "观察物体",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "搭积木比赛"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "观察的范围"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "天安门广场"
+            }
+          ],
+          "focus": "探究观察点、观察方向与观察范围的关系，提高空间推理能力。",
+          "pitfall": "把视点高度变化和物体本身移动混淆。",
+          "activity": "通过不同高度的观察点与搭积木，记录能看见的区域。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "百分数",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "百分数的认识"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "合格率"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "营养含量"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "这月我当家"
+            }
+          ],
+          "focus": "理解百分数表示的倍比关系，会进行简单百分数计算和实际应用。",
+          "pitfall": "将百分数等同于具体数量，忽略对应的整体。",
+          "activity": "读商品合格率与营养标签，说明“百分之几”的整体是什么。"
+        },
+        {
+          "id": "unit-05",
+          "order": 5,
+          "title": "数据处理",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "扇形统计图"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "统计图的选择"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "身高的情况"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "身高的变化"
+            }
+          ],
+          "focus": "根据数据特点选择统计图，解释比例、分布与趋势。",
+          "pitfall": "把扇形统计图各部分比例加总出错。",
+          "activity": "用身高调查分别设计条形、折线和扇形图。"
+        },
+        {
+          "id": "unit-06",
+          "order": 6,
+          "title": "比的认识",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "生活中的比"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "比的化简"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "比的应用"
+            }
+          ],
+          "focus": "理解比的意义、比值、基本性质及按比分配。",
+          "pitfall": "把比与除法的关系理解成两个量相减。",
+          "activity": "用果汁调配和地图比例构建具体比的模型。"
+        },
+        {
+          "id": "unit-07",
+          "order": 7,
+          "title": "百分数的应用",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "百分数的应用（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "百分数的应用（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "百分数的应用（三）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "百分数的应用（四）"
+            }
+          ],
+          "focus": "分析增加、减少、折扣等百分数实际问题，用数量关系解决问题。",
+          "pitfall": "增长率的分母选错，折扣和优惠金额混淆。",
+          "activity": "对比两种折扣方案，写出原价、折后价与折扣率关系。"
+        }
+      ]
+    },
+    {
+      "edition": "bsd",
+      "grade": 6,
+      "volume": 2,
+      "revision": "既有版目录",
+      "source": "https://www.taozhi.cn/phone_bmi/790",
+      "unitListVerified": true,
+      "unitCount": 4,
+      "units": [
+        {
+          "id": "unit-01",
+          "order": 1,
+          "title": "圆柱与圆锥",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "面的旋转"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "圆柱的表面积"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "圆柱的体积"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "圆锥的体积"
+            }
+          ],
+          "focus": "认识圆柱、圆锥的表面积和体积，理解旋转与空间图形的关系。",
+          "pitfall": "求圆锥体积忘记乘三分之一或混淆侧面积与表面积。",
+          "activity": "用圆柱和圆锥容器装沙，观察等底等高时的体积关系。"
+        },
+        {
+          "id": "unit-02",
+          "order": 2,
+          "title": "比例",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "比例的认识"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "比例的应用"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "比例尺"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "图形的放大和缩小"
+            }
+          ],
+          "focus": "理解比例及其基本性质，学习比例尺并探索图形放缩。",
+          "pitfall": "比例尺中的实际距离与图上距离单位不一致。",
+          "activity": "绘制教室缩略平面图，从实际测量反推比例尺。"
+        },
+        {
+          "id": "unit-03",
+          "order": 3,
+          "title": "图形的运动",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "图形的旋转（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "图形的旋转（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "图形的运动"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "欣赏与设计"
+            }
+          ],
+          "focus": "综合使用平移、旋转、轴对称描述图形变化。",
+          "pitfall": "确定旋转方向后忽略旋转中心和角度。",
+          "activity": "用透明方格纸叠图，记录图形变换的顺序与对应点。"
+        },
+        {
+          "id": "unit-04",
+          "order": 4,
+          "title": "正比例与反比例",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "变化的量"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "正比例"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "画一画"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "反比例"
+            }
+          ],
+          "focus": "从变量变化和数据表认识正比例、反比例关系及其图像。",
+          "pitfall": "只看两个量同时变化就判断成正比例，没有检查比值。",
+          "activity": "用行驶时间与路程、固定路程下速度与时间的数据作图。"
+        }
+      ]
+    }
+  ]
+}

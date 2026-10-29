@@ -1,0 +1,14 @@
+---
+pagination:
+  data: catalog.grades
+  size: 1
+  alias: gradeInfo
+permalink: "/textbooks/bsd/grade-{{ gradeInfo.grade }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "北师大版{{ gradeInfo.grade }}年级数学上下册教材目录"
+  description: "北师大版小学{{ gradeInfo.grade }}年级数学上册、下册单元目录，提供教学重点、易错点与课堂活动建议。"
+---
+<nav class="crumb" aria-label="面包屑"><a href="/">首页</a> / <a href="/textbooks/bsd/">北师大版</a> / {{ gradeInfo.grade }}年级</nav>
+<section class="intro"><p class="eyebrow">北师大版 · {{ gradeInfo.grade }}年级</p><h1>小学{{ gradeInfo.grade }}年级数学同步目录</h1><p class="lead">选择上册或下册，查看单元知识与教学建议。教材修订后单元安排可能发生变化，以您正在使用的教材印次为准。</p></section>
+<div class="cards">{% for book in gradeInfo.volumes %}<a class="card" href="{{ book.url }}"><span class="tiny">{{ book.revision }}</span><h2>{{ "上册" if book.volume==1 else "下册" }}</h2><p>{{ book.units.length }} 个主要学习单元 · 教学内容介绍</p><span class="more">进入{{ "上册" if book.volume==1 else "下册" }} →</span></a>{% endfor %}</div>

@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+title: 小学数学原创互动课件与教学资源
+description: 十一课件持续制作小学数学互动演示、3D教学资源与课堂课件，按教材版本、年级与课时更新。
+permalink: /courses/
+---
+<section class="intro"><p class="eyebrow">原创数学课件</p><h1>让数学知识看得见、动起来</h1><p class="lead">探索适合课堂使用的可视化教学方式。每套互动课件会在完成制作后独立展示版本、预览与实际包含的资源。</p></section>
+{% if courses.length %}<div class="cards">{% for course in courses %}<a class="card" href="/courses/{{ course.slug }}/"><h2>{{ course.title }}</h2><p>{{ course.description }}</p></a>{% endfor %}</div>{% else %}<div class="note">独立课件商品页将随着原创制作进度陆续上线。现在可以先从教材目录浏览每个单元的教学目标和课堂活动建议。</div>{% endif %}
+<p><a class="button" href="/textbooks/bsd/">查看北师大版教材目录</a><a class="button secondary" href="{{ site.social.xiaohongshu }}" target="_blank" rel="nofollow noopener noreferrer">小红书查看更新 ↗</a></p>
