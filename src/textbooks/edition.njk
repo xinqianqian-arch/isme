@@ -11,6 +11,6 @@ eleventyComputed:
 ---
 <nav class="crumb" aria-label="面包屑"><a href="/">首页</a> / <a href="/textbooks/">教材目录</a> / 北师大版</nav>
 <section class="intro"><p class="eyebrow">北师大版 · 小学数学</p><h1>北师大版数学课件与教材目录</h1><p class="lead">覆盖一年级至六年级、上下册，共12册数学教材的单元知识地图。每个单元配有知识重点、易错提醒和课堂活动建议，原创互动课件在小红书持续更新。</p><p class="note">提示：不同年级正逐步使用修订版教材；页面已注明对应目录版本，选课前请核对手中教材封面和单元名称。</p></section>
-<div class="cards">{% for grade in catalog.grades %}<a class="card" href="{{ grade.url }}"><span class="tiny">GRADE {{ grade.grade }}</span><h2>{{ grade.grade | cn }}年级数学</h2><p>上册 · 下册 · 单元学习指南</p><span class="more">查看课程 →</span></a>{% endfor %}</div>
+<div class="cards">{% for grade in catalog.grades %}<a class="card" href="{{ grade.url }}"><div class="pic"><img src="/assets/lessons/g{{ grade.grade }}a.webp" alt="" loading="lazy"></div><span class="tiny">GRADE {{ grade.grade }}</span><h2>{{ grade.grade | cn }}年级数学</h2><p>上册 · 下册 · 单元学习指南</p><span class="more">查看课程 →</span></a>{% endfor %}</div>
 <section class="below"><h2>如何使用课程导航？</h2><p>进入对应的年级与上下册，按照单元顺序浏览知识点、课堂难点和活动建议。</p><p><a href="/articles/textbook-edition-guide/">阅读新旧教材版本辨别指南</a></p></section>
 <script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"CollectionPage","name":"北师大版小学数学课程目录","url":"https://11edu.cc/textbooks/bsd/","inLanguage":"zh-CN"} | json | safe }}</script>

@@ -16,18 +16,22 @@ const metadata = '<link rel="canonical" href="' + site.url + '/">\n' +
   '<meta property="og:title" content="' + escape(title) + '">\n' +
   '<meta property="og:description" content="' + escape(site.description) + '">\n' +
   '<meta property="og:url" content="' + site.url + '/">\n' +
+  '<link rel="stylesheet" href="/css/topbar.css">\n' +
   '<link rel="stylesheet" href="/css/home-navigation.css">\n' +
   '<script type="application/ld+json">' + schema + '</script>\n';
 html = html.replace(/<\/head>/i, metadata + '</head>');
-const nav = '<nav class="edu-nav" aria-label="主导航"><a class="edu-brand" href="/">十一课件</a><div><a href="/textbooks/bsd/">教材目录</a><a href="/courses/">课件展厅</a><a href="/articles/">教学文章</a><a href="/about/">关于我</a></div></nav>';
+// 顶部导航与内页 src/_includes/layouts/base.njk 的 header 保持同样的结构，样式都在 css/topbar.css
+const nav = '<header class="topbar"><div class="top-inner"><a class="logo" href="/"><img src="/assets/avatar.webp" width="40" height="40" alt="">十一课件</a>' +
+  '<nav aria-label="主导航"><a href="/textbooks/bsd/">教材目录</a><a href="/courses/">课件展厅</a><a href="/articles/">教学文章</a><a href="/about/">关于我</a></nav>' +
+  '<a class="nav-xhs" href="' + escape(site.social.xiaohongshu) + '" target="_blank" rel="noopener noreferrer nofollow">小红书 ↗</a></div></header>';
 html = html.replace(/<body([^>]*)>/i, '<body$1>\n' + nav);
 const names = ['一', '二', '三', '四', '五', '六'];
 const cards = names.map((name, index) => {
   const grade = index + 1;
   const books = catalog.books.filter(book => book.grade === grade);
-  return '<article class="edu-grade"><span>GRADE ' + grade + '</span><h3><a href="/textbooks/bsd/grade-' + grade + '/">' + name + '年级数学</a></h3><p>按单元查看知识重点与课堂活动</p><div>' + books.map(book => '<a href="/textbooks/bsd/grade-' + grade + '/volume-' + book.volume + '/">' + (book.volume === 1 ? '上册' : '下册') + ' →</a>').join('') + '</div></article>';
+  return '<article class="edu-grade"><a class="pic" href="/textbooks/bsd/grade-' + grade + '/" tabindex="-1" aria-hidden="true"><img src="/assets/lessons/g' + grade + 'a.webp" alt="" loading="lazy"></a><div class="body"><span>GRADE ' + grade + '</span><h3><a href="/textbooks/bsd/grade-' + grade + '/">' + name + '年级数学</a></h3><p>按单元查看知识重点与课堂活动</p><div class="vols">' + books.map(book => '<a href="/textbooks/bsd/grade-' + grade + '/volume-' + book.volume + '/">' + (book.volume === 1 ? '上册' : '下册') + ' →</a>').join('') + '</div></div></article>';
 }).join('');
-const catalogSection = '<section class="edu-catalog" id="curriculum"><div class="wrap"><p class="edu-kicker">北师大版 · 小学数学</p><h2>按教材找到下一节课</h2><p class="edu-summary">从一年级到六年级，按上下册、单元和课题查找教学参考。</p><div class="edu-grades">' + cards + '</div><p class="edu-footnote">不同修订版教材的目录可能不同，请核对手中教材。本站为独立教学参考网站，并非教材出版社官方网站。</p></div></section>';
+const catalogSection = '<section class="edu-catalog" id="curriculum"><div class="wrap"><div class="sec-head"><h2>按教材找到下一节课 📚</h2><p>北师大版 · 一到六年级 · 按上下册和单元查看教学重点</p></div><div class="edu-grades">' + cards + '</div><p class="edu-footnote">本站为独立教学网站，并非教材出版社官方网站。</p></div></section>';
 const insertion = /<section\s+class="works"\s+id="works">/;
 if (!insertion.test(html)) throw new Error('Cannot locate original works section; homepage has changed');
 html = html.replace(insertion, catalogSection + '\n$&');

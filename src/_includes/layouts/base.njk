@@ -13,6 +13,7 @@
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:site_name" content="{{ site.name }}">
 <link rel="icon" href="/assets/avatar.webp" type="image/webp">
+<link rel="stylesheet" href="/css/topbar.css">
 <link rel="stylesheet" href="/css/site.css">
 {% if lesson and not lesson.seoReady %}<meta name="robots" content="noindex,follow">{% endif %}
 {% if lesson %}<script type="application/ld+json">{{ lesson.schema | json | safe }}</script>{% elif unit %}<script type="application/ld+json">{{ unit.schema | json | safe }}</script>{% endif %}
@@ -21,11 +22,12 @@
 <a class="skip" href="#main">跳至正文</a>
 <header class="topbar">
   <div class="top-inner">
-    <a class="logo" href="/"><img src="/assets/avatar.webp" width="38" height="38" alt="">十一课件</a>
-    <nav aria-label="主导航"><a href="/">首页</a><a href="/textbooks/bsd/">北师大版</a><a href="/courses/">课件展厅</a><a href="/articles/">教学文章</a><a href="/about/">关于我</a></nav>
+    <a class="logo" href="/"><img src="/assets/avatar.webp" width="40" height="40" alt="">十一课件</a>
+    <nav aria-label="主导航"><a href="/textbooks/bsd/"{% if "/textbooks/" in page.url %} aria-current="page"{% endif %}>教材目录</a><a href="/courses/"{% if "/courses/" in page.url %} aria-current="page"{% endif %}>课件展厅</a><a href="/articles/"{% if "/articles/" in page.url %} aria-current="page"{% endif %}>教学文章</a><a href="/about/"{% if "/about/" in page.url %} aria-current="page"{% endif %}>关于我</a></nav>
+    <a class="nav-xhs" href="{{ site.social.xiaohongshu }}" target="_blank" rel="noopener noreferrer nofollow">小红书 ↗</a>
   </div>
 </header>
-<main class="container" id="main">{{ content | safe }}</main>
+<main class="container" id="main">{% if page.inputPath.endsWith(".md") %}<article class="prose">{{ content | safe }}</article>{% else %}{{ content | safe }}{% endif %}</main>
 <footer class="footer">
   <div class="footer-inner"><strong>十一课件 · 让数学课动起来</strong>
   <p>面向小学数学教师的教材导航、备课思路与原创交互课件。</p>
