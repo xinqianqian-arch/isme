@@ -1,0 +1,18 @@
+---
+pagination:
+  data: courses
+  size: 1
+  alias: course
+permalink: "/courses/{{ course.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ course.title }}"
+  description: "{{ course.description }}"
+---
+<nav aria-label="面包屑"><a href="/">首页</a> / <a href="/courses/">课件展厅</a> / {{ course.title }}</nav>
+<h1>{{ course.title }}</h1>
+<p>{{ course.editionName }} · {{ course.grade }}年级{{ "上册" if course.volume == 1 else "下册" }} · 课件版本 {{ course.version }}</p>
+{% if course.cover %}<img src="{{ course.cover }}" alt="{{ course.title }}课件封面" loading="lazy" style="max-width:100%;border-radius:16px">{% endif %}
+<section class="course-body">{{ course.html | safe }}</section>
+{% if course.demoUrl %}<p><a class="button secondary" href="{{ course.demoUrl }}">体验课件演示</a></p>{% endif %}
+{% if course.shopUrl and course.shopUrl.startsWith("https://") %}<p><a class="button" href="{{ course.shopUrl }}" rel="nofollow noopener noreferrer" target="_blank">前往小红书薯店购买</a></p>{% endif %}

@@ -9,4 +9,7 @@ eleventyComputed:
   title: "{{ item.name }}{{ item.grade }}年级数学课件"
   description: "{{ item.name }}{{ item.grade }}年级数学上下册同步教学课件资源目录。"
 ---
-<p><a href="/textbooks/{{ item.edition }}/">{{ item.name }}</a> / {{ item.grade }}年级</p><h1>{{ item.name }}{{ item.grade }}年级数学课件</h1><div class="cards">{% for volume in [1,2] %}<a class="card" href="/textbooks/{{ item.edition }}/grade-{{ item.grade }}/volume-{{ volume }}/"><h2>{{ "上册" if volume == 1 else "下册" }}</h2><p>按课时查看已发布课件</p></a>{% endfor %}</div>
+<p><a href="/textbooks/{{ item.edition }}/">{{ item.name }}</a> / {{ item.grade }}年级</p>
+<h1>{{ item.name }}{{ item.grade }}年级数学课件</h1>
+<p>按上下册查看已发布资源。尚未制作的课件不会提供虚假下载。</p>
+<div class="cards">{% for vol in catalogVolumes %}{% if vol.edition == item.edition and vol.grade == item.grade %}<a class="card" href="/textbooks/{{ item.edition }}/grade-{{ item.grade }}/volume-{{ vol.volume }}/"><h2>{{ "上册" if vol.volume == 1 else "下册" }}</h2><p>查看已发布课件</p></a>{% endif %}{% endfor %}</div>

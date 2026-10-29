@@ -1,8 +1,10 @@
 # 十一课件 · Eleventy 内容站
 
-这是 11edu.cc 的新版静态 SEO 网站架构。**本分支只做架构演示，不覆盖线上 Cloudflare Pages 项目。** 原始 `index.html`、`aaa.html`、`assets/` 仍然保留。
+这是 [11edu.cc](https://11edu.cc) 的 Eleventy + Markdown 静态站架构。改造提交在独立分支，不会自动覆盖 Cloudflare Pages 线上网站。
 
-## 开发
+**原始 `index.html`、`aaa.html`、`assets/` 完整保留，供后续迁移现有精美首页。** 当前新模板首页是结构验证版，并非原首页的视觉迁移。
+
+## 开发与部署
 
 ```bash
 npm install
@@ -10,24 +12,30 @@ npm run dev
 npm run build
 ```
 
-构建目录是 `dist/`，可用 Cloudflare Pages Direct Upload 或 Wrangler 部署。建议先在 Pages 预览环境验证。
+输出目录为 `dist/`，用于 Cloudflare Pages Direct Upload。部署前先确认导航、素材、Canonical、Sitemap 与 SEO 页面。
 
-## Markdown 内容
+## 内容编辑
 
-- 品牌介绍：`src/about/index.md`
-- 教学文章：`content/articles/*.md`
-- 课件内容草稿：`content/courses/*.md`
-- 教材列表：`src/_data/editions.json`
+- 关于页面：`src/about/index.md`
+- 教学文章：`src/articles/*.md`，写 `tags: article`
+- 课件 Markdown 源文件：`content/courses/*.md`
+- 课件详情页：`src/courses/detail.njk` 根据发布课件数据自动生成
+- 教材版本：`src/_data/editions.json`
 
-注意：`content/` 在 Eleventy 输入目录之外。文章和课件内容须由对应的数据加载器或模板挂载才会自动生成页面；当前文章示例请移动到 `src/articles/` 后生成。课件草稿尚未自动发布，避免意外索引占位内容。
+课件 Markdown 的 front matter 至少要有 `slug`、`title`、`description`、`edition`、`editionName`、`grade`、`volume`、`version`、`status: published`。草稿设置 `draft`。
 
-## URL
+**教材章节数据需要依据实际教材版次核实后再录入**；同一课件版本迭代保持同一个 URL。
 
-- /textbooks/{pep|jj|bsd}/grade-{1..6}/volume-{1|2}/
-- /courses/{stable-slug}/
-- /articles/{slug}/
-- /about/
+## URL 结构
 
-## 下一步
+- `/textbooks/{pep|jj|bsd}/grade-{1..6}/`
+- `/textbooks/{edition}/grade-{grade}/volume-{1|2}/`（只有已发布课件时生成）
+- `/courses/{stable-slug}/`
+- `/articles/{slug}/`
+- `/about/`
 
-迁移现有漂亮首页（保留所有动画与素材），按真实教材版次录入单元和课时、增加课件 Markdown 渲染及购买追踪，最后检查 Sitemap、robots、canonical 和国内访问效果。
+## 安全与后续
+
+不要将 Cloudflare API Token、商品后台凭证提交进仓库。用户曾在聊天中暴露 Token，应在 Cloudflare 中吊销并重新申请。
+
+下一步将原主页样式迁入 `src/index.njk`，补全真实教材单元、课时、版本和课件信息，再部署预览。
