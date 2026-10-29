@@ -1,2 +1,8 @@
 /assets/*
   X-Content-Type-Options: nosniff
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/ai-index.json
+  Content-Type: application/json; charset=utf-8

@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy && node scripts/finish-build.mjs",
+    "check": "node --check eleventy.config.js && node --check src/_data/catalog.js && node --check scripts/finish-build.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

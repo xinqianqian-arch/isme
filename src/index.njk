@@ -1,9 +1,0 @@
----
-layout: layouts/base.njk
-title: 让数学课动起来｜小学数学互动课件
-description: 十一课件提供小学数学互动课件，按人教版、冀教版、北师大版与年级查找教学资源。
-permalink: /
----
-<section class="hero"><p class="eyebrow">十一课件 · 让数学课动起来</p><h1>让抽象的数学知识，看得见、动起来。</h1><p>面向小学数学教师的原创互动课件与课堂教学资源。</p><a class="button" href="/textbooks/">按教材寻找课件</a><a class="button secondary" href="/about/">认识创作者</a></section>
-<section><h2>选择教材版本</h2><div class="cards">{% for edition in editions %}<a class="card" href="/textbooks/{{ edition.slug }}/"><h3>{{ edition.name }}</h3><p>按年级、上下册探索数学教学资源</p></a>{% endfor %}</div></section>
-<section><h2>最新课件</h2><div class="cards">{% for course in courses %}<a class="card" href="/courses/{{ course.slug }}/"><h3>{{ course.title }}</h3><p>{{ course.editionName }} · {{ course.grade }}年级{{ "上册" if course.volume == 1 else "下册" }}</p></a>{% else %}<p>课件正在整理中。</p>{% endfor %}</div></section>
