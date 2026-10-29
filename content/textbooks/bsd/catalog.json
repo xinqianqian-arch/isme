@@ -1,6 +1,6 @@
 {
   "version": "2026-10-30",
-  "note": "教材目录存在修订差异：1—3年级部分册次按2024修订核对，其他沿用既有版；发布前需以实际教材印次复核。课件均未宣称可售。",
+  "note": "教材主题与课题目录来源于多处公开教育目录核对；2024修订与既有版并行。本网站为独立原创备课内容，教材印次变化请以实际教科书为准。",
   "books": [
     {
       "edition": "bsd",
@@ -144,16 +144,11 @@
             {
               "id": "lesson-08",
               "order": 8,
-              "title": "能解决吗"
+              "title": "做个加法表"
             },
             {
               "id": "lesson-09",
               "order": 9,
-              "title": "做个加法表"
-            },
-            {
-              "id": "lesson-10",
-              "order": 10,
               "title": "做个减法表"
             }
           ],
@@ -690,19 +685,29 @@
       "grade": 2,
       "volume": 2,
       "revision": "2024课标修订版",
-      "source": "https://libremath.cn/grade/2/",
+      "source": "https://www.yuntaigo.com/book.action?recordid=bm1tbGtub2M5Nzg3NTQyMzYzNTY1",
       "unitListVerified": true,
       "unitCount": 7,
       "units": [
         {
           "id": "unit-01",
           "order": 1,
-          "title": "100以内数加与减（三)",
+          "title": "100以内数加与减（三）",
           "lessons": [
             {
               "id": "lesson-01",
               "order": 1,
+              "title": "谁的得分高"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
               "title": "去军营"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "星星合唱队"
             }
           ],
           "focus": "在连续加减和加减混合问题中理解运算步骤，培养估算与验算习惯。",
@@ -712,8 +717,24 @@
         {
           "id": "unit-02",
           "order": 2,
-          "title": "图形大变身（二)",
-          "lessons": [],
+          "title": "图形大变身（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "校园一角"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "小蜗牛慢慢爬"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "蜗牛的家"
+            }
+          ],
           "focus": "探索长方体、正方体、圆柱和球之间的联系，结合折叠和展开观察面与体。",
           "pitfall": "只根据物体放置方向判断形状，忽略面与体的对应。",
           "activity": "折纸盒、拆纸盒、描各个面，比较展开图与立体物体。"
@@ -722,7 +743,28 @@
           "id": "unit-03",
           "order": 3,
           "title": "除法的应用",
-          "lessons": [],
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "搭一搭（一）"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "搭一搭（二）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分松果"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "租船"
+            }
+          ],
           "focus": "理解余数的含义，学习有余数除法与竖式，利用“余数小于除数”检验结果。",
           "pitfall": "余数不小于除数或在“至少需要几组”问题里忽略剩余。",
           "activity": "用装袋、租船等情境实际分一分，比较“分完”和“还剩”的结论。"
@@ -731,7 +773,43 @@
           "id": "unit-04",
           "order": 4,
           "title": "生活中的大数",
-          "lessons": [],
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "福建土楼"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "数一数（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "数一数（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "数说西藏"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "哪座山更高"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "有多少个字"
+            },
+            {
+              "id": "lesson-07",
+              "order": 7,
+              "title": "有多厚"
+            }
+          ],
           "focus": "认识千、万以内的数与数位顺序，学习读写比较并感受较大数量。",
           "pitfall": "把数中间的零漏读漏写或比较大小只看某一位。",
           "activity": "在计数器上逐位拨珠，结合学校人数与距离理解量级。"
@@ -739,8 +817,29 @@
         {
           "id": "unit-05",
           "order": 5,
-          "title": "有趣的平面图形（二)",
-          "lessons": [],
+          "title": "有趣的平面图形（二）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "图形王国"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "动手做（一）"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "动手做（二）"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "百变七巧板"
+            }
+          ],
           "focus": "认识平行四边形的特征，用七巧板和拼摆活动发展对图形变化的认识。",
           "pitfall": "只按外观的“歪斜”判断是否为平行四边形。",
           "activity": "用活动平行四边形和七巧板拼图比较边、角的特征。"
@@ -748,8 +847,39 @@
         {
           "id": "unit-06",
           "order": 6,
-          "title": "大数加与减（一)",
-          "lessons": [],
+          "title": "大数加与减（一）",
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "鱼菜共生"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "保护野生鸟类"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "保护野生哺乳动物"
+            },
+            {
+              "id": "lesson-04",
+              "order": 4,
+              "title": "美丽滇池"
+            },
+            {
+              "id": "lesson-05",
+              "order": 5,
+              "title": "算得对吗"
+            },
+            {
+              "id": "lesson-06",
+              "order": 6,
+              "title": "有多远"
+            }
+          ],
           "focus": "学习万以内数加减和口算策略，利用位值模型解释进位与退位。",
           "pitfall": "多位数连续退位时遗漏向高位借位的步骤。",
           "activity": "用数位表和购物账本演示拆分、凑整与笔算验算。"
@@ -758,7 +888,23 @@
           "id": "unit-07",
           "order": 7,
           "title": "分类",
-          "lessons": [],
+          "lessons": [
+            {
+              "id": "lesson-01",
+              "order": 1,
+              "title": "怎样分组"
+            },
+            {
+              "id": "lesson-02",
+              "order": 2,
+              "title": "水上乐园"
+            },
+            {
+              "id": "lesson-03",
+              "order": 3,
+              "title": "分扣子"
+            }
+          ],
           "focus": "按不同标准进行逐层分类与记录，用简单统计表表达调查结果。",
           "pitfall": "中途改变分类标准，导致一项记录被计数两次。",
           "activity": "统计班级文具或运动爱好，学生自主定标准并交流分类依据。"
