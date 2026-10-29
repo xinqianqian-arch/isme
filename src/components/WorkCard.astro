@@ -1,0 +1,12 @@
+---
+/* 课件展厅里的一个作品，点击跳到小红书主页 */
+import { SITE } from '../site.config';
+interface Props { work: { 图片: string; 标题: string; 说明: string } }
+const { work } = Astro.props;
+---
+<a class="card" href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">
+  <div class="pic"><img src={`/assets/lessons/${work.图片}.webp`} alt={work.标题} loading="lazy"></div>
+  <span class="tiny">{work.说明}</span>
+  <h2>{work.标题}</h2>
+  <span class="more">去小红书看 ↗</span>
+</a>

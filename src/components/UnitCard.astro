@@ -1,0 +1,15 @@
+---
+/* 册页上的一个单元 */
+import type { Unit } from '../lib/catalog';
+interface Props { unit: Unit }
+const { unit } = Astro.props;
+---
+<article class="unit-row">
+  <span class="unit-no">{String(unit.order).padStart(2, '0')}</span>
+  <div>
+    <h2><a href={unit.url}>{unit.title}</a></h2>
+    <p>{unit.focus}</p>
+    <span class="tiny">{unit.lessons.length} 个课题</span>
+  </div>
+  <a class="more" href={unit.url} aria-label={`查看${unit.title}`}>查看 →</a>
+</article>

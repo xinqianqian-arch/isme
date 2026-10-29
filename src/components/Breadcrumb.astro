@@ -1,0 +1,11 @@
+---
+/* 面包屑：页面上显示一行“首页 / 北师大版 / …”，同时告诉搜索引擎这一页在网站里的位置 */
+import { breadcrumb } from '../lib/seo';
+interface Props { items: { name: string; url?: string }[] }
+const { items } = Astro.props;
+const all = [{ name: '首页', url: '/' }, ...items];
+---
+<nav class="crumb" aria-label="面包屑">
+  {all.map((it, i) => <>{i > 0 && ' / '}{it.url && i < all.length - 1 ? <a href={it.url}>{it.name}</a> : it.name}</>)}
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumb(all)).replace(/</g, '\\u003c')} />

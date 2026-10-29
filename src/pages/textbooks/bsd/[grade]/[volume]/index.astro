@@ -1,0 +1,23 @@
+---
+import PageLayout from '../../../../../layouts/PageLayout.astro';
+import PageHero from '../../../../../components/PageHero.astro';
+import Breadcrumb from '../../../../../components/Breadcrumb.astro';
+import UnitCard from '../../../../../components/UnitCard.astro';
+import XhsCta from '../../../../../components/XhsCta.astro';
+import { getCatalog, CN } from '../../../../../lib/catalog';
+
+export async function getStaticPaths() {
+  const { books } = await getCatalog();
+  return books.map(b => ({ params: { grade: `grade-${b.grade}`, volume: `volume-${b.volume}` }, props: { b } }));
+}
+const { b } = Astro.props;
+const n = CN[b.grade];
+---
+<PageLayout title={`北师大版${n}年级数学${b.volumeName}教材目录｜单元知识点`} description={`北师大版${n}年级数学${b.volumeName}课程目录，含${b.units.length}个学习单元的知识重点、教学重难点、课堂活动及课时导航。`}>
+  <Breadcrumb items={[{ name: '北师大版', url: '/textbooks/bsd/' }, { name: `${n}年级`, url: `/textbooks/bsd/grade-${b.grade}/` }, { name: b.volumeName }]} />
+  <PageHero eyebrow={`北师大版 · ${b.revision}`} title={`${n}年级数学${b.volumeName}课程目录`} lead={`本册整理了${b.units.length}个主要学习单元。各单元提供知识梳理、易错提醒和课堂活动建议，便于教师根据实际进度备课。`}>
+    <p class="note">教材版本：{b.revision}。<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p>
+  </PageHero>
+  <div class="unit-list">{b.units.map(u => <UnitCard unit={u} />)}</div>
+  <XhsCta title="本册互动课件" text={`${n}年级${b.volumeName}各单元的动画演示、课堂互动与练习设计，在十一课件的小红书主页持续更新。`} />
+</PageLayout>

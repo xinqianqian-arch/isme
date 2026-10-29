@@ -1,0 +1,32 @@
+---
+/* 内页骨架：<head> 搜索信息 + 顶部导航 + 正文 + 页脚 */
+import '../styles/tokens.css';
+import '../styles/pages.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site.config';
+interface Props {
+  title: string;
+  description: string;
+  /** 默认会在标题后加“ - 十一课件”，写了 fullTitle 就原样使用 */
+  fullTitle?: string;
+  noindex?: boolean;
+  canonical?: boolean;
+  type?: 'website' | 'article';
+  jsonLd?: object[];
+}
+const { title, fullTitle, ...seo } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <Seo title={fullTitle ?? `${title} - ${SITE.name}`} {...seo} />
+</head>
+<body>
+  <a class="skip" href="#main">跳至正文</a>
+  <Header />
+  <main class="container" id="main"><slot /></main>
+  <Footer />
+</body>
+</html>

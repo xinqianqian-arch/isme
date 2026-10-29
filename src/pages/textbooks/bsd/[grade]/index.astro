@@ -1,0 +1,21 @@
+---
+import PageLayout from '../../../../layouts/PageLayout.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import GradeCard from '../../../../components/GradeCard.astro';
+import { getCatalog, CN } from '../../../../lib/catalog';
+
+export async function getStaticPaths() {
+  const { grades } = await getCatalog();
+  return grades.map(g => ({ params: { grade: `grade-${g.grade}` }, props: { g } }));
+}
+const { g } = Astro.props;
+const n = CN[g.grade];
+---
+<PageLayout title={`北师大版${n}年级数学上下册教材目录`} description={`北师大版小学${n}年级数学上册、下册单元目录，提供教学重点、易错点与课堂活动建议。`}>
+  <Breadcrumb items={[{ name: '北师大版', url: '/textbooks/bsd/' }, { name: `${n}年级` }]} />
+  <PageHero eyebrow={`北师大版 · ${n}年级`} title={`小学${n}年级数学同步目录`} lead="选择上册或下册，查看单元知识与教学建议。教材修订后单元安排可能发生变化，以您正在使用的教材印次为准。" />
+  <div class="cards">
+    {g.books.map(b => <GradeCard href={b.url} img={`g${g.grade}${b.volume === 1 ? 'b' : 'c'}`} tiny={b.revision} title={b.volumeName} text={`${b.units.length} 个主要学习单元 · 教学内容介绍`} more={`进入${b.volumeName} →`} />)}
+  </div>
+</PageLayout>

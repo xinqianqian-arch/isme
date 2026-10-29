@@ -1,0 +1,9 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<PageLayout title="" fullTitle="页面未找到 · 十一课件" description="这个页面暂时找不到，可以返回十一课件首页或按教材重新查找。" noindex canonical={false}>
+  <PageHero eyebrow="404" title="这个页面暂时找不到" lead="可以返回首页，或者按教材重新查找。">
+    <p><a class="button" href="/">返回十一课件首页</a><a class="button secondary" href="/textbooks/bsd/">浏览教材目录</a></p>
+  </PageHero>
+</PageLayout>

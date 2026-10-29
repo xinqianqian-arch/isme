@@ -1,0 +1,11 @@
+---
+/* “去小红书看课件”引流卡片 */
+import { SITE } from '../site.config';
+interface Props { title: string; text: string }
+const { title, text } = Astro.props;
+---
+<section class="cta">
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <a class="button" href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a>
+</section>

@@ -1,0 +1,40 @@
+---
+import { render } from 'astro:content';
+import PageLayout from '../../../../../../layouts/PageLayout.astro';
+import PageHero from '../../../../../../components/PageHero.astro';
+import Breadcrumb from '../../../../../../components/Breadcrumb.astro';
+import LessonList from '../../../../../../components/LessonList.astro';
+import XhsCta from '../../../../../../components/XhsCta.astro';
+import { getCatalog, CN } from '../../../../../../lib/catalog';
+import { abs, faq } from '../../../../../../lib/seo';
+
+export async function getStaticPaths() {
+  const { units } = await getCatalog();
+  return units.map(u => ({ params: { grade: `grade-${u.grade}`, volume: `volume-${u.volume}`, unit: u.id }, props: { u } }));
+}
+const { u } = Astro.props;
+const n = CN[u.grade];
+const Extra = u.entry ? (await render(u.entry)).Content : null;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'LearningResource', name: `北师大版${n}年级${u.volumeName}《${u.title}》单元备课指南`,
+  description: u.focus, inLanguage: 'zh-CN', educationalLevel: '小学', learningResourceType: '教学参考', url: abs(u.url), isAccessibleForFree: true,
+};
+const qa = faq([
+  [`北师大版${n}年级${u.volumeName}“${u.title}”单元主要学习什么？`, u.focus],
+  [`“${u.title}”单元学生容易错在哪里？`, u.pitfall],
+  [`“${u.title}”单元可以设计什么课堂活动？`, u.activity],
+]);
+---
+<PageLayout title={`北师大版${n}年级数学${u.volumeName}《${u.title}》单元教学内容与备课指南`} description={`北师大版${n}年级${u.volumeName}《${u.title}》：${u.focus}`} jsonLd={[schema, qa]}>
+  <Breadcrumb items={[{ name: '北师大版', url: '/textbooks/bsd/' }, { name: `${n}年级${u.volumeName}`, url: u.book.url }, { name: u.title }]} />
+  <article class="lesson-content">
+    <PageHero as="header" eyebrow={`单元 ${u.order} · ${u.revision}`} title={`${u.title}｜单元教学内容与备课建议`} lead={u.focus} />
+    <div class="facts"><div><span class="tiny">适用教材</span><strong>北师大版数学</strong></div><div><span class="tiny">所在年级</span><strong>{n}年级{u.volumeName}</strong></div><div><span class="tiny">资料类型</span><strong>单元教学指南</strong></div></div>
+    {Extra && <section class="original-note md-body"><Extra /></section>}
+    <section><h2>这个单元主要学习什么？</h2><p>{u.focus}</p><p>备课时建议先确认学生此前掌握了哪些相关知识，再把抽象概念放回具体的问题情境。理解形成过程，比仅给出结论或套用计算公式更重要。</p></section>
+    <section><h2>重点与易错点</h2><p>{u.pitfall}</p><p>教师可以安排一次“先独立判断，再同伴解释，最后全班比较”的交流，让学生说出为什么这样计算、分类或作图，而不只是报出答案。</p></section>
+    <section><h2>课堂活动设计建议</h2><p>{u.activity}</p><p>建议按“情境提出问题 → 动手操作或画图 → 表达数量关系 → 归纳方法 → 变式练习”的顺序组织课堂，最后让学生用自己的语言总结发现。</p></section>
+    {u.lessons.length > 0 && <section><h2>对应课时与教学内容</h2><LessonList lessons={u.lessons} /></section>}
+    <XhsCta title={`“${u.title}”单元互动课件`} text="动画演示、课堂互动和练习设计，让抽象的知识看得见、动起来。十一课件的原创课件在小红书主页持续更新。" />
+  </article>
+</PageLayout>

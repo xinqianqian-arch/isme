@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getArticles, articleUrl, ymd } from '../../lib/articles';
+import { article } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  return (await getArticles()).map(a => ({ params: { slug: a.id }, props: { a } }));
+}
+const { a } = Astro.props;
+const { Content } = await render(a);
+const d = a.data;
+---
+<PageLayout title={d.标题} description={d.简介} type="article"
+  jsonLd={[article({ title: d.标题, description: d.简介, url: articleUrl(a.id), date: d.日期, updated: d.更新 })]}>
+  <article class="prose">
+    <h1>{d.大标题 ?? d.标题}</h1>
+    <p class="fine">{ymd(d.日期)}{d.更新 && ` · 更新于 ${ymd(d.更新)}`}</p>
+    <Content />
+  </article>
+</PageLayout>

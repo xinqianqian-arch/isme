@@ -1,0 +1,28 @@
+---
+/* 首页「按教材找到下一节课」：六个年级的插画卡片 */
+import '../../styles/home-catalog.css';
+import { getCatalog, CN } from '../../lib/catalog';
+const { grades } = await getCatalog();
+---
+<section class="edu-catalog" id="curriculum">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>按教材找到下一节课 📚</h2>
+      <p>北师大版 · 一到六年级 · 按上下册和单元查看教学重点</p>
+    </div>
+    <div class="edu-grades">
+      {grades.map(g => (
+        <article class="edu-grade">
+          <a class="pic" href={g.url} tabindex="-1" aria-hidden="true"><img src={`/assets/lessons/g${g.grade}a.webp`} alt="" loading="lazy"></a>
+          <div class="body">
+            <span>GRADE {g.grade}</span>
+            <h3><a href={g.url}>{CN[g.grade]}年级数学</a></h3>
+            <p>按单元查看知识重点与课堂活动</p>
+            <div class="vols">{g.books.map(b => <a href={b.url}>{b.volumeName} →</a>)}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="edu-footnote">本站为独立教学网站，并非教材出版社官方网站。</p>
+  </div>
+</section>

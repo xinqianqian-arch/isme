@@ -1,0 +1,142 @@
+---
+/* 首页第一屏：人物介绍 + 跟随鼠标、会弹跳的黏土贴纸（从原来的 index.html 搬过来） */
+import { SITE } from '../../site.config';
+---
+<section class="hero" id="hero">
+  <div class="stickers" id="stickers"></div>
+  <div class="intro wrap">
+    <div class="me" id="me">
+      <img class="avatar" id="avatar" src="/assets/avatar.webp" alt="十一老师">
+      <div class="bubble">嗨，我是十一老师 👋<small>一线数学老师 · 天津</small></div>
+    </div>
+    <h1>让数学课<span class="hl"><span>动</span><span>起</span><span>来</span>
+      <svg viewBox="0 0 200 16" preserveAspectRatio="none"><path d="M2 10 Q 25 2 50 10 T 100 10 T 150 10 T 198 10" fill="none" stroke="#FFC845" stroke-width="5" stroke-linecap="round"/></svg>
+    </span>！</h1>
+    <p class="lead">用 AI 自研 1–6 年级数学课件<br>会动的例题、能玩的练习，孩子爱看，老师省心。</p>
+    <div class="chips">
+      <span class="chip"><b>4.3 万</b>获赞与收藏</span>
+      <span class="chip"><b>1–6</b>年级北师大同步</span>
+      <span class="chip"><b>网页 · 3D · 动画</b></span>
+    </div>
+    <div class="ctas">
+      <a class="btn btn-xhs" href={SITE.xhs.profile} target="_blank" rel="noopener">查看小红书主页 →</a>
+      <a class="btn btn-ghost" href="#works">看看课件 👀</a>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#works">往下看课件<span>⌄</span></a>
+</section>
+
+<script>
+/* ---------- 跟随鼠标、会弹跳的黏土贴纸 ---------- */
+const STICKERS = ['n01', 'o08', 'o05', 'n09', 'o10', 'n02', 'n07', 'o03', 'o11', 'n03', 'o01', 'n12', 'o06', 'n10'];
+/* 位置（百分比）和大小；中间留给人物介绍 */
+const SLOTS = [
+  [5, 12, 96], [16, 34, 78], [4, 56, 104], [15, 76, 84], [7, 90, 70],
+  [92, 11, 90], [82, 30, 80], [93, 50, 104], [82, 72, 120], [92, 90, 74],
+  [30, 8, 66], [68, 7, 72], [27, 92, 70], [72, 91, 66]
+];
+/* 手机：只放在上下两条边和左右边缘，不压正文 */
+const SLOTS_SMALL = [
+  [9, 5, 58], [33, 4, 44], [67, 5, 46], [91, 6, 58], [3, 34, 44], [97, 40, 44],
+  [3, 66, 44], [97, 70, 42], [10, 95, 52], [37, 96, 42], [64, 95, 46], [90, 94, 54]
+];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hero = document.getElementById('hero');
+const layer = document.getElementById('stickers');
+const avatar = document.getElementById('avatar');
+const mouse = { x: -9999, y: -9999, in: false };
+let items = [];
+
+function layout() {
+  const w = hero.clientWidth, h = hero.clientHeight, small = w < 640;
+  const slots = small ? SLOTS_SMALL : SLOTS;
+  items.forEach((it, i) => {
+    it.el.hidden = i >= slots.length;
+    if (it.el.hidden) return;
+    const [px, py, size] = slots[i];
+    it.size = size * (small ? 1 : Math.min(1, w / 1300 + .15));
+    it.el.style.width = it.el.style.height = it.size + 'px';
+    it.hx = px / 100 * w - it.size / 2;
+    it.hy = py / 100 * h - it.size / 2;
+  });
+}
+
+function buildStickers() {
+  const n = Math.min(STICKERS.length, SLOTS.length);
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('img');
+    el.className = 'sticker';
+    el.src = `/assets/stickers/${STICKERS[i]}.webp`;
+    el.alt = '';
+    el.draggable = false;
+    layer.appendChild(el);
+    const it = { el, x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0, s: 1, vs: 0, depth: .5 + Math.random(), phase: Math.random() * 6.28, cool: 0 };
+    el.addEventListener('pointerdown', () => jump(it, 1.6));
+    items.push(it);
+  }
+  layout();
+}
+
+function jump(it, k = 1) {
+  if (it.cool > 0) return;
+  it.vy -= 9 * k;
+  it.vr += (Math.random() < .5 ? -1 : 1) * 9 * k;
+  it.vs -= .12 * k;
+  it.cool = 24;
+}
+
+const ava = { rx: 0, ry: 0, vx: 0, vy: 0 };
+function frame(t) {
+  const rect = hero.getBoundingClientRect();
+  const mx = mouse.x - rect.left, my = mouse.y - rect.top;
+  items.forEach(it => {
+    if (it.el.hidden) return;
+    const cx = it.hx + it.size / 2, cy = it.hy + it.size / 2;
+    let tx = 0, ty = 0;
+    if (mouse.in) {
+      // 朝鼠标方向轻轻追过去
+      tx = Math.max(-46, Math.min(46, (mx - cx) * .05 * it.depth));
+      ty = Math.max(-46, Math.min(46, (my - cy) * .05 * it.depth));
+      // 鼠标靠太近就被弹开并蹦一下
+      const dx = cx + it.x - mx, dy = cy + it.y - my, d = Math.hypot(dx, dy), R = it.size * .9 + 50;
+      if (d < R) {
+        const f = (1 - d / R) * 70;
+        tx += dx / (d || 1) * f; ty += dy / (d || 1) * f;
+        jump(it, .7);
+      }
+    }
+    it.vx = (it.vx + (tx - it.x) * .07) * .86;
+    it.vy = (it.vy + (ty - it.y) * .07) * .86;
+    it.x += it.vx; it.y += it.vy;
+    it.vr = (it.vr + (it.vx * 1.2 - it.r) * .08) * .88;
+    it.r += it.vr;
+    it.vs = (it.vs + (1 - it.s) * .2) * .78;
+    it.s += it.vs;
+    if (it.cool > 0) it.cool--;
+    const bob = Math.sin(t / 900 + it.phase) * 6;
+    it.el.style.transform = `translate3d(${it.hx + it.x}px, ${it.hy + it.y + bob}px, 0) rotate(${it.r}deg) scale(${2 - it.s}, ${it.s})`;
+  });
+
+  // 头像朝鼠标微微转头
+  const ar = avatar.getBoundingClientRect();
+  const tx = mouse.in ? Math.max(-1, Math.min(1, (mouse.x - ar.left - ar.width / 2) / 400)) * 16 : 0;
+  const ty = mouse.in ? Math.max(-1, Math.min(1, (mouse.y - ar.top - ar.height / 2) / 400)) * -16 : 0;
+  ava.vx = (ava.vx + (tx - ava.ry) * .08) * .82; ava.ry += ava.vx;
+  ava.vy = (ava.vy + (ty - ava.rx) * .08) * .82; ava.rx += ava.vy;
+  avatar.style.transform = `rotateY(${ava.ry}deg) rotateX(${ava.rx}deg)`;
+
+  if (heroVisible) requestAnimationFrame(frame); else running = false;
+}
+
+let heroVisible = true, running = false;
+function start() { if (!running && !reduce) { running = true; requestAnimationFrame(frame); } }
+addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.in = true; });
+document.addEventListener('pointerleave', () => { mouse.in = false; });
+addEventListener('resize', layout);
+new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; if (heroVisible) start(); }).observe(hero);
+document.getElementById('me').addEventListener('pointerdown', () => items.forEach((it, i) => setTimeout(() => jump(it, 1.2), i * 40)));
+
+buildStickers();
+if (reduce) items.forEach(it => { it.el.style.transform = `translate3d(${it.hx}px, ${it.hy}px, 0)`; });
+start();
+</script>

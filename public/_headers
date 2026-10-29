@@ -8,9 +8,6 @@
 /assets/*
   Cache-Control: public, max-age=86400
 
-/css/*
-  Cache-Control: public, max-age=86400
-
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 
@@ -23,3 +20,7 @@
 # workers.dev 上的预览和备用地址不让搜索引擎收录，只收录 11edu.cc
 https://:host.xinqianqian951210.workers.dev/*
   X-Robots-Tag: noindex
+
+# 构建生成的样式和脚本，文件名里带内容指纹，可以放心长期缓存
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,48 @@
+---
+/* 首页「1–6 年级课件」：卡片在构建时就生成好（搜索引擎和 AI 也能看到），年级按钮只负责显示/隐藏 */
+import { getCollection } from 'astro:content';
+import { SITE } from '../../site.config';
+import ShopBanner from './ShopBanner.astro';
+const TINT = { Y: '#FFE9A8', M: '#CFF3E2', S: '#D3E8FF', P: '#FFDCC4', L: '#E4DCFF' } as const;
+const GRADES = ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'];
+const works = (await getCollection('works')).sort((a, b) => a.id.localeCompare(b.id)).map(w => w.data);
+const nth: Record<number, number> = {};
+---
+<section class="works" id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>1–6 年级课件 🎨</h2>
+      <p>北师大版同步 · 网页互动 + 课堂演示视频</p>
+    </div>
+    <div class="tabs" id="tabs">
+      {GRADES.map((n, i) => <button type="button" data-g={i + 1} class={i === 0 ? 'on' : undefined}>{n}</button>)}
+    </div>
+    <div class="grid" id="grid">
+      {works.map(w => {
+        const k = (nth[w.年级] = (nth[w.年级] ?? 0) + 1);
+        return (
+          <a class="work" data-g={w.年级} hidden={w.年级 !== 1} href={SITE.xhs.profile} target="_blank" rel="noopener"
+             style={`--tint:${TINT[w.色调]};animation-delay:${(k - 1) * 0.05}s`}>
+            <div class="pic"><img src={`/assets/lessons/${w.图片}.webp`} alt={w.标题} loading="lazy"><span class="go">去小红书看 ↗</span></div>
+            <div class="info"><div><h3>{w.标题}</h3><div class="meta">{w.说明}</div></div><span class="arrow">→</span></div>
+          </a>
+        );
+      })}
+    </div>
+    <p class="more">每个年级持续更新中 · <a href="/textbooks/bsd/">完整教材目录在这里 →</a></p>
+    <ShopBanner />
+  </div>
+  <footer>© 2026 十一课件 · 用 AI 认真备好每一节数学课</footer>
+</section>
+
+<script>
+  /* 年级切换 */
+  const tabs = document.getElementById('tabs')!;
+  const cards = document.querySelectorAll<HTMLElement>('#grid .work');
+  tabs.addEventListener('click', e => {
+    const b = (e.target as HTMLElement).closest('button');
+    if (!b) return;
+    tabs.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    cards.forEach(c => { c.hidden = c.dataset.g !== b.dataset.g; });
+  });
+</script>

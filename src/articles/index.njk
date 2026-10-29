@@ -1,7 +1,0 @@
----
-layout: layouts/base.njk
-title: 小学数学教学文章
-description: 阅读十一课件原创教学思路、课堂案例和数学知识点解析。
-permalink: /articles/
----
-<section class="intro"><p class="eyebrow">教学文章</p><h1>数学教学文章</h1><p class="lead">备课思路、课堂案例和教材版本辨别，写给一线小学数学老师。</p></section><div class="cards">{% for article in collections.article %}<a class="card" href="{{ article.url }}"><h2>{{ article.data.title }}</h2><p>{{ article.data.description }}</p></a>{% endfor %}</div>

@@ -1,0 +1,21 @@
+---
+/* 顶部导航：首页和内页共用 */
+import '../styles/topbar.css';
+import { SITE } from '../site.config';
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/textbooks/bsd/', text: '教材目录', match: '/textbooks/' },
+  { href: '/courses/', text: '课件展厅', match: '/courses/' },
+  { href: '/articles/', text: '教学文章', match: '/articles/' },
+  { href: '/about/', text: '关于我', match: '/about/' },
+];
+---
+<header class="topbar">
+  <div class="top-inner">
+    <a class="logo" href="/"><img src="/assets/avatar.webp" width="40" height="40" alt="">{SITE.name}</a>
+    <nav aria-label="主导航">
+      {nav.map(n => <a href={n.href} aria-current={path.startsWith(n.match) ? 'page' : undefined}>{n.text}</a>)}
+    </nav>
+    <a class="nav-xhs" href={SITE.xhs.profile} target="_blank" rel="noopener noreferrer nofollow">小红书 ↗</a>
+  </div>
+</header>

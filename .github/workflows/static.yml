@@ -32,19 +32,11 @@ jobs:
           node-version-file: .nvmrc
       - name: Install build dependencies
         run: |
-          if [ -f package-lock.json ]; then
-            npm ci --include=dev --no-audit --no-fund
-          else
-            npm install --include=dev --no-audit --no-fund
-          fi
-      - name: Check build script syntax
+          npm ci --include=dev --no-audit --no-fund
+      - name: Check content format
         run: npm run check
-      - name: Build and validate Cloudflare output
+      - name: Build and validate output
         run: npm run build
-      - name: Verify original homepage and assets are unchanged
-        run: git diff --exit-code -- index.html assets
-      - name: Show build report
-        run: cat build-report.json
       - name: Save deployment artifact
         uses: actions/upload-artifact@v4
         with:

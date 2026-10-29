@@ -1,0 +1,12 @@
+---
+/* 带插画的入口卡片：教材目录的年级卡片、年级页的上下册卡片 */
+interface Props { href: string; img: string; tiny: string; title: string; text: string; more: string }
+const { href, img, tiny, title, text, more } = Astro.props;
+---
+<a class="card" href={href}>
+  <div class="pic"><img src={`/assets/lessons/${img}.webp`} alt="" loading="lazy"></div>
+  <span class="tiny">{tiny}</span>
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <span class="more">{more}</span>
+</a>

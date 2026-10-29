@@ -1,7 +1,7 @@
 # Cloudflare 发布说明
 
 11edu.cc 由 Cloudflare **Worker `11ai`** 提供（Workers 静态资源，没有自定义脚本），不是 Pages 项目。
-仓库根目录的 `wrangler.jsonc` 描述了这个 Worker：发布 `dist/` 目录，自定义域名 `11edu.cc`。
+仓库根目录的 `wrangler.jsonc` 描述了这个 Worker：发布 `dist/` 目录（Astro 构建产物），自定义域名 `11edu.cc`。
 
 ## 自动发布（Workers Builds）
 
@@ -36,5 +36,5 @@ Cloudflare 后台 → Workers & Pages → `11ai` → Deployments，选上一个�
 ## 注意
 
 - 发布内容只有 `dist/`；不要把仓库根目录直接上传。
-- `content/xhs/profile.json` 是小红书原始资料（含个人信息），只作素材留档，不进入发布目录。
+- `materials/xhs-profile.json` 是小红书原始资料（含个人信息），只作素材留档，不进入发布目录。
 - 不要把任何 token 写进代码、配置或工作流。

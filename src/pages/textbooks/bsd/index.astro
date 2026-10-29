@@ -1,0 +1,20 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import GradeCard from '../../../components/GradeCard.astro';
+import { getCatalog, CN, EDITION } from '../../../lib/catalog';
+import { abs } from '../../../lib/seo';
+const { grades } = await getCatalog();
+const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: '北师大版小学数学课程目录', url: abs('/textbooks/bsd/'), inLanguage: 'zh-CN' };
+---
+<PageLayout title={`${EDITION.name}小学数学1—6年级课件目录与备课指南`} description={`${EDITION.name}小学数学上下册课程导航：分年级查找真实单元目录、教学内容、易错点和互动课件更新。`} jsonLd={[ld]}>
+  <Breadcrumb items={[{ name: '教材目录', url: '/textbooks/' }, { name: '北师大版' }]} />
+  <PageHero eyebrow="北师大版 · 小学数学" title="北师大版数学课件与教材目录" lead="覆盖一年级至六年级、上下册，共12册数学教材的单元知识地图。每个单元配有知识重点、易错提醒和课堂活动建议，原创互动课件在小红书持续更新。">
+    <p class="note">提示：不同年级正逐步使用修订版教材；页面已注明对应目录版本，选课前请核对手中教材封面和单元名称。</p>
+  </PageHero>
+  <div class="cards">
+    {grades.map(g => <GradeCard href={g.url} img={`g${g.grade}a`} tiny={`GRADE ${g.grade}`} title={`${CN[g.grade]}年级数学`} text="上册 · 下册 · 单元学习指南" more="查看课程 →" />)}
+  </div>
+  <section class="below"><h2>如何使用课程导航？</h2><p>进入对应的年级与上下册，按照单元顺序浏览知识点、课堂难点和活动建议。</p><p><a href="/articles/textbook-edition-guide/">阅读新旧教材版本辨别指南</a></p></section>
+</PageLayout>

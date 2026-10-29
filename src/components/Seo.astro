@@ -1,0 +1,33 @@
+---
+/* <head> 里的搜索信息：标题、描述、规范网址、分享卡片、结构化数据 */
+import { SITE } from '../site.config';
+import { abs } from '../lib/seo';
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  /** 404 等页面不需要规范网址 */
+  canonical?: boolean;
+  type?: 'website' | 'article';
+  jsonLd?: object[];
+  image?: string;
+}
+const { title, description, noindex = false, canonical = true, type = 'website', jsonLd = [], image = SITE.shareImage } = Astro.props;
+const url = abs(Astro.url.pathname);
+const ld = (o: object) => JSON.stringify(o).replace(/</g, '\\u003c');
+---
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+{canonical && <link rel="canonical" href={url}>}
+{noindex && <meta name="robots" content="noindex,follow">}
+<meta property="og:type" content={type}>
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content={SITE.name}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+{canonical && <meta property="og:url" content={url}>}
+<meta property="og:image" content={abs(image)}>
+<link rel="icon" href="/assets/avatar.webp" type="image/webp">
+{jsonLd.map(o => <script type="application/ld+json" set:html={ld(o)} />)}

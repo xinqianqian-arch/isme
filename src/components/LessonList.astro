@@ -1,0 +1,9 @@
+---
+/* 单元页上的课时列表 */
+import type { Lesson } from '../lib/catalog';
+interface Props { lessons: Lesson[] }
+const { lessons } = Astro.props;
+---
+<ol class="lesson-index">
+  {lessons.map(l => <li><a href={l.url}><span>{l.title}</span><span class="tiny">课时介绍 →</span></a></li>)}
+</ol>

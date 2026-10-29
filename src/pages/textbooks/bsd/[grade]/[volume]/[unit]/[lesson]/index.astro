@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import PageLayout from '../../../../../../../layouts/PageLayout.astro';
+import PageHero from '../../../../../../../components/PageHero.astro';
+import Breadcrumb from '../../../../../../../components/Breadcrumb.astro';
+import XhsCta from '../../../../../../../components/XhsCta.astro';
+import { getCatalog, CN } from '../../../../../../../lib/catalog';
+import { abs } from '../../../../../../../lib/seo';
+
+export async function getStaticPaths() {
+  const { lessons } = await getCatalog();
+  return lessons.map(l => ({ params: { grade: `grade-${l.grade}`, volume: `volume-${l.volume}`, unit: l.unit.id, lesson: l.id }, props: { l } }));
+}
+const { l } = Astro.props;
+const n = CN[l.grade];
+const u = l.unit;
+// 写了课时讲解：显示讲解正文；没写：显示所在单元的通用备课参考（这种页面不让搜索引擎收录）
+const Body = l.entry ? (await render(l.entry)).Content : null;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'WebPage', name: `北师大版${n}年级${l.volumeName}《${l.title}》教学内容介绍`,
+  url: abs(l.url), description: u.focus, inLanguage: 'zh-CN', isPartOf: { '@type': 'CreativeWork', name: `北师大版${n}年级${l.volumeName}` },
+};
+---
+<PageLayout title={`北师大版${n}年级数学${l.volumeName}《${l.title}》教学内容介绍`} description={`北师大版${n}年级${l.volumeName}《${l.title}》备课参考：${u.focus}`} noindex={!l.indexable} jsonLd={[schema]}>
+  <Breadcrumb items={[{ name: '北师大版', url: '/textbooks/bsd/' }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
+  <article class="lesson-content">
+    <PageHero as="header" eyebrow={`课时导航 · ${l.revision}`} title={`《${l.title}》教学内容介绍`} lead={`这节课属于北师大版${n}年级数学${l.volumeName}“${u.title}”单元，建议从学生已有经验与具体情境出发理解数学概念。`} />
+    {Body ? (
+      <section class="md-body"><Body /></section>
+    ) : (
+      <>
+        <section><h2>本课所在单元的核心目标</h2><p>{u.focus}</p></section>
+        <section><h2>课堂教学如何组织？</h2><p>围绕《{l.title}》的课题情境，引导学生先提出数学问题，再尝试用实物、示意图或算式表达自己的思考。{u.activity}</p></section>
+        <section><h2>备课时值得关注的易错点</h2><p>{u.pitfall}</p><p>可以让学生在解释方法时指出每个数字、图形元素或计量单位的含义，避免只凭记忆给出结果。</p></section>
+      </>
+    )}
+    <XhsCta title={`《${l.title}》互动课件`} text="想看这节课的动画演示和课堂互动设计？十一课件的原创互动课件在小红书主页持续更新。" />
+  </article>
+</PageLayout>

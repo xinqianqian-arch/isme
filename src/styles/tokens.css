@@ -1,0 +1,17 @@
+/* 全站共用的配色、圆角、阴影：首页和内页都用这一套 */
+:root {
+  --bg: #FFF9EE;
+  --sun: #FFC845;
+  --coral: #FF7B5C;
+  --mint: #3DC9A4;
+  --sky: #5B9DFF;
+  --grape: #8C7BFF;
+  --ink: #2E3A59;
+  --muted: #6B7590;
+  --xhs: #FF2442;
+  --card: #FFFFFF;
+  --line: #F1E6D3;
+  --radius: 24px;
+  --shadow: 0 10px 30px rgba(46, 58, 89, .10);
+  --shadow-up: 0 22px 44px rgba(46, 58, 89, .16);
+}

@@ -1,0 +1,11 @@
+---
+/* 页头大卡片（右侧有黏土贴纸，样式在 pages.css 的 .intro） */
+interface Props { eyebrow?: string; title: string; lead?: string; as?: 'section' | 'header' }
+const { eyebrow, title, lead, as: Tag = 'section' } = Astro.props;
+---
+<Tag class="intro">
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h1>{title}</h1>
+  {lead && <p class="lead">{lead}</p>}
+  <slot />
+</Tag>

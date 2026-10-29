@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { SITE } from '../site.config';
+const works = (await getCollection('works')).sort((a, b) => a.id.localeCompare(b.id));
+---
+<PageLayout title="小学数学原创互动课件与教学资源" description="十一课件持续制作小学数学互动演示、3D教学资源与课堂课件，按教材版本、年级与课时更新。">
+  <PageHero eyebrow="原创数学课件" title="让数学知识看得见、动起来" lead="用动画演示、3D 模型和课堂互动，帮助学生看懂抽象的数学概念。" />
+  <div class="works-grid">{works.map(w => <WorkCard work={w.data} />)}</div>
+  <p><a class="button" href="/textbooks/bsd/">查看北师大版教材目录</a><a class="button secondary" href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a></p>
+</PageLayout>

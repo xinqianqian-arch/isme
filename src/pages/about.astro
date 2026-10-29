@@ -1,0 +1,14 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import { person, abs } from '../lib/seo';
+const page = (await getEntry('pages', 'about'))!;
+const { Content } = await render(page);
+const ld = { '@context': 'https://schema.org', '@type': 'AboutPage', url: abs('/about/'), name: page.data.标题, mainEntity: person() };
+---
+<PageLayout title={page.data.标题} description={page.data.简介} jsonLd={[ld]}>
+  <article class="prose">
+    <h1>{page.data.标题}</h1>
+    <Content />
+  </article>
+</PageLayout>

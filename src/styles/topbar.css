@@ -1,0 +1,23 @@
+/* 顶部导航：首页和内页共用，改这里两边一起变 */
+.topbar { color: var(--ink); }
+.topbar a { color: inherit; }
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255, 249, 238, .82);
+  backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid rgba(241, 230, 211, .7);
+}
+.top-inner { width: min(1180px, 100% - 48px); margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 12px 0; }
+.topbar .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; text-decoration: none; }
+.topbar .logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 0 0 3px var(--sun); }
+.topbar nav { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.topbar nav a { padding: 6px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; color: var(--muted); transition: background .2s, color .2s; }
+.topbar nav a:hover, .topbar nav a[aria-current="page"] { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
+.topbar .nav-xhs { padding: 8px 18px; border-radius: 999px; background: var(--xhs); color: #fff; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 18px rgba(255, 36, 66, .25); transition: transform .2s; }
+.topbar .nav-xhs:hover { transform: translateY(-2px); }
+@media (max-width: 640px) {
+  .top-inner { flex-wrap: wrap; gap: 8px 12px; width: calc(100% - 28px); }
+  .topbar nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; }
+  .topbar nav a { padding: 4px 10px; font-size: 14px; white-space: nowrap; }
+  .topbar .nav-xhs { margin-left: auto; padding: 6px 14px; font-size: 14px; }
+}
