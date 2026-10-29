@@ -2,11 +2,14 @@
   "name": "11edu-site",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
   "scripts": {
     "dev": "eleventy --serve",
     "prebuild": "node --input-type=module -e \"import fs from 'node:fs'; fs.rmSync('dist', {recursive:true, force:true});\"",
-    "build": "eleventy && node scripts/prepare-home.mjs && node scripts/finish-build.mjs",
-    "check": "node --check eleventy.config.js && node --check src/_data/catalog.js && node --check src/_data/courses.js && node --check scripts/prepare-home.mjs && node --check scripts/finish-build.mjs"
+    "build": "eleventy && node scripts/prepare-home.mjs && node scripts/finish-build.mjs && node scripts/verify-build.mjs",
+    "check": "node --check eleventy.config.js && node --check src/_data/catalog.js && node --check src/_data/courses.js && node --check scripts/prepare-home.mjs && node --check scripts/finish-build.mjs && node --check scripts/verify-build.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
