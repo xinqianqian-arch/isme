@@ -1,5 +1,7 @@
 export default function (config) {
   config.addPassthroughCopy({ "index.html": "index.html" });
+  /* 单文件互动课件（天安门广场），原样发布到 /aaa */
+  config.addPassthroughCopy({ "aaa.html": "aaa.html" });
   config.addPassthroughCopy({ "assets": "assets" });
   config.addPassthroughCopy({ "public": "/" });
   config.addWatchTarget("content/");
