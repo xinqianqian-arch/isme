@@ -13,8 +13,8 @@
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:site_name" content="{{ site.name }}">
 <link rel="icon" href="/assets/avatar.webp" type="image/webp">
-<link rel="stylesheet" href="/css/topbar.css">
-<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="{{ '/css/topbar.css' | asset }}">
+<link rel="stylesheet" href="{{ '/css/site.css' | asset }}">
 {% if lesson and not lesson.seoReady %}<meta name="robots" content="noindex,follow">{% endif %}
 {% if lesson %}<script type="application/ld+json">{{ lesson.schema | json | safe }}</script>{% elif unit %}<script type="application/ld+json">{{ unit.schema | json | safe }}</script>{% endif %}
 </head>

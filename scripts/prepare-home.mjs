@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { assetUrl } from '../eleventy.config.js';
 
 // Enhance the generated copy only; keep the original landing page and animation source intact.
 const site = JSON.parse(fs.readFileSync('src/_data/site.json', 'utf8'));
@@ -16,8 +17,8 @@ const metadata = '<link rel="canonical" href="' + site.url + '/">\n' +
   '<meta property="og:title" content="' + escape(title) + '">\n' +
   '<meta property="og:description" content="' + escape(site.description) + '">\n' +
   '<meta property="og:url" content="' + site.url + '/">\n' +
-  '<link rel="stylesheet" href="/css/topbar.css">\n' +
-  '<link rel="stylesheet" href="/css/home-navigation.css">\n' +
+  '<link rel="stylesheet" href="' + assetUrl('/css/topbar.css') + '">\n' +
+  '<link rel="stylesheet" href="' + assetUrl('/css/home-navigation.css') + '">\n' +
   '<script type="application/ld+json">' + schema + '</script>\n';
 html = html.replace(/<\/head>/i, metadata + '</head>');
 // 顶部导航与内页 src/_includes/layouts/base.njk 的 header 保持同样的结构，样式都在 css/topbar.css
