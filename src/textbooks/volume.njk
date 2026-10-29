@@ -1,0 +1,15 @@
+---
+pagination:
+  data: catalogVolumes
+  size: 1
+  alias: item
+permalink: "/textbooks/{{ item.edition }}/grade-{{ item.grade }}/volume-{{ item.volume }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ item.name }}{{ item.grade }}年级数学{{ '上册' if item.volume == 1 else '下册' }}课件"
+  description: "{{ item.name }}{{ item.grade }}年级数学{{ '上册' if item.volume == 1 else '下册' }}同步课件目录。"
+---
+<p><a href="/textbooks/{{ item.edition }}/">{{ item.name }}</a> / <a href="/textbooks/{{ item.edition }}/grade-{{ item.grade }}/">{{ item.grade }}年级</a></p>
+<h1>{{ item.name }}{{ item.grade }}年级数学{{ "上册" if item.volume == 1 else "下册" }}</h1>
+<p>当前仅展示已发布的课件；教材单元和课时目录将在核实版次后逐步完善。</p>
+<div class="cards">{% set namespaceFound = false %}{% for course in courses %}{% if course.edition == item.edition and course.grade == item.grade and course.volume == item.volume %}<a class="card" href="/courses/{{ course.slug }}/"><h2>{{ course.title }}</h2><p>查看课件详情</p></a>{% endif %}{% endfor %}</div>

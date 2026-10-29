@@ -1,0 +1,12 @@
+---
+pagination:
+  data: editions
+  size: 1
+  alias: edition
+permalink: "/textbooks/{{ edition.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ edition.name }}小学数学课件"
+  description: "{{ edition.name }}一至六年级数学同步课件目录，按上下册查找已发布的互动教学资源。"
+---
+<p><a href="/textbooks/">教材版本</a> / {{ edition.name }}</p><h1>{{ edition.name }}小学数学课件</h1><div class="cards">{% for grade in [1,2,3,4,5,6] %}<a class="card" href="/textbooks/{{ edition.slug }}/grade-{{ grade }}/"><h2>{{ grade }}年级</h2><p>上下册课件目录</p></a>{% endfor %}</div>

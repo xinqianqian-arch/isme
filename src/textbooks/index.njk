@@ -1,0 +1,7 @@
+---
+layout: layouts/base.njk
+title: 小学数学教材版本目录
+description: 按人教版、冀教版、北师大版查找小学一至六年级数学课件。
+permalink: /textbooks/
+---
+<h1>小学数学教材目录</h1><p>选择教材版本，继续按年级和上下册查找对应资源。</p><div class="cards">{% for edition in editions %}<a class="card" href="/textbooks/{{ edition.slug }}/"><h2>{{ edition.name }}</h2><p>一年级至六年级</p></a>{% endfor %}</div>
