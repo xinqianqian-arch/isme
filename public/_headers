@@ -1,8 +1,25 @@
-/assets/*
+/*
   X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# 图片文件名不带版本号，缓存一天，换图后最迟第二天生效
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/css/*
+  Cache-Control: public, max-age=86400
 
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+
 /ai-index.json
   Content-Type: application/json; charset=utf-8
+
+# workers.dev 上的预览和备用地址不让搜索引擎收录，只收录 11edu.cc
+https://:host.xinqianqian951210.workers.dev/*
+  X-Robots-Tag: noindex

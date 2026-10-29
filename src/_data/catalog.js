@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import MarkdownIt from "markdown-it";
 
 const markdown = new MarkdownIt({html:false,linkify:true,typographer:true});
+const CN = ["", "一", "二", "三", "四", "五", "六"];
 export default function () {
   const pathToCatalog = path.join(process.cwd(),"content/textbooks/bsd/catalog.json");
   const source = JSON.parse(fs.readFileSync(pathToCatalog,"utf8"));
@@ -31,11 +32,11 @@ export default function () {
           if(extra.publishSeo===true && !seoReady) throw new Error("SEO lesson requires 250+ characters: "+ref);
         }
         const lesson={...rawLesson,ref,url:lessonUrl,grade:book.grade,volume:book.volume,volumeName:book.volumeName,revision:book.revision,unitTitle:unit.title,unitUrl:unitUrl,bookUrl:root,focus:unit.focus,pitfall:unit.pitfall,activity:unit.activity,courseStatus:extra.courseStatus||"planned",videoUrl:extra.videoUrl||"",shopUrl:extra.shopUrl||"",html,seoReady};
-        lesson.schema={"@context":"https://schema.org","@type":"WebPage",name:`北师大版${book.grade}年级${book.volumeName}《${rawLesson.title}》教学内容介绍`,url:"https://11edu.cc"+lessonUrl,description:unit.focus,inLanguage:"zh-CN",isPartOf:{"@type":"CreativeWork",name:`北师大版${book.grade}年级${book.volumeName}`}};
+        lesson.schema={"@context":"https://schema.org","@type":"WebPage",name:`北师大版${CN[book.grade]}年级${book.volumeName}《${rawLesson.title}》教学内容介绍`,url:"https://11edu.cc"+lessonUrl,description:unit.focus,inLanguage:"zh-CN",isPartOf:{"@type":"CreativeWork",name:`北师大版${CN[book.grade]}年级${book.volumeName}`}};
         unit.lessons.push(lesson);
         lessons.push(lesson);
       }
-      unit.schema={"@context":"https://schema.org","@type":"LearningResource",name:`北师大版${book.grade}年级${book.volumeName}《${unit.title}》单元备课指南`,description:unit.focus,inLanguage:"zh-CN",educationalLevel:"小学",learningResourceType:"教学参考",url:"https://11edu.cc"+unit.url,isAccessibleForFree:true};
+      unit.schema={"@context":"https://schema.org","@type":"LearningResource",name:`北师大版${CN[book.grade]}年级${book.volumeName}《${unit.title}》单元备课指南`,description:unit.focus,inLanguage:"zh-CN",educationalLevel:"小学",learningResourceType:"教学参考",url:"https://11edu.cc"+unit.url,isAccessibleForFree:true};
       book.units.push(unit);
       units.push(unit);
     }

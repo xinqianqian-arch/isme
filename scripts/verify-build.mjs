@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 // Run after generation in BOTH Cloudflare and GitHub Actions.
 const root = path.resolve('dist');
 const required = ['index.html', '404.html', 'robots.txt', 'sitemap.xml', 'llms.txt',
-  'llms-full.txt', 'ai-index.json', 'build-report.json', 'assets/avatar.webp',
+  'llms-full.txt', 'ai-index.json', 'assets/avatar.webp',
   'css/site.css', 'css/home-navigation.css'];
 for (const name of required) {
   const file = path.join(root, name);
@@ -38,12 +38,12 @@ for (const value of urls) {
 }
 assert(fs.readFileSync(path.join(root, 'robots.txt'), 'utf8')
   .includes('Sitemap: https://11edu.cc/sitemap.xml'), 'robots.txt Sitemap declaration missing');
-const report = JSON.parse(fs.readFileSync(path.join(root, 'build-report.json'), 'utf8'));
+const report = JSON.parse(fs.readFileSync('build-report.json', 'utf8'));
 const ai = JSON.parse(fs.readFileSync(path.join(root, 'ai-index.json'), 'utf8'));
 assert(report.indexable === urls.length, 'Build report disagrees with Sitemap');
 assert(ai.url === 'https://11edu.cc' && Array.isArray(ai.catalog), 'Invalid AI index');
 // Publishing the repository root would expose source files. Only dist/ is deployable.
-for (const name of ['.git', 'node_modules', 'src', 'content', 'package.json', '.env']) {
+for (const name of ['.git', 'node_modules', 'src', 'content', 'package.json', '.env', 'build-report.json', 'assets/profile.json']) {
   assert(!fs.existsSync(path.join(root, name)), `Source/private file in published output: ${name}`);
 }
 console.log(`Deployment checks passed: original homepage sections retained, ${urls.length} Sitemap URLs verified.`);

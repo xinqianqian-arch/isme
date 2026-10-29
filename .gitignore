@@ -7,3 +7,4 @@ dist/
 # 本地私钥与打包文件，不能进仓库
 .ssh/
 *.zip
+build-report.json

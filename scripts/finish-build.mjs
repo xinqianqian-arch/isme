@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const BASE = "https://11edu.cc";
+const CN = ["", "一", "二", "三", "四", "五", "六"];
 const ROOT = path.resolve("dist");
 const content = JSON.parse(fs.readFileSync("content/textbooks/bsd/catalog.json", "utf8"));
 const books = content.books;
@@ -47,7 +48,7 @@ const ai = {
   name: "十一课件",
   url: BASE,
   language: "zh-CN",
-  description: "北师大版小学数学教材导航与原创单元备课指南；课件演示和可购买资源按实际发布进度更新。",
+  description: "北师大版小学数学教材导航与原创单元备课指南；原创互动课件在创作者小红书主页持续更新。",
   disclaimer: "独立原创教学参考网站，非北京师范大学出版社官方网站。教材章节以实际使用的教材版次为准。",
   primarySitemap: BASE+"/sitemap.xml",
   llms: BASE+"/llms.txt",
@@ -79,12 +80,11 @@ const llms=[
 "- [结构化课程索引(JSON)]("+BASE+"/ai-index.json)",
 "",
 "## 教材导航",
-...books.map(b=>`- [北师大版${b.grade}年级${b.volume===1?"上册":"下册"}（${b.revision}）](${BASE}/textbooks/bsd/grade-${b.grade}/volume-${b.volume}/)`),
+...books.map(b=>`- [北师大版${CN[b.grade]}年级${b.volume===1?"上册":"下册"}（${b.revision}）](${BASE}/textbooks/bsd/grade-${b.grade}/volume-${b.volume}/)`),
 "",
 "## 内容与使用说明",
-"- 网站提供原创单元知识梳理、常见错误分析、课堂活动建议和课件更新状态。",
-"- 未完成的课件不会声称可下载、可购买；课时仅建立目录时可使用 noindex 控制索引。",
-"- 各课件购买链接将逐步单独更新，暂时统一跳转到创作者小红书主页。",
+"- 网站提供原创单元知识梳理、常见错误分析和课堂活动建议。",
+"- 原创互动课件的展示与获取方式，见创作者小红书主页。",
 "- 本站允许依法合规地搜索、引用与链接公开的原创内容；请保留来源与原始 URL。",
 "- 本文件旨在辅助发现公开内容，不构成任何搜索引擎或 AI 系统一定抓取、索引本站的保证。",
 ""
@@ -96,7 +96,7 @@ const llmsFull=[
 "这是网站提供的机器可读内容摘要，不包含教材正文或付费资源。",
 "",
 ...books.flatMap(b=>[
-  `## 北师大版 ${b.grade} 年级 ${b.volume===1?"上册":"下册"}（${b.revision}）`,
+  `## 北师大版${CN[b.grade]}年级${b.volume===1?"上册":"下册"}（${b.revision}）`,
   `链接：${BASE}/textbooks/bsd/grade-${b.grade}/volume-${b.volume}/`,
   "",
   ...b.units.flatMap(u=>[
@@ -110,7 +110,7 @@ const llmsFull=[
 ])
 ];
 fs.writeFileSync(path.join(ROOT,"llms-full.txt"),llmsFull.join("\n"));
-fs.writeFileSync(path.join(ROOT,"build-report.json"),JSON.stringify({
+fs.writeFileSync("build-report.json",JSON.stringify({
   date:content.version,files:pages.length,indexable:inSitemap.length,excluded:noindexPages.length,
   volumes:books.length,units:books.reduce((a,b)=>a+b.units.length,0),
   lessons:books.reduce((a,b)=>a+b.units.reduce((s,u)=>s+u.lessons.length,0),0)

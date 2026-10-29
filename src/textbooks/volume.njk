@@ -6,10 +6,10 @@ pagination:
 permalink: "{{ book.url }}"
 layout: layouts/base.njk
 eleventyComputed:
-  title: "北师大版{{ book.grade }}年级数学{{ book.volumeName }}教材目录｜单元知识点"
-  description: "北师大版{{ book.grade }}年级数学{{ book.volumeName }}课程目录，含{{ book.unitCount }}个学习单元的知识重点、教学重难点、课堂活动及课时导航。"
+  title: "北师大版{{ book.grade | cn }}年级数学{{ book.volumeName }}教材目录｜单元知识点"
+  description: "北师大版{{ book.grade | cn }}年级数学{{ book.volumeName }}课程目录，含{{ book.unitCount }}个学习单元的知识重点、教学重难点、课堂活动及课时导航。"
 ---
-<nav class="crumb" aria-label="面包屑"><a href="/">首页</a> / <a href="/textbooks/bsd/">北师大版</a> / <a href="/textbooks/bsd/grade-{{ book.grade }}/">{{ book.grade }}年级</a> / {{ book.volumeName }}</nav>
-<section class="intro"><p class="eyebrow">北师大版 · {{ book.revision }}</p><h1>{{ book.grade }}年级数学{{ book.volumeName }}课程目录</h1><p class="lead">本册整理了{{ book.unitCount }}个主要学习单元。各单元提供知识梳理、易错提醒和课堂活动建议，便于教师根据实际进度备课。</p><p class="note">课程目录口径：{{ book.revision }}。不同印次或新课标修订教材可能有差异；请先与手中教材目录核对。<a href="/articles/textbook-edition-guide/">如何辨别教材版本？</a></p></section>
-<div class="unit-list">{% for item in book.units %}<article class="unit-row"><span class="unit-no">{% if item.order < 10 %}0{% endif %}{{ item.order }}</span><div><h2><a href="{{ item.url }}">{{ item.title }}</a></h2><p>{{ item.focus }}</p><span class="tiny">{{ item.lessons.length }} 个已整理课题{% if item.lessons.length == 0 %} · 暂按单元发布备课指南{% endif %}</span></div><a class="more" href="{{ item.url }}" aria-label="查看{{ item.title }}">查看 →</a></article>{% endfor %}</div>
-<section class="below"><h2>教材版本说明</h2><p>本网站仅整理教学目录与原创课程介绍，不提供教材扫描版或未经授权的教材正文。课件演示及下载将随着原创制作进度单独更新。</p><p>目录核对参考：<a href="{{ book.source }}" target="_blank" rel="noopener noreferrer nofollow">本册参考资料</a>。目录仍需结合实际教材逐项复核，本页不承诺覆盖所有复习与综合实践栏目。</p></section>
+<nav class="crumb" aria-label="面包屑"><a href="/">首页</a> / <a href="/textbooks/bsd/">北师大版</a> / <a href="/textbooks/bsd/grade-{{ book.grade }}/">{{ book.grade | cn }}年级</a> / {{ book.volumeName }}</nav>
+<section class="intro"><p class="eyebrow">北师大版 · {{ book.revision }}</p><h1>{{ book.grade | cn }}年级数学{{ book.volumeName }}课程目录</h1><p class="lead">本册整理了{{ book.unitCount }}个主要学习单元。各单元提供知识梳理、易错提醒和课堂活动建议，便于教师根据实际进度备课。</p><p class="note">教材版本：{{ book.revision }}。<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p></section>
+<div class="unit-list">{% for item in book.units %}<article class="unit-row"><span class="unit-no">{% if item.order < 10 %}0{% endif %}{{ item.order }}</span><div><h2><a href="{{ item.url }}">{{ item.title }}</a></h2><p>{{ item.focus }}</p><span class="tiny">{{ item.lessons.length }} 个课题</span></div><a class="more" href="{{ item.url }}" aria-label="查看{{ item.title }}">查看 →</a></article>{% endfor %}</div>
+<section class="cta"><h2>本册互动课件</h2><p>{{ book.grade | cn }}年级{{ book.volumeName }}各单元的动画演示、课堂互动与练习设计，在十一课件的小红书主页持续更新。</p><a class="button" href="{{ site.social.xiaohongshu }}" target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a></section>

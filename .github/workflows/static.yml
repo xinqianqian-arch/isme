@@ -44,7 +44,7 @@ jobs:
       - name: Verify original homepage and assets are unchanged
         run: git diff --exit-code -- index.html assets
       - name: Show build report
-        run: cat dist/build-report.json
+        run: cat build-report.json
       - name: Save deployment artifact
         uses: actions/upload-artifact@v4
         with:

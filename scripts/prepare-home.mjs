@@ -27,7 +27,7 @@ const cards = names.map((name, index) => {
   const books = catalog.books.filter(book => book.grade === grade);
   return '<article class="edu-grade"><span>GRADE ' + grade + '</span><h3><a href="/textbooks/bsd/grade-' + grade + '/">' + name + '年级数学</a></h3><p>按单元查看知识重点与课堂活动</p><div>' + books.map(book => '<a href="/textbooks/bsd/grade-' + grade + '/volume-' + book.volume + '/">' + (book.volume === 1 ? '上册' : '下册') + ' →</a>').join('') + '</div></article>';
 }).join('');
-const catalogSection = '<section class="edu-catalog" id="curriculum"><div class="wrap"><p class="edu-kicker">北师大版 · 小学数学</p><h2>按教材找到下一节课</h2><p class="edu-summary">从一年级到六年级，按上下册、单元和课题查找教学参考。未制作完成的课件会标注状态，后续更新不改变课程入口。</p><div class="edu-grades">' + cards + '</div><p class="edu-footnote">不同修订版教材的目录可能不同，请核对手中教材。本站为独立教学参考网站，并非教材出版社官方网站。</p></div></section>';
+const catalogSection = '<section class="edu-catalog" id="curriculum"><div class="wrap"><p class="edu-kicker">北师大版 · 小学数学</p><h2>按教材找到下一节课</h2><p class="edu-summary">从一年级到六年级，按上下册、单元和课题查找教学参考。</p><div class="edu-grades">' + cards + '</div><p class="edu-footnote">不同修订版教材的目录可能不同，请核对手中教材。本站为独立教学参考网站，并非教材出版社官方网站。</p></div></section>';
 const insertion = /<section\s+class="works"\s+id="works">/;
 if (!insertion.test(html)) throw new Error('Cannot locate original works section; homepage has changed');
 html = html.replace(insertion, catalogSection + '\n$&');
