@@ -1,0 +1,29 @@
+---
+/* 访问统计：Google Analytics + 百度统计。ID 在 site.config.ts 里改；本地 npm run dev 时不加载，避免把自己调试的访问算进去 */
+import { SITE } from '../site.config';
+const { google, baidu } = SITE.analytics;
+const enabled = import.meta.env.PROD;
+---
+{enabled && google && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${google}`}></script>
+    <script is:inline define:vars={{ google }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', google);
+    </script>
+  </>
+)}
+{enabled && baidu && (
+  <script is:inline define:vars={{ baidu }}>
+    var _hmt = (window._hmt = window._hmt || []);
+    (function () {
+      var hm = document.createElement('script');
+      hm.src = 'https://hm.baidu.com/hm.js?' + baidu;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+)}

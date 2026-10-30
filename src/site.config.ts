@@ -11,6 +11,11 @@ export const SITE = {
     profile: 'https://www.xiaohongshu.com/user/profile/5e502cc200000000010010c6',
     id: '834134750',
   },
+  /** 访问统计：Google Analytics 衡量 ID、百度统计站点代码（hm.js? 后面那串）。只在正式构建时加入页面 */
+  analytics: {
+    google: 'G-3G5WMXPYVH',
+    baidu: '5040e4e650c7e94dbc66ba5838eb36fd',
+  },
   /** 创作者信息：用于搜索引擎和 AI 识别“十一课件”背后是谁 */
   author: {
     name: '十一老师',

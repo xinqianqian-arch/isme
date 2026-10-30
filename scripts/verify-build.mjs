@@ -17,6 +17,7 @@ for (const f of ['index.html', '404.html', 'robots.txt', 'sitemap.xml', 'llms.tx
 const home = read('index.html');
 for (const id of ['hero', 'stickers', 'avatar', 'works', 'curriculum']) assert(home.includes(`id="${id}"`), `首页缺少栏目 #${id}`);
 assert(home.includes('https://www.xiaohongshu.com/user/profile/5e502cc200000000010010c6'), '首页缺少小红书主页链接');
+assert(home.includes('googletagmanager.com/gtag/js') && home.includes('hm.baidu.com/hm.js'), '首页缺少访问统计代码（Google Analytics / 百度统计）');
 
 // 3. 网站地图里的每个网址：页面存在、没有 noindex、规范网址一致、有描述
 const xml = read('sitemap.xml');
