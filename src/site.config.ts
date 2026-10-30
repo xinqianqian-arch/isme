@@ -14,7 +14,7 @@ export const SITE = {
   /** 访问统计：Google Analytics 衡量 ID、百度统计站点代码（hm.js? 后面那串）。只在正式构建时加入页面 */
   analytics: {
     google: 'G-3G5WMXPYVH',
-    baidu: '5040e4e650c7e94dbc66ba5838eb36fd',
+    baidu: '83f6e606a8b0d4bac2c62a03372af4d4',
   },
   /** 创作者信息：用于搜索引擎和 AI 识别“十一课件”背后是谁 */
   author: {
