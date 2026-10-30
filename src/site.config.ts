@@ -2,7 +2,7 @@
 export const SITE = {
   name: '十一课件',
   tagline: '让数学课动起来',
-  url: 'https://11edu.cc',
+  url: 'https://11aike.com',
   description: '十一课件：北师大版小学数学1—6年级同步教材目录、单元知识点、课堂教学思路与原创互动课件更新。',
   homeTitle: '十一课件 · 北师大版小学数学课程目录与互动教学',
   /** 分享到微信、小红书等平台时显示的封面图 */

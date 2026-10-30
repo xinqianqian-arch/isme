@@ -1,7 +1,20 @@
 # Cloudflare 发布说明
 
-11edu.cc 由 Cloudflare **Worker `11ai`** 提供（Workers 静态资源，没有自定义脚本），不是 Pages 项目。
-仓库根目录的 `wrangler.jsonc` 描述了这个 Worker：发布 `dist/` 目录（Astro 构建产物），自定义域名 `11edu.cc`。
+网站由 Cloudflare **Worker `11ai`** 提供（Workers 静态资源，没有自定义脚本），不是 Pages 项目。
+仓库根目录的 `wrangler.jsonc` 描述了这个 Worker：发布 `dist/` 目录（Astro 构建产物），自定义域名见下方“域名与跳转”。
+
+## 域名与跳转
+
+| 域名 | 作用 |
+| --- | --- |
+| **11aike.com** | 主域名（2026-10-30 在 Cloudflare 注册），网站地图、规范网址、统计都用它 |
+| www.11aike.com | 301 跳转到 https://11aike.com （保留路径和参数） |
+| 11edu.cc | 旧域名，301 跳转到 https://11aike.com （保留路径和参数） |
+| 11aike.cn | 已注册，暂未使用 |
+
+三个网址都作为自定义域名挂在 Worker `11ai` 上（`wrangler.jsonc` 的 `routes`），这样它们都由 Cloudflare 接管；
+跳转由各自 zone 的“跳转规则”（Rules → Redirect Rules）完成，规则先于 Worker 执行。换主域名时要同时改：
+`src/site.config.ts`、`astro.config.mjs`、`public/robots.txt`、`scripts/verify-build.mjs` 里的域名，以及跳转规则。
 
 ## 自动发布（Workers Builds）
 
@@ -17,7 +30,7 @@
 
 构建命令不能留空：留空时不会生成 `dist/`，部署会报 “assets.directory ... does not exist”。
 
-之后每次推送到 `main`，Cloudflare 会安装依赖、运行 `npm run build`（构建自带检查，失败就不会发布），再用 `wrangler deploy` 把 `dist/` 发布到 11edu.cc。
+之后每次推送到 `main`，Cloudflare 会安装依赖、运行 `npm run build`（构建自带检查，失败就不会发布），再用 `wrangler deploy` 把 `dist/` 发布到 11aike.com。
 GitHub Actions（`.github/workflows/static.yml`）只做构建检查，不负责发布。
 
 ## 手动发布 / 预览（需要有 Workers Scripts 编辑权限的 API token）
@@ -26,7 +39,7 @@ GitHub Actions（`.github/workflows/static.yml`）只做构建检查，不负责
 npm ci && npm run build
 export CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 CLOUDFLARE_API_TOKEN=...   # 不要写进仓库
 npx wrangler versions upload   # 只生成预览网址，不影响线上
-npx wrangler deploy            # 发布到 11edu.cc
+npx wrangler deploy            # 发布到 11aike.com
 ```
 
 ## 回退

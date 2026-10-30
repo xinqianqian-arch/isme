@@ -1,7 +1,7 @@
-# 十一课件 · 11edu.cc
+# 十一课件 · 11aike.com
 
 小红书数学老师「十一课件」的网站：品牌首页 + 北师大版 1–6 年级教材目录 + 教学文章 + 课件展厅。
-用 [Astro](https://astro.build) 生成静态网页，由 Cloudflare Worker `11ai` 发布到 https://11edu.cc 。
+用 [Astro](https://astro.build) 生成静态网页，由 Cloudflare Worker `11ai` 发布到 https://11aike.com （旧域名 11edu.cc 永久跳转过来）。
 
 **想写内容、改内容，看 [写内容指南](写内容指南.md)。** 平时只需要改 `src/content/` 里的文件。
 
@@ -9,7 +9,7 @@
 
 ```
 ├── 写内容指南.md                  写文章、课时讲解、单元补充、改教材目录的说明，附 AI 提示词
-├── astro.config.mjs              Astro 配置（网址 11edu.cc，输出到 dist/）
+├── astro.config.mjs              Astro 配置（网址 11aike.com，输出到 dist/）
 ├── wrangler.jsonc                Cloudflare Worker「11ai」：发布 dist/
 ├── src/
 │   ├── content/                  ✍️ 内容区

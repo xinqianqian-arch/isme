@@ -1,4 +1,5 @@
-// Cloudflare Worker「11ai」：只托管 npm run build 生成的 dist/ 静态文件，自定义域名 11edu.cc
+// Cloudflare Worker「11ai」：只托管 npm run build 生成的 dist/ 静态文件。
+// 主域名 11aike.com；www.11aike.com 和旧域名 11edu.cc 也挂在这里，由 Cloudflare 跳转规则 301 到 https://11aike.com（见 docs/cloudflare-deployment.md）
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "11ai",
@@ -8,7 +9,11 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
-  "routes": [{ "pattern": "11edu.cc", "custom_domain": true }],
+  "routes": [
+    { "pattern": "11aike.com", "custom_domain": true },
+    { "pattern": "www.11aike.com", "custom_domain": true },
+    { "pattern": "11edu.cc", "custom_domain": true }
+  ],
   "workers_dev": true,
   "preview_urls": true,
   "observability": { "enabled": true }

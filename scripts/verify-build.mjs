@@ -26,7 +26,7 @@ assert(urls.length > 100, `网站地图网址太少：${urls.length}`);
 assert(new Set(urls).size === urls.length, '网站地图有重复网址');
 for (const u of urls) {
   const url = new URL(u);
-  assert(url.origin === 'https://11edu.cc' && url.pathname.endsWith('/') && !url.search, `网站地图网址不规范：${u}`);
+  assert(url.origin === 'https://11aike.com' && url.pathname.endsWith('/') && !url.search, `网站地图网址不规范：${u}`);
   const file = path.join(root, decodeURIComponent(url.pathname), 'index.html');
   assert(fs.existsSync(file), `网站地图里的页面不存在：${u}`);
   const html = fs.readFileSync(file, 'utf8');
@@ -50,9 +50,9 @@ for (const f of all) {
 }
 
 // 5. robots、AI 索引
-assert(read('robots.txt').includes('Sitemap: https://11edu.cc/sitemap.xml'), 'robots.txt 没有声明网站地图');
+assert(read('robots.txt').includes('Sitemap: https://11aike.com/sitemap.xml'), 'robots.txt 没有声明网站地图');
 const ai = JSON.parse(read('ai-index.json'));
-assert(ai.url === 'https://11edu.cc' && ai.catalog.length === 12, 'ai-index.json 内容不对');
+assert(ai.url === 'https://11aike.com' && ai.catalog.length === 12, 'ai-index.json 内容不对');
 
 // 6. 源码、私密资料不能被发布
 for (const f of ['materials', 'xhs-profile.json', 'assets/profile.json', 'src', 'node_modules', 'package.json', '.env', 'wrangler.jsonc']) {

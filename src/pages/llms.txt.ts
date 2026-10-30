@@ -7,7 +7,7 @@ export const GET: APIRoute = async () => {
   const { books } = await getCatalog();
   const B = SITE.url;
   const lines = [
-    '# 十一课件（11edu.cc）',
+    '# 十一课件（11aike.com）',
     '',
     '> 一个面向中国小学数学教师的原创互动课件品牌与教学参考站，提供北师大版1—6年级上下册教材导航、单元教学目标、易错提醒和课堂活动思路。',
     '',

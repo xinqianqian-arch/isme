@@ -17,7 +17,7 @@
 /ai-index.json
   Content-Type: application/json; charset=utf-8
 
-# workers.dev 上的预览和备用地址不让搜索引擎收录，只收录 11edu.cc
+# workers.dev 上的预览和备用地址不让搜索引擎收录，只收录 11aike.com
 https://:host.xinqianqian951210.workers.dev/*
   X-Robots-Tag: noindex
 
