@@ -1,12 +1,14 @@
 ---
-/* 全册目录：所有单元和课一页看全。左边单元导航，右边每个单元列出课；有完整备课的课带插画、知识点和页码 */
+/* 全册目录：一册的所有单元和课一页看全。单元是分组标题（单元要点点开才显示），下面直接是课的卡片；左边单元导航 */
+import { render } from 'astro:content';
 import PageLayout from '../../../../../layouts/PageLayout.astro';
 import CatalogHero from '../../../../../components/CatalogHero.astro';
-import BookCover from '../../../../../components/BookCover.astro';
 import Breadcrumb from '../../../../../components/Breadcrumb.astro';
 import LessonGrid from '../../../../../components/LessonGrid.astro';
 import XhsCta from '../../../../../components/XhsCta.astro';
-import { getCatalog, CN, type Book, type Unit } from '../../../../../lib/catalog';
+import { getCatalog, CN, type Book } from '../../../../../lib/catalog';
+import { media } from '../../../../../lib/media.mjs';
+import { faq } from '../../../../../lib/seo';
 
 export async function getStaticPaths() {
   const { books } = await getCatalog();
@@ -17,17 +19,19 @@ const n = CN[b.grade], e = b.edition;
 const all = b.units.flatMap(u => u.lessons);
 const doneOf = (x: Book) => x.units.reduce((k, u) => k + u.lessons.filter(l => l.indexable).length, 0);
 const done = doneOf(b);
-/** 单元封面：这个单元里任一课写了“封面”就用它 */
-const coverOf = (u: Unit) => u.lessons.find(l => l.entry?.data.封面)?.entry?.data.封面;
+/** 单元补充说明（src/content/units/ 里的 Markdown），显示在“单元要点”里 */
+const extras = await Promise.all(b.units.map(u => (u.entry ? render(u.entry).then(r => r.Content) : null)));
+const qa = faq(b.units.flatMap(u => [
+  [`${e.name}${n}年级${b.volumeName}第${u.order}单元“${u.title}”主要学什么？`, u.focus],
+  [`“${u.title}”单元学生容易错在哪里？`, u.pitfall],
+] as [string, string][]));
 ---
-<PageLayout title={`${e.name}${n}年级数学${b.volumeName}教材目录｜单元知识点`} description={`${e.name}${n}年级数学${b.volumeName}课程目录，含${b.units.length}个学习单元的知识重点、教学重难点、课堂活动及课时导航。`}>
-  <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级`, url: `/textbooks/${e.slug}/grade-${b.grade}/` }, { name: b.volumeName }]} />
-  <CatalogHero eyebrow={`${e.name} · ${b.revision}`} title={`${n}年级数学${b.volumeName}课程目录`} lead={`本册 ${b.units.length} 个单元、${all.length} 课，一页看全，点课题直接进入。${done > 0 ? '带插画的课有完整备课：教材解读、教学设计、趣味活动和 AI 提示词。' : ''}`}>
-    <BookCover slot="pic" book={b} size="l" />
+<PageLayout title={`${e.name}${n}年级数学${b.volumeName}教材目录｜单元知识点`} description={`${e.name}${n}年级数学${b.volumeName}课程目录，含${b.units.length}个学习单元的知识重点、教学重难点、课堂活动及课时导航。`} jsonLd={[qa]}>
+  <Breadcrumb items={[{ name: '教材目录', url: '/textbooks/' }, { name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${b.volumeName}` }]} />
+  <CatalogHero eyebrow={`${e.name} · ${b.revision}`} title={`${n}年级数学${b.volumeName}课程目录`} lead={`本册 ${b.units.length} 个单元、${all.length} 课，一页看全，点课题直接进入。${done > 0 ? '带插画的课有完整备课：教材解读、教学设计、趣味活动和 AI 提示词。' : ''}`} img={b.cover ?? media(`courseware/covers/g${b.grade}a.webp`)}>
     <div class="ch-stats"><span>{b.units.length} 个单元</span><span>{all.length} 课</span>{done > 0 && <span class="hot">{done} 课完整备课</span>}</div>
-    <p class="ch-note">教材版本：{b.revision}。<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p>
   </CatalogHero>
-  <nav class="book-switch" aria-label="切换年级和册">
+  <nav class="book-switch" aria-label="切换到同版本的其他册">
     {siblings.map(s => s === b
       ? <span>{CN[s.grade]}{s.volumeName[0]}</span>
       : <a class:list={[{ hot: doneOf(s) > 0 }]} href={s.url}>{CN[s.grade]}{s.volumeName[0]}</a>)}
@@ -35,22 +39,28 @@ const coverOf = (u: Unit) => u.lessons.find(l => l.entry?.data.封面)?.entry?.d
   <div class="book-layout">
     <aside class="book-nav" aria-label="本册单元">
       <p>单元</p>
-      <ol>{b.units.map(u => <li><a href={`#${u.id}`}><b>{u.order}</b>{u.title}<small>{u.lessons.length} 课</small></a></li>)}</ol>
+      <ol>{b.units.map(u => <li><a href={`#${u.id}`} data-unit={u.id}><b>{u.order}</b>{u.title}<small>{u.lessons.length} 课</small></a></li>)}</ol>
     </aside>
     <div>
-      {b.units.map(u => {
-        const cover = coverOf(u);
+      {b.units.map((u, i) => {
+        const Extra = extras[i];
         return (
           <section class="bunit" id={u.id}>
             <header class="bunit-head">
               <span class="unit-no">{String(u.order).padStart(2, '0')}</span>
               <div>
-                <h2><a href={u.url}>{u.title}</a></h2>
+                <h2>{u.title}</h2>
                 <p>{u.focus}</p>
-                <a class="more" href={u.url}>单元要点 →</a>
               </div>
-              {cover && <a class="bunit-cover" href={u.url} tabindex="-1" aria-hidden="true"><img src={cover} alt="" loading="lazy"></a>}
             </header>
+            <details class="utips">
+              <summary>单元要点：易错点与课堂活动</summary>
+              <div class="utips-body">
+                <p><b>易错点</b>{u.pitfall}</p>
+                <p><b>课堂活动</b>{u.activity}</p>
+                {Extra && <div class="md-body"><Extra /></div>}
+              </div>
+            </details>
             <LessonGrid lessons={u.lessons} />
           </section>
         );
@@ -59,3 +69,16 @@ const coverOf = (u: Unit) => u.lessons.find(l => l.entry?.data.封面)?.entry?.d
   </div>
   <XhsCta title="本册互动课件" text={`${n}年级${b.volumeName}各单元的动画演示、课堂互动与练习设计，在十一课件的小红书主页持续更新。`} />
 </PageLayout>
+
+<script>
+  /* 左侧单元导航：滚动时高亮当前单元 */
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.book-nav a[data-unit]')];
+  const secs = links.map(a => document.getElementById(a.dataset.unit!));
+  const update = () => {
+    let cur = 0;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 160) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  };
+  addEventListener('scroll', update, { passive: true });
+  update();
+</script>

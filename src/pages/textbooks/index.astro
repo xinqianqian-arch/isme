@@ -1,40 +1,46 @@
 ---
-/* 找课：搜索框 + 按教材选一册 + 最新完整备课。目标是两步以内找到想要的那一课 */
+/* 教材目录：搜索框 + 版本卡片（北师大版、人教版……）。在 src/lib/editions.ts 新增版本后，这里自动多一张卡片 */
 import PageLayout from '../../layouts/PageLayout.astro';
 import LessonSearch from '../../components/LessonSearch.astro';
-import BookPicker from '../../components/BookPicker.astro';
-import LatestLessons from '../../components/LatestLessons.astro';
-import { getCatalog } from '../../lib/catalog';
+import { getCatalog, CN, type Book } from '../../lib/catalog';
 import { media } from '../../lib/media.mjs';
 const { editions, lessons } = await getCatalog();
-const done = lessons.filter(l => l.indexable).length;
+const doneOf = (bs: Book[]) => bs.reduce((n, b) => n + b.units.reduce((k, u) => k + u.lessons.filter(l => l.indexable).length, 0), 0);
+const total = lessons.filter(l => l.indexable).length;
 /** 搜索框下面的示例词，点一下直接搜 */
 const hot = ['两、三位数乘一位数', '轴对称', '周长', '三下 除法', '线段、射线、直线'];
+const cards = editions.map(x => {
+  const best = [...x.books].sort((p, q) => doneOf([q]) - doneOf([p]))[0];
+  const gs = x.grades.map(g => g.grade);
+  return {
+    x, done: doneOf(x.books),
+    img: best.cover ?? media(`courseware/covers/g${best.grade}a.webp`),
+    range: gs.length > 1 ? `${CN[gs[0]]}至${CN[gs[gs.length - 1]]}年级` : `${CN[gs[0]]}年级`,
+  };
+});
 ---
-<PageLayout title="找课：小学数学同步教材目录与逐课备课资源" description={`按课题或知识点搜索，或按教材、年级一页看全册单元和课时。覆盖${editions.map(x => x.edition.name).join('、')}，已有 ${done} 课完整备课：教材解读、教学设计、趣味活动与 AI 互动课件用法。`}>
+<PageLayout title="小学数学教材目录：按版本找同步备课资料" description={`小学数学同步教材目录：${editions.map(x => x.edition.name).join('、')}，按年级、上下册一页看全所有课；已有 ${total} 课完整备课，也可以直接搜课题或知识点。`}>
   <section class="fhero">
     <div class="fh-text">
-      <p class="ch-eyebrow">找课 · 已有 {done} 课完整备课</p>
-      <h1>小学数学，按课找备课资料</h1>
-      <p class="fh-lead">输入课题或知识点直接打开那一课，或先选教材和年级，一页看全册所有课。</p>
+      <p class="ch-eyebrow">教材目录 · 已有 {total} 课完整备课</p>
+      <h1>小学数学，按教材找备课资料</h1>
+      <p class="fh-lead">先选教材版本，再选年级和上下册；也可以直接搜课题或知识点。</p>
       <LessonSearch big readQuery />
       <p class="hot-words"><span>常搜</span>{hot.map(w => <a href={`/textbooks/?q=${encodeURIComponent(w)}`}>{w}</a>)}</p>
     </div>
     <div class="fh-pic"><img src={media('brand/teacher-desk.webp')} alt="十一老师" fetchpriority="high"></div>
   </section>
-  {editions.map(x => (
-    <section class="find-sec">
-      <div class="sec-title">
-        <h2>{x.edition.name}<small>{x.edition.card}</small></h2>
-        <a href={x.url}>全部目录 →</a>
-      </div>
-      <BookPicker books={x.books} />
-    </section>
-  ))}
-  <section class="find-sec">
-    <div class="sec-title">
-      <h2>最新完整备课<small>一课一篇：教材解读、教学设计、趣味活动、AI 提示词</small></h2>
-    </div>
-    <LatestLessons limit={8} />
-  </section>
+  <div class="edcards">
+    {cards.map(c => (
+      <a class="edcard" href={c.x.url}>
+        <span class="ed-pic"><img src={c.img} alt="" loading="lazy"></span>
+        <span class="ed-body">
+          <span class="ed-top"><strong>{c.x.edition.name}</strong>{c.done > 0 && <span class="tag-hot">{c.done} 课完整备课</span>}</span>
+          <span class="ed-meta">{c.range} · {c.x.books.length} 册 · {c.x.books[0].revision}</span>
+          <span class="ed-desc">{c.x.edition.card}</span>
+          <span class="go">进入全部教材 →</span>
+        </span>
+      </a>
+    ))}
+  </div>
 </PageLayout>

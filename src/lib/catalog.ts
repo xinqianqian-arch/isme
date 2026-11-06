@@ -1,5 +1,6 @@
 /* 教材目录：把 textbooks/<版本>/*.yaml 和 lessons、units 里的 Markdown 对应起来，算出每一页的网址。
-   网址规则（北师大版和旧站一致）：/textbooks/<版本>/grade-4/volume-1/unit-04/lesson-02/ */
+   页面层级：教材目录 /textbooks/ → 全部教材 /textbooks/<版本>/ → 全册目录 /textbooks/<版本>/grade-4/volume-1/ → 课时 …/unit-04/lesson-02/
+   年级、单元没有单独的页面：年级的网址是“全部教材”页上的 #grade-4，单元的网址是全册目录上的 #unit-04 */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { EDITIONS, editionByName, type Edition } from './editions';
 
@@ -23,7 +24,8 @@ export interface Lesson {
   pages?: string;
 }
 export interface Unit {
-  id: string; order: number; title: string; url: string;
+  /** url 是全册目录上的位置（…/volume-1/#unit-04）；path 是课时网址里的那一段（…/volume-1/unit-04/） */
+  id: string; order: number; title: string; url: string; path: string;
   focus: string; pitfall: string; activity: string;
   edition: Edition; grade: number; volume: number; volumeName: string; revision: string;
   book: Book; lessons: Lesson[];
@@ -80,11 +82,11 @@ async function build(): Promise<Catalog> {
     const book: Book = { edition, grade: r.年级, volume, volumeName: r.册, label, revision: r.版本, updated: r.更新, cover: r.封面,
       url: `/textbooks/${edition.slug}/grade-${r.年级}/volume-${volume}/`, units: [] };
     r.单元.forEach((u, i) => {
-      const unit: Unit = { id: `unit-${pad(i + 1)}`, order: i + 1, title: u.名称, url: `${book.url}unit-${pad(i + 1)}/`,
+      const unit: Unit = { id: `unit-${pad(i + 1)}`, order: i + 1, title: u.名称, url: `${book.url}#unit-${pad(i + 1)}`, path: `${book.url}unit-${pad(i + 1)}/`,
         focus: u.重点, pitfall: u.易错, activity: u.活动, edition, grade: book.grade, volume, volumeName: r.册,
         revision: r.版本, book, lessons: [], updated: r.更新 };
       u.课时.forEach((t, k) => {
-        const lesson: Lesson = { id: `lesson-${pad(k + 1)}`, order: k + 1, title: t, url: `${unit.url}lesson-${pad(k + 1)}/`,
+        const lesson: Lesson = { id: `lesson-${pad(k + 1)}`, order: k + 1, title: t, url: `${unit.path}lesson-${pad(k + 1)}/`,
           edition, grade: book.grade, volume, volumeName: r.册, revision: r.版本, unit, book, indexable: false, updated: r.更新 };
         unit.lessons.push(lesson); lessons.push(lesson);
       });
@@ -138,7 +140,7 @@ async function build(): Promise<Catalog> {
   const editions = EDITIONS.map(edition => {
     const eb = books.filter(b => b.edition === edition);
     const grades = [1, 2, 3, 4, 5, 6]
-      .map(grade => ({ edition, grade, url: `/textbooks/${edition.slug}/grade-${grade}/`, books: eb.filter(b => b.grade === grade) }))
+      .map(grade => ({ edition, grade, url: `/textbooks/${edition.slug}/#grade-${grade}`, books: eb.filter(b => b.grade === grade) }))
       .filter(g => g.books.length > 0);
     return { edition, url: `/textbooks/${edition.slug}/`, books: eb, grades };
   }).filter(x => x.books.length > 0);

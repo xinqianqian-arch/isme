@@ -22,7 +22,7 @@ assert(home.includes('googletagmanager.com/gtag/js') && home.includes('hm.baidu.
 // 3. 网站地图里的每个网址：页面存在、没有 noindex、规范网址一致、有描述
 const xml = read('sitemap.xml');
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-assert(urls.length > 100, `网站地图网址太少：${urls.length}`);
+assert(urls.length > 40, `网站地图网址太少：${urls.length}`);
 assert(new Set(urls).size === urls.length, '网站地图有重复网址');
 for (const u of urls) {
   const url = new URL(u);

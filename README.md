@@ -47,8 +47,9 @@
 | --- | --- |
 | 首页 | `/` |
 | 教材目录 | `/textbooks/`、`/textbooks/bsd/` |
-| 年级 / 册 | `/textbooks/bsd/grade-4/`、`/textbooks/bsd/grade-4/volume-1/` |
-| 单元 / 课时 | `/textbooks/bsd/grade-4/volume-1/unit-04/`、`…/unit-04/lesson-02/` |
+| 全部教材（一个版本的所有册） | `/textbooks/bsd/` |
+| 全册目录（一册的所有单元和课） | `/textbooks/bsd/grade-4/volume-1/` |
+| 课时 | `/textbooks/bsd/grade-4/volume-1/unit-04/lesson-02/` |
 | 文章 | `/articles/`、`/articles/<文件名>/` |
 | 其他 | `/about/`、`/courses/`、`/aaa`（天安门课件 demo） |
 | 给搜索引擎和 AI | `/sitemap.xml`、`/robots.txt`、`/llms.txt`、`/llms-full.txt`、`/ai-index.json` |

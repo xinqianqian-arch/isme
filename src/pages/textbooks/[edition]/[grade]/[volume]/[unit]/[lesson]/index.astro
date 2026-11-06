@@ -49,7 +49,7 @@ const jsonLd = Body
     }];
 ---
 <PageLayout title={title} description={description} noindex={!l.indexable} type={Body ? 'article' : 'website'} jsonLd={jsonLd} image={d?.封面}>
-  <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
+  <Breadcrumb items={[{ name: '教材目录', url: '/textbooks/' }, { name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
   {Body ? (
     <DocPage
       title={d?.大标题 ?? d?.标题 ?? `《${l.title}》怎么教？`}

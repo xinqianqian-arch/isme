@@ -59,7 +59,7 @@ Keep the left 40% of the image as calm empty pastel background (space for a titl
 
 ## 教材封面（每一册一张，样板：北师大版 12 册、人教版三上）
 
-- **规格**：3:4 竖版；画面上方 35% 留空，网页会在那里叠书名“数学 · 三年级下册”；左下角叠版本名。画面里不要任何文字和数字。
+- **规格**：3:4 竖版，画面里不要任何文字和数字。网页上会把它裁成卡片图（取下方的物件部分），所以物件要集中在下方 60%，上方留空。
 - **生成**：用 `gpt-image-2`，风格参考图是年级插画 `https://media.11aike.com/courseware/covers/g3a.webp`。生成后居中裁成 3:4，缩到 600×800，存成 webp。
 - **上传**：和全册目录网页同路径，`textbooks/<版本>/grade-N/volume-N/cover.webp`。再在这一册的 YAML 里写 `封面:` 填完整网址。
 - **底色区分版本**：
@@ -77,5 +77,5 @@ Keep the left 40% of the image as calm empty pastel background (space for a titl
 3D clay / plasticine illustration in a soft, rounded, refined style with muted, low-saturation pastel colors and gentle warm studio lighting (match the clay material and look of the reference image). Elegant and calm, suitable for a professional teaching resource, not childish.
 Scene: a primary-school math still-life for a grade 3 textbook: <从单元里挑的 3–4 个物件，写清楚数量和样子>.
 Background: a smooth, soft warm apricot-cream color (pale apricot).
-Portrait book-cover composition, aspect ratio 3:4. Keep the TOP 35% of the image as a calm, empty, plain background area (a title will be placed there later). Arrange 3 to 4 objects as a neat, balanced still-life in the lower 60%, resting on the same soft surface, with comfortable margins on all sides; nothing cut off. No text, no letters, no written numbers or digits anywhere, no watermark.
+Portrait book-cover composition, aspect ratio 3:4. Keep the TOP 35% of the image as a calm, empty, plain background area. Arrange 3 to 4 objects as a neat, balanced still-life in the lower 60%, resting on the same soft surface, with comfortable margins on all sides; nothing cut off. No text, no letters, no written numbers or digits anywhere, no watermark.
 ```
