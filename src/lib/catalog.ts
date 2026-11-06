@@ -34,6 +34,10 @@ export interface Book {
   edition: Edition; grade: number; volume: number; volumeName: string; label: string;
   revision: string; updated: Date; url: string; units: Unit[];
 }
+/** 一册的配图：第一个写了“封面”的课的封面（单元封面），没有就用年级插画 */
+export function bookImage(b: Book) {
+  return b.units.flatMap(u => u.lessons).find(l => l.entry?.data.封面)?.entry?.data.封面 ?? null;
+}
 export interface Grade { edition: Edition; grade: number; url: string; books: Book[] }
 export interface Catalog {
   books: Book[]; units: Unit[]; lessons: Lesson[]; grades: Grade[];

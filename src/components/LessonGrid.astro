@@ -1,5 +1,6 @@
 ---
-/* 一个单元里的课：有完整备课的显示成带插画的大卡片（知识点、页码一眼看到），其余的列成一排小按钮 */
+/* 一个单元里的课：有完整备课的显示成带插画的大卡片（知识点、页码一眼看到），其余的列成一排小按钮。
+   颜色跟着外层的 --tone / --tint（单元颜色） */
 import '../styles/catalog.css';
 import type { Lesson } from '../lib/catalog';
 interface Props { lessons: Lesson[] }
@@ -11,12 +12,14 @@ const rest = lessons.filter(l => !l.indexable);
   <div class="lgrid">
     {rich.map(l => (
       <a class="lcard" href={l.url}>
-        <span class="lc-pic">{l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}</span>
+        <span class="lc-pic">
+          {l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}
+          <span class="lc-chip">第 {l.order} 课</span>
+        </span>
         <span class="lc-body">
-          <span class="lc-no">第 {l.order} 课{l.pages && ` · ${l.pages}`}</span>
           <strong>{l.title}</strong>
           {l.topic && <span class="lc-topic">{l.topic}</span>}
-          <span class="lc-tag">完整备课 · 教学设计 · AI 提示词</span>
+          <span class="lc-foot"><span class="lc-tag">完整备课</span>{l.pages && <span class="lc-pages">{l.pages}</span>}</span>
         </span>
       </a>
     ))}
@@ -24,6 +27,6 @@ const rest = lessons.filter(l => !l.indexable);
 )}
 {rest.length > 0 && (
   <ol class="lrest">
-    {rest.map(l => <li><a href={l.url}><span class="lr-no">{l.order}</span>{l.title}<span class="lr-go">课题要点 →</span></a></li>)}
+    {rest.map(l => <li><a href={l.url}><span class="lr-no">{l.order}</span>{l.title}<span class="lr-go">要点 →</span></a></li>)}
   </ol>
 )}

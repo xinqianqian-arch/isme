@@ -1,22 +1,27 @@
 ---
-/* 最新完整备课：按写作日期排，最新的在前 */
+/* 最新完整备课：按写作日期排，最新的在前；颜色跟着单元 */
 import '../styles/catalog.css';
 import { getCatalog, CN } from '../lib/catalog';
+import { toneVars } from '../lib/tones';
 interface Props { limit?: number }
 const { limit = 8 } = Astro.props;
 const { lessons } = await getCatalog();
 const latest = lessons.filter(l => l.indexable)
   .sort((a, b) => b.updated.getTime() - a.updated.getTime() || a.book.url.localeCompare(b.book.url) || a.unit.order - b.unit.order || a.order - b.order)
   .slice(0, limit);
+const short = (name: string) => name.replace('版', '');
 ---
 <div class="latest">
   {latest.map(l => (
-    <a class="lcard" href={l.url}>
-      <span class="lc-pic">{l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}</span>
+    <a class="lcard" href={l.url} style={toneVars(l.unit.order)}>
+      <span class="lc-pic">
+        {l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}
+        <span class="lc-chip">{short(l.edition.name)}{CN[l.grade]}{l.volumeName[0]}</span>
+      </span>
       <span class="lc-body">
-        <span class="lc-no">{l.edition.name}{CN[l.grade]}年级{l.volumeName} · {l.unit.title}</span>
         <strong>{l.title}</strong>
         {l.topic && <span class="lc-topic">{l.topic}</span>}
+        <span class="lc-foot"><span class="lc-tag">{l.unit.title}</span></span>
       </span>
     </a>
   ))}

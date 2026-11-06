@@ -5,27 +5,36 @@ import LessonSearch from '../../components/LessonSearch.astro';
 import BookPicker from '../../components/BookPicker.astro';
 import LatestLessons from '../../components/LatestLessons.astro';
 import { getCatalog } from '../../lib/catalog';
+import { media } from '../../lib/media.mjs';
 const { editions, lessons } = await getCatalog();
 const done = lessons.filter(l => l.indexable).length;
 /** 搜索框下面的示例词，点一下直接搜 */
 const hot = ['两、三位数乘一位数', '轴对称', '周长', '三下 除法', '线段、射线、直线'];
+/** 页头漂浮的黏土贴纸：[贴纸名, 位置样式] */
+const floats = [['n07', 'left:6%;top:16%'], ['o01', 'right:7%;top:12%'], ['n03', 'left:11%;bottom:14%'], ['o02', 'right:12%;bottom:16%'], ['n09', 'left:24%;top:6%'], ['o08', 'right:24%;top:5%']];
 ---
 <PageLayout title="找课：小学数学同步教材目录与逐课备课资源" description={`按课题或知识点搜索，或按教材、年级一页看全册单元和课时。覆盖${editions.map(x => x.edition.name).join('、')}，已有 ${done} 课完整备课：教材解读、教学设计、趣味活动与 AI 互动课件用法。`}>
-  <section class="intro find-hero">
-    <p class="eyebrow">找课 · {done} 课完整备课</p>
-    <h1>小学数学，按课找备课资料</h1>
-    <p class="lead">输入课题或知识点，直接打开那一课；也可以先选教材和年级，一页看全册所有单元和课。</p>
+  <section class="fhero">
+    {floats.map(([s, pos], i) => <img class="fh-st" style={`${pos};animation-delay:${i * -1.3}s`} src={media(`brand/stickers/${s}.webp`)} alt="" aria-hidden="true">)}
+    <p class="fh-eyebrow">🔎 找课 · 已有 {done} 课完整备课</p>
+    <h1><span class="br">小学数学，</span><span class="hl">按课</span>找备课资料</h1>
+    <p class="fh-lead">输入课题或知识点，直接打开那一课；也可以先选教材和年级，一页看全册所有单元和课。</p>
     <LessonSearch big readQuery />
-    <p class="hot-words">试试：{hot.map(w => <a href={`/textbooks/?q=${encodeURIComponent(w)}`}>{w}</a>)}</p>
+    <p class="hot-words"><span>试试</span>{hot.map(w => <a href={`/textbooks/?q=${encodeURIComponent(w)}`}>{w}</a>)}</p>
   </section>
   {editions.map(x => (
     <section class="find-sec">
-      <header><h2>{x.edition.name}</h2><p>{x.edition.card}</p><a href={x.url}>{x.edition.name}全部目录 →</a></header>
+      <div class="sec-title">
+        <h2>📚 {x.edition.name}<small>{x.edition.card}</small></h2>
+        <a href={x.url}>全部目录 →</a>
+      </div>
       <BookPicker books={x.books} />
     </section>
   ))}
-  <section class="find-sec">
-    <header><h2>最新完整备课</h2><p>一课一篇：教材解读、教学设计、趣味活动、AI 提示词</p></header>
+  <section class="find-sec find-band">
+    <div class="sec-title">
+      <h2>✨ 最新完整备课<small>一课一篇：教材解读、教学设计、趣味活动、AI 提示词</small></h2>
+    </div>
     <LatestLessons limit={8} />
   </section>
 </PageLayout>

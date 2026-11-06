@@ -1,10 +1,12 @@
 ---
-/* 一个教材版本：搜索 + 每一册一张卡片（单元直接列出来，点单元或全册目录都能直达） */
+/* 一个教材版本：搜索 + 每一册一张卡片（配插画和年级颜色，单元直接列出来） */
 import PageLayout from '../../../layouts/PageLayout.astro';
-import PageHero from '../../../components/PageHero.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import CatalogHero from '../../../components/CatalogHero.astro';
 import LessonSearch from '../../../components/LessonSearch.astro';
-import { getCatalog, CN, type Book } from '../../../lib/catalog';
+import { getCatalog, CN, bookImage, type Book } from '../../../lib/catalog';
+import { media } from '../../../lib/media.mjs';
+import { toneVars } from '../../../lib/tones';
 import { abs } from '../../../lib/seo';
 
 export async function getStaticPaths() {
@@ -14,24 +16,24 @@ export async function getStaticPaths() {
 const { x } = Astro.props;
 const e = x.edition;
 const done = (b: Book) => b.units.reduce((n, u) => n + u.lessons.filter(l => l.indexable).length, 0);
+const pic = (b: Book) => bookImage(b) ?? media(`courseware/covers/g${b.grade}a.webp`);
 const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${e.name}小学数学课程目录`, url: abs(x.url), inLanguage: 'zh-CN' };
 ---
 <PageLayout title={`${e.name}小学数学1—6年级课件目录与备课指南`} description={`${e.name}小学数学上下册课程导航：分年级查找真实单元目录、教学内容、易错点和互动课件更新。`} jsonLd={[ld]}>
   <Breadcrumb items={[{ name: '教材目录', url: '/textbooks/' }, { name: e.name }]} />
-  <PageHero eyebrow={`${e.name} · 小学数学`} title={e.heading} lead={e.lead(x.books.length)}>
-    <p class="note">{e.note}<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p>
-  </PageHero>
+  <CatalogHero eyebrow={`${e.name} · 小学数学`} title={e.heading} lead={e.lead(x.books.length)} img={media('brand/teacher.webp')} stickers={['n07', 'o12']} tone={toneVars(2)}>
+    <div class="ch-search"><LessonSearch placeholder={`在${e.name}里搜课题或知识点`} /></div>
+    <p class="ch-note">{e.note}<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p>
+  </CatalogHero>
   <section class="find-sec">
-    <LessonSearch placeholder={`在${e.name}里搜课题或知识点`} />
-  </section>
-  <section class="find-sec">
-    <header><h2>全部教材</h2><p>点单元名直接进入单元，点“全册目录”一页看全所有课</p></header>
+    <div class="sec-title"><h2>📚 全部教材<small>点单元名直接进入单元，点“全册目录”一页看全所有课</small></h2></div>
     <div class="books">
       {x.books.map(b => {
         const n = done(b);
         return (
-          <article class="bookcard">
-            <h3><a href={b.url}>{CN[b.grade]}年级{b.volumeName}</a>{n > 0 && <small>{n} 课完整备课</small>}</h3>
+          <article class="bookcard" style={toneVars(b.grade)}>
+            <a class="bk-pic" href={b.url} tabindex="-1" aria-hidden="true"><img src={pic(b)} alt="" loading="lazy"></a>
+            <h3><a href={b.url}>{CN[b.grade]}年级{b.volumeName}</a>{n > 0 && <small>✨ {n} 课完整备课</small>}</h3>
             <ol>{b.units.map(u => <li><a href={u.url}>{u.title}</a></li>)}</ol>
             <a class="more" href={b.url}>全册目录 →</a>
           </article>

@@ -1,9 +1,11 @@
 ---
 /* 一个年级：上册、下册并排，单元和课一页看全 */
 import PageLayout from '../../../../layouts/PageLayout.astro';
-import PageHero from '../../../../components/PageHero.astro';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import CatalogHero from '../../../../components/CatalogHero.astro';
 import { getCatalog, CN } from '../../../../lib/catalog';
+import { media } from '../../../../lib/media.mjs';
+import { toneVars } from '../../../../lib/tones';
 
 export async function getStaticPaths() {
   const { grades } = await getCatalog();
@@ -15,19 +17,20 @@ const both = g.books.length > 1;
 ---
 <PageLayout title={`${e.name}${n}年级数学${both ? '上下册' : g.books[0].volumeName}教材目录`} description={`${e.name}小学${n}年级数学${both ? '上册、下册' : g.books[0].volumeName}单元目录，提供教学重点、易错点与课堂活动建议。`}>
   <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级` }]} />
-  <PageHero eyebrow={`${e.name} · ${n}年级`} title={`小学${n}年级数学同步目录`} lead={`${both ? '上册、下册' : g.books[0].volumeName}的单元和课一页看全，点课题直接进入。标红的课有完整备课：教材解读、教学设计、趣味活动和 AI 提示词。`} />
+  <CatalogHero eyebrow={`${e.name} · ${n}年级`} title={`小学${n}年级数学同步目录`} lead={`${both ? '上册、下册' : g.books[0].volumeName}的单元和课一页看全，点课题直接进入。带颜色的课有完整备课：教材解读、教学设计、趣味活动和 AI 提示词。`} img={media(`courseware/covers/g${g.grade}a.webp`)} stickers={['n01', 'o05']} tone={toneVars(g.grade)} />
   <div class="grade-cols">
-    {g.books.map(b => {
+    {g.books.map((b, i) => {
       const done = b.units.reduce((k, u) => k + u.lessons.filter(l => l.indexable).length, 0);
       return (
-        <section class="grade-col">
-          <h2><a href={b.url}>{b.volumeName}</a>{done > 0 && <small>{done} 课完整备课</small>}</h2>
+        <section class="grade-col" style={toneVars(g.grade + i)}>
+          <h2><a href={b.url}>{b.volumeName}</a>{done > 0 && <small>✨ {done} 课完整备课</small>}</h2>
           {b.units.map(u => (
             <div class="gunit">
-              <h3><a href={u.url}>第{u.order}单元 {u.title}</a></h3>
+              <h3><a href={u.url}><b>{u.order}</b>{u.title}</a></h3>
               <ul>{u.lessons.map(l => <li><a class:list={[{ hot: l.indexable }]} href={l.url}>{l.title}</a></li>)}</ul>
             </div>
           ))}
+          <a class="more" href={b.url}>{b.volumeName}全册目录 →</a>
         </section>
       );
     })}
