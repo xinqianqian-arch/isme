@@ -12,7 +12,7 @@ export const GET: APIRoute = async () => {
     '这是网站提供的机器可读内容摘要，不包含教材正文或付费资源。',
     '',
     ...books.flatMap(b => [
-      `## 北师大版${CN[b.grade]}年级${b.volumeName}（${b.revision}）`,
+      `## ${b.edition.name}${CN[b.grade]}年级${b.volumeName}（${b.revision}）`,
       `链接：${B}${b.url}`,
       '',
       ...b.units.flatMap(u => [

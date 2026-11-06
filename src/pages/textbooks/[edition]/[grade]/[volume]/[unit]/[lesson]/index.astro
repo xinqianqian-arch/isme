@@ -1,0 +1,75 @@
+---
+import { render } from 'astro:content';
+import PageLayout from '../../../../../../../layouts/PageLayout.astro';
+import PageHero from '../../../../../../../components/PageHero.astro';
+import Breadcrumb from '../../../../../../../components/Breadcrumb.astro';
+import XhsCta from '../../../../../../../components/XhsCta.astro';
+import { getCatalog, CN } from '../../../../../../../lib/catalog';
+import { abs, faq, person } from '../../../../../../../lib/seo';
+import { SITE } from '../../../../../../../site.config';
+
+export async function getStaticPaths() {
+  const { lessons } = await getCatalog();
+  return lessons.map(l => ({ params: { edition: l.edition.slug, grade: `grade-${l.grade}`, volume: `volume-${l.volume}`, unit: l.unit.id, lesson: l.id }, props: { l } }));
+}
+const { l } = Astro.props;
+const n = CN[l.grade], u = l.unit, e = l.edition;
+const d = l.entry?.data;
+// 写了课时讲解：按文档版式显示讲解正文；没写：显示所在单元的通用备课参考（这种页面不让搜索引擎收录）
+const Body = l.entry ? (await render(l.entry)).Content : null;
+const UNIT_CN = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+const all = l.book.units.flatMap(x => x.lessons);
+const prev = all[all.indexOf(l) - 1], next = all[all.indexOf(l) + 1];
+const ymd = (x: Date) => x.toISOString().slice(0, 10);
+
+const title = d?.标题 ?? `${e.name}${n}年级数学${l.volumeName}《${l.title}》教学内容介绍`;
+const description = d?.简介 ?? `${e.name}${n}年级${l.volumeName}《${l.title}》备课参考：${u.focus}`;
+
+/** 讲解正文最后“## 常见问题”里的“**问题** + 回答”，标注成问答，方便搜索引擎和 AI 直接引用 */
+function faqFrom(md = '') {
+  const sec = md.split(/^## 常见问题\s*$/m)[1]?.split(/^## /m)[0] ?? '';
+  return [...sec.matchAll(/^\*\*(.+?)\*\*\s*\n((?:.+\n?)+)/gm)]
+    .map(m => [m[1].trim(), m[2].trim().replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '')] as [string, string]);
+}
+const qa = faqFrom(l.entry?.body);
+const jsonLd = Body
+  ? [{
+      '@context': 'https://schema.org', '@type': 'LearningResource', name: title, description, url: abs(l.url), inLanguage: 'zh-CN',
+      educationalLevel: `小学${n}年级`, learningResourceType: '教学设计', teaches: l.title,
+      isPartOf: { '@type': 'CreativeWork', name: `${e.name}小学数学${n}年级${l.volumeName}` },
+      author: person(), datePublished: ymd(d?.日期 ?? l.updated), dateModified: ymd(l.updated),
+    }, ...(qa.length ? [faq(qa)] : [])]
+  : [{
+      '@context': 'https://schema.org', '@type': 'WebPage', name: `${e.name}${n}年级${l.volumeName}《${l.title}》教学内容介绍`,
+      url: abs(l.url), description: u.focus, inLanguage: 'zh-CN', isPartOf: { '@type': 'CreativeWork', name: `${e.name}${n}年级${l.volumeName}` },
+    }];
+---
+<PageLayout title={title} description={description} noindex={!l.indexable} type={Body ? 'article' : 'website'} jsonLd={jsonLd}>
+  <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
+  {Body ? (
+    <article class="doc">
+      <header class="doc-head">
+        <p class="doc-kicker">{e.name} · {n}年级{l.volumeName} · 第{UNIT_CN[u.order] ?? u.order}单元“{u.title}”</p>
+        <h1>{d?.大标题 ?? d?.标题 ?? `《${l.title}》怎么教？`}</h1>
+        <p class="doc-byline">{SITE.author.name} · {SITE.author.description.split('，')[0]} · 更新于 {ymd(l.updated)}</p>
+      </header>
+      <Body />
+      <aside class="doc-cta">
+        <p><strong>想看这节课的互动课件和 PPT？</strong>十一课件的原创互动课件在小红书主页持续更新。</p>
+        <a href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a>
+      </aside>
+      <nav class="doc-pager" aria-label="上一课 / 下一课">
+        {prev ? <a href={prev.url}><span>上一课</span>{prev.title}</a> : <span></span>}
+        {next ? <a class="next" href={next.url}><span>下一课</span>{next.title}</a> : <span></span>}
+      </nav>
+    </article>
+  ) : (
+    <article class="lesson-content">
+      <PageHero as="header" eyebrow={`课时导航 · ${l.revision}`} title={`《${l.title}》教学内容介绍`} lead={`这节课属于${e.name}${n}年级数学${l.volumeName}“${u.title}”单元，建议从学生已有经验与具体情境出发理解数学概念。`} />
+      <section><h2>本课所在单元的核心目标</h2><p>{u.focus}</p></section>
+      <section><h2>课堂教学如何组织？</h2><p>围绕《{l.title}》的课题情境，引导学生先提出数学问题，再尝试用实物、示意图或算式表达自己的思考。{u.activity}</p></section>
+      <section><h2>备课时值得关注的易错点</h2><p>{u.pitfall}</p><p>可以让学生在解释方法时指出每个数字、图形元素或计量单位的含义，避免只凭记忆给出结果。</p></section>
+      <XhsCta title={`《${l.title}》互动课件`} text="想看这节课的动画演示和课堂互动设计？十一课件的原创互动课件在小红书主页持续更新。" />
+    </article>
+  )}
+</PageLayout>

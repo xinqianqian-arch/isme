@@ -2,7 +2,7 @@
 /* 首页「按教材找到下一节课」：六个年级的插画卡片 */
 import '../../styles/home-catalog.css';
 import { getCatalog, CN } from '../../lib/catalog';
-const { grades } = await getCatalog();
+const grades = (await getCatalog()).grades.filter(g => g.edition.slug === 'bsd');
 ---
 <section class="edu-catalog" id="curriculum">
   <div class="wrap">

@@ -52,7 +52,7 @@ for (const f of all) {
 // 5. robots、AI 索引
 assert(read('robots.txt').includes('Sitemap: https://11aike.com/sitemap.xml'), 'robots.txt 没有声明网站地图');
 const ai = JSON.parse(read('ai-index.json'));
-assert(ai.url === 'https://11aike.com' && ai.catalog.length === 12, 'ai-index.json 内容不对');
+assert(ai.url === 'https://11aike.com' && ai.catalog.length >= 12, 'ai-index.json 内容不对');
 
 // 6. 源码、私密资料不能被发布
 for (const f of ['materials', 'xhs-profile.json', 'assets/profile.json', 'src', 'node_modules', 'package.json', '.env', 'wrangler.jsonc']) {

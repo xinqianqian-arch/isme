@@ -1,0 +1,53 @@
+/* 文档式阅读版式：课时讲解、教学文章、关于我共用。
+   参照飞书文档 / Notion：白底、正文为主、不用彩色装饰；电脑和手机都好读，复制到公众号也不走样。 */
+.doc, .prose {
+  max-width: 800px; margin: 8px auto 0; padding: 48px 56px 40px;
+  background: #fff; border: 1px solid #EFE7DA; border-radius: 12px; box-shadow: none;
+  color: #2B3141; font-size: 16.5px; line-height: 1.85; letter-spacing: .2px;
+}
+.doc-head { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #F0EEEA; }
+.doc-kicker { margin: 0 0 10px; font-size: 14px; color: #8A8F99; }
+.doc h1, .prose h1 { font-size: clamp(26px, 3.4vw, 34px); line-height: 1.35; font-weight: 800; margin: 0 0 12px; letter-spacing: 0; }
+.doc-byline { margin: 0; font-size: 14px; color: #8A8F99; }
+.doc h2, .prose h2 { font-size: 23px; font-weight: 800; line-height: 1.4; margin: 2.2em 0 .8em; padding: 0; border: 0; }
+.doc h2::before, .prose h2::before { content: none; }
+.doc h3, .prose h3 { font-size: 18.5px; font-weight: 700; line-height: 1.45; margin: 1.8em 0 .6em; }
+.doc p, .prose p { margin: 0 0 1em; }
+.doc ul, .doc ol, .prose ul, .prose ol { margin: 0 0 1.1em; padding-left: 1.5em; }
+.doc li, .prose li { margin: .3em 0; }
+.doc li > p, .prose li > p { margin: 0; }
+.doc strong, .prose strong { font-weight: 700; color: #1F2430; }
+.doc a, .prose a { color: #2F6FDB; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(47, 111, 219, .3); }
+.doc a:hover, .prose a:hover { border-bottom-color: #2F6FDB; }
+/* 引用：灰色提示块 */
+.doc blockquote, .prose blockquote { margin: 0 0 1.4em; padding: 14px 18px; background: #F7F7F5; border-left: 3px solid #D8D4CC; border-radius: 0 6px 6px 0; color: #3A3F4B; }
+.doc blockquote p:last-child, .prose blockquote p:last-child { margin-bottom: 0; }
+/* 表格：细线，手机上可以左右滑动 */
+.doc table, .prose table { display: block; overflow-x: auto; width: 100%; border-collapse: collapse; margin: 0 0 1.4em; font-size: 15px; line-height: 1.6; }
+.doc th, .doc td, .prose th, .prose td { border: 1px solid #E8E5DF; padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc th, .prose th { background: #FAFAF8; font-weight: 700; white-space: nowrap; }
+/* 代码块（板书、提示词）：浅灰底，等宽字体 */
+.doc pre, .prose pre { margin: 0 0 1.4em; padding: 14px 18px; background: #F6F6F4; border: 1px solid #ECEAE5; border-radius: 6px; overflow-x: auto; font-size: 14px; line-height: 1.75; color: #2B3141; white-space: pre; }
+.doc pre code, .prose pre code { font-family: "Sarasa Mono SC", "Noto Sans Mono CJK SC", "PingFang SC", Menlo, Consolas, monospace; }
+.doc :not(pre) > code, .prose :not(pre) > code { padding: 1px 6px; background: #F3F2EF; border-radius: 4px; font-size: .92em; }
+.doc hr, .prose hr { border: 0; border-top: 1px solid #F0EEEA; margin: 2em 0; }
+.doc img, .prose img { max-width: 100%; border-radius: 6px; }
+/* 文末：引流提示 + 上一课 / 下一课 */
+.doc-cta { margin: 2.4em 0 0; padding: 16px 18px; border: 1px solid #F3D9CF; background: #FFF8F5; border-radius: 8px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.doc-cta p { margin: 0; flex: 1 1 320px; }
+.doc .doc-cta a { flex: none; padding: 8px 18px; border: 0; border-radius: 999px; background: var(--xhs); color: #fff; font-weight: 700; }
+.doc-pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.doc .doc-pager a { flex: 1 1 0; padding: 10px 14px; border: 1px solid #ECEAE5; border-radius: 8px; color: #2B3141; font-weight: 600; }
+.doc .doc-pager a.next { text-align: right; }
+.doc-pager a span { display: block; font-size: 12.5px; color: #8A8F99; font-weight: 400; }
+.doc-pager > span { flex: 1 1 0; }
+.prose .fine { font-size: 14px; color: #8A8F99; }
+
+@media (max-width: 640px) {
+  .doc, .prose { margin: 0 -14px; padding: 26px 18px 28px; border-left: 0; border-right: 0; border-radius: 0; font-size: 16px; }
+  .doc h2, .prose h2 { font-size: 20px; }
+  .doc h3, .prose h3 { font-size: 17px; }
+  .doc pre, .prose pre { font-size: 12.5px; }
+  .doc-pager { flex-direction: column; }
+  .doc .doc-pager a.next { text-align: left; }
+}

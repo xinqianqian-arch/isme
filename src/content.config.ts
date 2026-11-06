@@ -3,9 +3,12 @@ import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { parse } from 'yaml';
+import { EDITIONS } from './lib/editions';
 
 /** “四年级上册”这样的写法 */
 const 年级册 = z.string().regex(/^[一二三四五六]年级[上下]册$/, '请写成“四年级上册”这样的格式');
+/** 教材版本名称，不写默认北师大版 */
+const 教材 = z.enum(EDITIONS.map(e => e.name) as [string, ...string[]]).default('北师大版');
 /** 以 _ 开头的文件（比如 _模板.md）只是模板，不发布 */
 const md = (dir: string) => glob({ pattern: ['**/*.md', '!**/_*'], base: `./src/content/${dir}` });
 
@@ -25,8 +28,15 @@ const articles = defineCollection({
 const lessons = defineCollection({
   loader: md('lessons'),
   schema: z.object({
+    教材,
     年级: 年级册,
     课题: z.string(),
+    /** 搜索结果里显示的标题，不写就用默认格式 */
+    标题: z.string().optional(),
+    /** 页面上的大标题，不写就用“标题” */
+    大标题: z.string().optional(),
+    /** 搜索结果里的摘要 */
+    简介: z.string().optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),
     日期: z.coerce.date().optional(),
@@ -35,7 +45,7 @@ const lessons = defineCollection({
 
 const units = defineCollection({
   loader: md('units'),
-  schema: z.object({ 年级: 年级册, 单元: z.string(), 日期: z.coerce.date().optional() }),
+  schema: z.object({ 教材, 年级: 年级册, 单元: z.string(), 日期: z.coerce.date().optional() }),
 });
 
 const textbooks = defineCollection({

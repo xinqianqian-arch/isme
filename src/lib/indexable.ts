@@ -6,14 +6,14 @@ export interface IndexedPage { url: string; lastmod?: Date }
 const max = (ds: (Date | undefined)[]) => ds.filter(Boolean).sort((a, b) => b!.getTime() - a!.getTime())[0];
 
 export async function getIndexedPages(): Promise<IndexedPage[]> {
-  const { books, units, lessons, grades } = await getCatalog();
+  const { books, units, lessons, grades, editions } = await getCatalog();
   const articles = await getArticles();
   const catalogDate = max(units.map(u => u.updated));
   const articleDate = max(articles.map(a => a.data.更新 ?? a.data.日期));
   return [
     { url: '/', lastmod: max([catalogDate, articleDate]) },
     { url: '/textbooks/', lastmod: catalogDate },
-    { url: '/textbooks/bsd/', lastmod: catalogDate },
+    ...editions.map(x => ({ url: x.url, lastmod: max(x.books.map(b => b.updated)) })),
     ...grades.map(g => ({ url: g.url, lastmod: max(g.books.map(b => b.updated)) })),
     ...books.map(b => ({ url: b.url, lastmod: b.updated })),
     ...units.map(u => ({ url: u.url, lastmod: u.updated })),
