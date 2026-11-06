@@ -63,6 +63,7 @@ CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 
 ```
 
 - **token 只在命令行里临时写，不要存进任何文件。** 这个仓库是公开的。
+- **不要直接访问还没上传的网址**：CDN 会把“不存在”缓存约 3 分钟。工具和构建检查都已经避开了这个问题。
 - **覆盖保护**：公开桶里已经有同名文件时，要加 `--overwrite` 才会替换。替换后工具会自动刷新 CDN 缓存。浏览器的缓存最迟一天更新。
 - **用到的权限**：上传需要 token 有 R2 编辑权限；刷新缓存需要 11aike.com 的“缓存清除”权限。
 
@@ -91,6 +92,7 @@ CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 
 - [x] `11aike-media` 的跨域只允许 `https://11aike.com`、`https://www.11aike.com` 和本地预览 `http://localhost:4321`，方法限 GET/HEAD。
 - [x] 两个桶都会在 7 天后自动清理没传完的上传。
 - [x] 《线段、射线、直线》的 AI 原图和提示词已备份到 `11aike-vault/originals/lessons/pep-3a-lines/`。
-- [ ] **在 Cloudflare 后台给 `11aike-media` 绑定域名 `media.11aike.com`**：R2 → 11aike-media → 设置 → 自定义域 → 连接域。
-- [ ] 绑好域名之后，关闭 `11aike-media` 的 `r2.dev` 公开地址：同一页面 → 公共开发 URL → 禁用。
+- [x] `media.11aike.com` 已绑定到 `11aike-media`，证书已生效（最低 TLS 1.2）。`r2.dev` 公开地址已关闭。
+- [x] 已验证：再次访问走 CDN 缓存；支持分段下载（视频可以拖动进度）；跨域只对 11aike.com 放行。`brand/avatar.webp`（头像）是第一个文件。
+- [ ] 可选：给 token 加上 11aike.com 的“缓存清除”权限。这样覆盖文件后会马上生效，否则 CDN 最迟一天后更新。
 - [ ] 以后再定：课件版本管理、付费资源用临时链接发放、防盗链规则（发现被盗用时再加）。

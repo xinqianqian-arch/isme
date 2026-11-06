@@ -64,7 +64,8 @@ const media = new Set();
 for (const f of all) for (const m of fs.readFileSync(f, 'utf8').matchAll(/(?:src|poster|href)="(https:\/\/media\.11aike\.com\/[^"]+)"/g)) media.add(m[1]);
 for (const u of media) {
   let res;
-  try { res = await fetch(u, { method: 'HEAD' }); } catch (e) { console.warn(`⚠ 暂时检查不了 ${u}：${e.message}`); continue; }
+  // 加一次性参数，避免 CDN 把“还没上传”缓存到正式网址上
+  try { res = await fetch(`${u}${u.includes('?') ? '&' : '?'}check=${Date.now()}`, { method: 'HEAD' }); } catch (e) { console.warn(`⚠ 暂时检查不了 ${u}：${e.message}`); continue; }
   assert(res.ok, `R2 素材打不开（${res.status}）：${u}，先用 npm run media -- put 上传`);
 }
 

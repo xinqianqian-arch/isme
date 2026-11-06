@@ -53,7 +53,8 @@ async function put(file, key) {
   const url = `${MEDIA_URL}/${key}`;
   let existed = false;
   if (!priv) {
-    try { existed = (await fetch(url, { method: 'HEAD' })).ok; } catch { console.warn(`⚠ 暂时访问不了 ${MEDIA_URL}，跳过“是否已存在”的检查`); }
+    // 加一个一次性参数再查：CDN 会把“不存在”缓存几分钟，直接查正式网址的话，刚传上去的文件也会暂时显示 404
+    try { existed = (await fetch(`${url}?check=${Date.now()}`, { method: 'HEAD' })).ok; } catch { console.warn(`⚠ 暂时访问不了 ${MEDIA_URL}，跳过“是否已存在”的检查`); }
     if (existed && !flags.has('--overwrite')) fail(`${url} 已经有文件了。确定要替换就加 --overwrite`);
   }
 
@@ -67,7 +68,7 @@ async function put(file, key) {
       method: 'POST', headers: { Authorization: `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ files: [url] }),
     }).then(x => x.json()).catch(e => ({ success: false, errors: [{ message: e.message }] }));
-    console.log(r.success ? '已刷新 CDN 缓存' : `⚠ CDN 缓存没刷新成功（${r.errors?.[0]?.message}），最迟一天后生效`);
+    console.log(r.success ? '已刷新 CDN 缓存' : `⚠ CDN 缓存没刷新成功（${r.errors?.[0]?.message}；token 需要 11aike.com 的“缓存清除”权限），最迟一天后生效`);
   }
   if (!priv) {
     console.log(`\n网址：${url}\nMarkdown 里这样写：\n![说明这是什么](${url} "图注")`);
