@@ -9,6 +9,7 @@
 
 ```
 ├── 写内容指南.md                  写文章、课时讲解、单元补充、改教材目录的说明，附 AI 提示词
+├── .claude/skills/lesson-article/  课时备课文章的写作标准（给 AI 用）：结构、写法、配图规范、插画提示词和脚本
 ├── astro.config.mjs              Astro 配置（网址 11aike.com，输出到 dist/）
 ├── wrangler.jsonc                Cloudflare Worker「11ai」：发布 dist/
 ├── src/
