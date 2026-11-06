@@ -59,4 +59,13 @@ for (const f of ['materials', 'xhs-profile.json', 'assets/profile.json', 'src', 
   assert(!exists(f), `不该发布的文件出现在 dist/ 里：${f}`);
 }
 
-console.log(`构建检查通过：${all.length} 个页面，网站地图 ${urls.length} 个网址，${noindex} 个页面不让收录`);
+// 7. 页面里用到的 R2 素材（视频、音频、视频封面）都要打得开
+const media = new Set();
+for (const f of all) for (const m of fs.readFileSync(f, 'utf8').matchAll(/(?:src|poster|href)="(https:\/\/media\.11aike\.com\/[^"]+)"/g)) media.add(m[1]);
+for (const u of media) {
+  let res;
+  try { res = await fetch(u, { method: 'HEAD' }); } catch (e) { console.warn(`⚠ 暂时检查不了 ${u}：${e.message}`); continue; }
+  assert(res.ok, `R2 素材打不开（${res.status}）：${u}，先用 npm run media -- put 上传`);
+}
+
+console.log(`构建检查通过：${all.length} 个页面，网站地图 ${urls.length} 个网址，${noindex} 个页面不让收录${media.size ? `，${media.size} 个 R2 素材` : ''}`);

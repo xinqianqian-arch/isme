@@ -35,7 +35,9 @@
 │   └── styles/                   tokens.css（共用配色）、home.css（首页）、pages.css（内页）、topbar.css（导航）
 ├── public/                       原样发布：图片 assets/、天安门课件 aaa.html、_headers、robots.txt
 ├── scripts/verify-build.mjs      构建后检查（不通过就不发布）
+├── scripts/media.mjs             视频、音频转换，上传到 Cloudflare R2（npm run media）
 ├── materials/                    素材留档（小红书原始资料等），不发布
+├── docs/media-storage.md         图片、视频、音频放在哪、怎么上传（R2：media.11aike.com）
 └── docs/cloudflare-deployment.md 发布与回退说明
 ```
 

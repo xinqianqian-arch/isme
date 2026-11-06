@@ -62,6 +62,8 @@
 .doc-body figure { margin: 1.5em 0 1.7em; text-align: center; }
 .doc-body figure img { display: block; width: 100%; margin: 0 auto; border-radius: 12px; }
 .doc-body figure img[src$=".svg"] { max-width: 640px; }
+.doc-body figure video { display: block; width: 100%; height: auto; border-radius: 12px; background: #1F2430; }
+.doc-body figure audio { display: block; width: 100%; max-width: 640px; margin: 0 auto; }
 .doc-body figcaption { margin: 10px auto 0; max-width: 640px; font-size: 14px; line-height: 1.6; color: #8A8F99; text-wrap: pretty; }
 
 /* ---------- 文末：引流 + 上一课 / 下一课 ---------- */

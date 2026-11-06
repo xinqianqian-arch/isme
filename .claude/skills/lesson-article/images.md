@@ -28,6 +28,7 @@
 | 九、易错点 | 正误对比图 | SVG |
 | 开头信息 `封面` | 分享封面，不在正文显示 | Poe |
 | 六、课中 | 真实互动课件截图 | **由用户提供**，不要用 AI 生成课件界面 |
+| 需要演示过程时 | 课件操作录屏（短视频）、朗读音频 | 用户提供原片 → `npm run media` 转换后上传 R2，见下文 |
 
 数学内容（图形、端点、字母、刻度）一律用 SVG 手绘，不交给 AI 画，AI 很容易画错。
 
@@ -121,3 +122,20 @@ python3 .claude/skills/lesson-article/scripts/to_webp.py <输入.png> <输出.we
 ```
 
 转好后每张插画大约 30–40KB。
+
+### 备份原图
+
+挑剩的图和原图，连同提示词文件，一起备份到 R2 私有桶，放在 `originals/lessons/<文件夹>/`：
+
+```bash
+npm run media -- put <原图.png> originals/lessons/pep-3a-lines/<原图.png> --private
+```
+
+同样要带上 Cloudflare 的环境变量。备份完再删掉临时目录。
+
+## 视频和音频（Cloudflare R2）
+
+- 视频、音频不放进仓库。先转换格式，再上传到公开桶 `11aike-media`，在文章里用 `https://media.11aike.com/…` 引用，写法和图片一样。
+- 视频必须配一张同名的 `-poster.webp` 封面，`npm run media -- video` 会自动截一张。
+- 目录、格式、命令和权限都写在 `docs/media-storage.md`。
+- 构建时会检查页面里引用的 R2 素材能不能打开。
