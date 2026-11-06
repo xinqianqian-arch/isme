@@ -1,8 +1,7 @@
 ---
-/* 最新完整备课：按写作日期排，最新的在前；颜色跟着单元 */
+/* 最新完整备课：按写作日期排，最新的在前 */
 import '../styles/catalog.css';
 import { getCatalog, CN } from '../lib/catalog';
-import { toneVars } from '../lib/tones';
 interface Props { limit?: number }
 const { limit = 8 } = Astro.props;
 const { lessons } = await getCatalog();
@@ -13,7 +12,7 @@ const short = (name: string) => name.replace('版', '');
 ---
 <div class="latest">
   {latest.map(l => (
-    <a class="lcard" href={l.url} style={toneVars(l.unit.order)}>
+    <a class="lcard" href={l.url}>
       <span class="lc-pic">
         {l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}
         <span class="lc-chip">{short(l.edition.name)}{CN[l.grade]}{l.volumeName[0]}</span>

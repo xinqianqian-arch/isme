@@ -1,23 +1,17 @@
 ---
-/* 找课页面的页头：左边文字，右边一张插画（年级插画或单元封面），配两三个漂浮的黏土贴纸 */
+/* 找课页面的页头：左边文字，右边一张插画（年级插画或单元封面） */
 import '../styles/catalog.css';
-import { media } from '../lib/media.mjs';
 interface Props {
   eyebrow?: string;
   title: string;
   lead?: string;
   /** 右侧插画的完整网址 */
   img?: string;
-  /** 贴纸名，最多 3 个，如 ['n07', 'o01'] */
-  stickers?: string[];
-  /** 页头主色，写成 toneVars() 的结果 */
-  tone?: string;
   as?: 'section' | 'header';
 }
-const { eyebrow, title, lead, img, stickers = ['o08', 'o01'], tone, as: Tag = 'section' } = Astro.props;
+const { eyebrow, title, lead, img, as: Tag = 'section' } = Astro.props;
 ---
-<Tag class:list={['chero', { 'has-img': !!img }]} style={tone}>
-  {stickers.slice(0, 3).map((s, i) => <img class={`ch-st ch-st${i + 1}`} src={media(`brand/stickers/${s}.webp`)} alt="" aria-hidden="true">)}
+<Tag class:list={['chero', { 'has-img': !!img }]}>
   <div class="ch-text">
     {eyebrow && <p class="ch-eyebrow">{eyebrow}</p>}
     <h1>{title}</h1>

@@ -9,7 +9,6 @@ import XhsCta from '../../../../../../components/XhsCta.astro';
 import { getCatalog, CN } from '../../../../../../lib/catalog';
 import { abs, faq } from '../../../../../../lib/seo';
 import { media } from '../../../../../../lib/media.mjs';
-import { toneVars } from '../../../../../../lib/tones';
 
 export async function getStaticPaths() {
   const { units } = await getCatalog();
@@ -20,7 +19,6 @@ const n = CN[u.grade], e = u.edition;
 const Extra = u.entry ? (await render(u.entry)).Content : null;
 const done = u.lessons.filter(l => l.indexable).length;
 const cover = u.lessons.find(l => l.entry?.data.封面)?.entry?.data.封面 ?? media(`courseware/covers/g${u.grade}a.webp`);
-const tone = toneVars(u.order);
 const schema = {
   '@context': 'https://schema.org', '@type': 'LearningResource', name: `${e.name}${n}年级${u.volumeName}《${u.title}》单元备课指南`,
   description: u.focus, inLanguage: 'zh-CN', educationalLevel: '小学', learningResourceType: '教学参考', url: abs(u.url), isAccessibleForFree: true,
@@ -33,19 +31,19 @@ const qa = faq([
 ---
 <PageLayout title={`${e.name}${n}年级数学${u.volumeName}《${u.title}》单元教学内容与备课指南`} description={`${e.name}${n}年级${u.volumeName}《${u.title}》：${u.focus}`} jsonLd={[schema, qa]}>
   <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${u.volumeName}`, url: u.book.url }, { name: u.title }]} />
-  <CatalogHero as="header" eyebrow={`第${u.order}单元 · ${e.name}${n}年级${u.volumeName}`} title={`${u.title}｜单元备课`} lead={u.focus} img={cover} stickers={['o08', 'n11']} tone={tone}>
-    <div class="ch-stats"><span>📝 {u.lessons.length} 课</span>{done > 0 && <span class="hot">✨ {done} 课完整备课</span>}</div>
+  <CatalogHero as="header" eyebrow={`第${u.order}单元 · ${e.name}${n}年级${u.volumeName}`} title={`${u.title}｜单元备课`} lead={u.focus} img={cover}>
+    <div class="ch-stats"><span>{u.lessons.length} 课</span>{done > 0 && <span class="hot">{done} 课完整备课</span>}</div>
   </CatalogHero>
   {u.lessons.length > 0 && (
-    <section class="find-sec unit-lessons" style={tone}>
-      <div class="sec-title"><h2>📝 本单元的课<small>{u.lessons.length} 课{done > 0 && `，${done} 课有完整备课`}</small></h2></div>
+    <section class="find-sec unit-lessons">
+      <div class="sec-title"><h2>本单元的课<small>{u.lessons.length} 课{done > 0 && `，${done} 课有完整备课`}</small></h2></div>
       <LessonGrid lessons={u.lessons} />
     </section>
   )}
   {Extra && <section class="original-note md-body"><Extra /></section>}
   <div class="unit-notes">
-    <div><h2>🧐 易错点</h2><p>{u.pitfall}</p></div>
-    <div><h2>🎲 课堂活动</h2><p>{u.activity}</p></div>
+    <div><h2>易错点</h2><p>{u.pitfall}</p></div>
+    <div><h2>课堂活动</h2><p>{u.activity}</p></div>
   </div>
   <nav class="book-switch" aria-label="本册其他单元">
     {u.book.units.map(x => x === u ? <span>{x.order} {x.title}</span> : <a href={x.url}>{x.order} {x.title}</a>)}
