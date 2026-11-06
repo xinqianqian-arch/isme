@@ -56,3 +56,26 @@ Keep the left 40% of the image as calm empty pastel background (space for a titl
 - 画面比例写约 1.9:1，生成后再用 `to_webp.py --cover` 裁成 1200×630。
 - 左边 40% 留空，以后可以加标题。
 - 用本课的“主角物件”做画面，并按课本画法写清楚哪些东西不能出现。
+
+## 教材封面（每一册一张，样板：北师大版 12 册、人教版三上）
+
+- **规格**：3:4 竖版；画面上方 35% 留空，网页会在那里叠书名“数学 · 三年级下册”；左下角叠版本名。画面里不要任何文字和数字。
+- **生成**：用 `gpt-image-2`，风格参考图是年级插画 `https://media.11aike.com/courseware/covers/g3a.webp`。生成后居中裁成 3:4，缩到 600×800，存成 webp。
+- **上传**：和全册目录网页同路径，`textbooks/<版本>/grade-N/volume-N/cover.webp`。再在这一册的 YAML 里写 `封面:` 填完整网址。
+- **底色区分版本**：
+  - 北师大版：暖杏奶油色，各年级略有深浅；
+  - 人教版：浅灰绿、淡薄荷色；
+  - 新的版本：另选一种低饱和颜色，比如浅雾蓝或浅藕粉，同一版本的所有册保持一致。
+- **画面内容**：从这一册的单元里挑 3–4 个最有代表性的物件，摆成静物。比如三下用了：饮品店分组的杯子、翅膀对称的蝴蝶、绕着边线的绳子和树叶、拆开的盒子。
+- **不要画展开图**：AI 画长方体、正方体的展开图经常拼错。要表现立体图形，就画盒子，或者用小正方体拼成的长方体。
+- **检查**：
+  - 物件数量对不对（例如“每盘 3 个”）；
+  - 有没有冒出文字；
+  - 上方是否留够了空。
+
+```
+3D clay / plasticine illustration in a soft, rounded, refined style with muted, low-saturation pastel colors and gentle warm studio lighting (match the clay material and look of the reference image). Elegant and calm, suitable for a professional teaching resource, not childish.
+Scene: a primary-school math still-life for a grade 3 textbook: <从单元里挑的 3–4 个物件，写清楚数量和样子>.
+Background: a smooth, soft warm apricot-cream color (pale apricot).
+Portrait book-cover composition, aspect ratio 3:4. Keep the TOP 35% of the image as a calm, empty, plain background area (a title will be placed there later). Arrange 3 to 4 objects as a neat, balanced still-life in the lower 60%, resting on the same soft surface, with comfortable margins on all sides; nothing cut off. No text, no letters, no written numbers or digits anywhere, no watermark.
+```

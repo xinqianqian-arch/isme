@@ -1,5 +1,5 @@
 ---
-/* 找课页面的页头：左边文字，右边一张插画（年级插画或单元封面） */
+/* 找课页面的页头：左边文字，右边一张插画（单元封面），或者 slot="pic" 放教材封面 */
 import '../styles/catalog.css';
 interface Props {
   eyebrow?: string;
@@ -10,8 +10,9 @@ interface Props {
   as?: 'section' | 'header';
 }
 const { eyebrow, title, lead, img, as: Tag = 'section' } = Astro.props;
+const pic = Astro.slots.has('pic');
 ---
-<Tag class:list={['chero', { 'has-img': !!img }]}>
+<Tag class:list={['chero', { 'has-img': !!img, 'has-book': pic }]}>
   <div class="ch-text">
     {eyebrow && <p class="ch-eyebrow">{eyebrow}</p>}
     <h1>{title}</h1>
@@ -19,4 +20,5 @@ const { eyebrow, title, lead, img, as: Tag = 'section' } = Astro.props;
     <slot />
   </div>
   {img && <div class="ch-pic"><img src={img} alt="" fetchpriority="high"></div>}
+  {pic && <div class="ch-book"><slot name="pic" /></div>}
 </Tag>

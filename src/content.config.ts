@@ -68,6 +68,8 @@ const textbooks = defineCollection({
     版本: z.string(),
     更新: z.coerce.date(),
     参考: z.string().optional(),
+    /** 这一册的专属封面插画（3:4 竖版，不带文字，书名由网页叠上去），和网页同路径：https://media.11aike.com/textbooks/<版本>/grade-N/volume-N/cover.webp */
+    封面: z.string().startsWith(MEDIA_URL + '/', `封面要先上传到 R2，写 ${MEDIA_URL}/ 开头的网址`).optional(),
     单元: z.array(z.object({
       名称: z.string(),
       重点: z.string(),

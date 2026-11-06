@@ -1,0 +1,15 @@
+---
+/* 一册教材的封面：专属插画（YAML 里的“封面”，没有就用年级插画）+ 网页文字叠上去的书名和版本，左边一道书脊阴影。
+   size：s 选册格子里的小封面，m 版本页的卡片，l 页头 */
+import '../styles/catalog.css';
+import { media } from '../lib/media.mjs';
+import { CN, type Book } from '../lib/catalog';
+interface Props { book: Book; size?: 's' | 'm' | 'l' }
+const { book: b, size = 'm' } = Astro.props;
+const img = b.cover ?? media(`courseware/covers/g${b.grade}a.webp`);
+---
+<span class:list={['bcover', size]}>
+  <img src={img} alt="" loading={size === 'l' ? undefined : 'lazy'}>
+  <span class="bc-title"><b>数学</b><span>{CN[b.grade]}年级{b.volumeName}</span></span>
+  <span class="bc-ed">{b.edition.name}</span>
+</span>

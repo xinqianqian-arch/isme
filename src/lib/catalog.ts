@@ -33,10 +33,8 @@ export interface Unit {
 export interface Book {
   edition: Edition; grade: number; volume: number; volumeName: string; label: string;
   revision: string; updated: Date; url: string; units: Unit[];
-}
-/** 一册的配图：第一个写了“封面”的课的封面（单元封面），没有就用年级插画 */
-export function bookImage(b: Book) {
-  return b.units.flatMap(u => u.lessons).find(l => l.entry?.data.封面)?.entry?.data.封面 ?? null;
+  /** 专属封面插画（YAML 里的“封面”） */
+  cover?: string;
 }
 export interface Grade { edition: Edition; grade: number; url: string; books: Book[] }
 export interface Catalog {
@@ -79,7 +77,7 @@ async function build(): Promise<Catalog> {
     const key = `${edition.name}${label}`;
     if (seen.has(key)) throw new Error(`教材目录里有两份“${key}”，请删掉一份`);
     seen.add(key);
-    const book: Book = { edition, grade: r.年级, volume, volumeName: r.册, label, revision: r.版本, updated: r.更新,
+    const book: Book = { edition, grade: r.年级, volume, volumeName: r.册, label, revision: r.版本, updated: r.更新, cover: r.封面,
       url: `/textbooks/${edition.slug}/grade-${r.年级}/volume-${volume}/`, units: [] };
     r.单元.forEach((u, i) => {
       const unit: Unit = { id: `unit-${pad(i + 1)}`, order: i + 1, title: u.名称, url: `${book.url}unit-${pad(i + 1)}/`,

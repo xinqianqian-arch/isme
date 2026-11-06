@@ -20,7 +20,7 @@ const hot = ['两、三位数乘一位数', '轴对称', '周长', '三下 除�
       <LessonSearch big readQuery />
       <p class="hot-words"><span>常搜</span>{hot.map(w => <a href={`/textbooks/?q=${encodeURIComponent(w)}`}>{w}</a>)}</p>
     </div>
-    <div class="fh-pic"><img src={media('brand/teacher.webp')} alt="十一老师" fetchpriority="high"></div>
+    <div class="fh-pic"><img src={media('brand/teacher-desk.webp')} alt="十一老师" fetchpriority="high"></div>
   </section>
   {editions.map(x => (
     <section class="find-sec">

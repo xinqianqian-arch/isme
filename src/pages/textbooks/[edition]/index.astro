@@ -3,9 +3,9 @@
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CatalogHero from '../../../components/CatalogHero.astro';
+import BookCover from '../../../components/BookCover.astro';
 import LessonSearch from '../../../components/LessonSearch.astro';
-import { getCatalog, CN, bookImage, type Book } from '../../../lib/catalog';
-import { media } from '../../../lib/media.mjs';
+import { getCatalog, CN, type Book } from '../../../lib/catalog';
 import { abs } from '../../../lib/seo';
 
 export async function getStaticPaths() {
@@ -15,12 +15,14 @@ export async function getStaticPaths() {
 const { x } = Astro.props;
 const e = x.edition;
 const done = (b: Book) => b.units.reduce((n, u) => n + u.lessons.filter(l => l.indexable).length, 0);
-const pic = (b: Book) => bookImage(b) ?? media(`courseware/covers/g${b.grade}a.webp`);
+/** 页头展示的几本封面：有完整备课的册优先 */
+const fan = [...x.books].sort((p, q) => done(q) - done(p)).slice(0, 3);
 const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${e.name}小学数学课程目录`, url: abs(x.url), inLanguage: 'zh-CN' };
 ---
 <PageLayout title={`${e.name}小学数学1—6年级课件目录与备课指南`} description={`${e.name}小学数学上下册课程导航：分年级查找真实单元目录、教学内容、易错点和互动课件更新。`} jsonLd={[ld]}>
   <Breadcrumb items={[{ name: '教材目录', url: '/textbooks/' }, { name: e.name }]} />
-  <CatalogHero eyebrow={`${e.name} · 小学数学`} title={e.heading} lead={e.lead(x.books.length)} img={media('brand/teacher.webp')}>
+  <CatalogHero eyebrow={`${e.name} · 小学数学`} title={e.heading} lead={e.lead(x.books.length)}>
+    <div slot="pic" class="ch-books fan">{fan.map(b => <a href={b.url}><BookCover book={b} size="m" /></a>)}</div>
     <div class="ch-search"><LessonSearch placeholder={`在${e.name}里搜课题或知识点`} /></div>
     <p class="ch-note">{e.note}<a href="/articles/textbook-edition-guide/">如何辨别新旧教材？</a></p>
   </CatalogHero>
@@ -31,10 +33,12 @@ const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 
         const n = done(b);
         return (
           <article class="bookcard">
-            <a class="bk-pic" href={b.url} tabindex="-1" aria-hidden="true"><img src={pic(b)} alt="" loading="lazy"></a>
-            <h3><a href={b.url}>{CN[b.grade]}年级{b.volumeName}</a>{n > 0 && <small>{n} 课完整备课</small>}</h3>
-            <ol>{b.units.map(u => <li><a href={u.url}>{u.title}</a></li>)}</ol>
-            <a class="more" href={b.url}>全册目录 →</a>
+            <a class="bk-cover" href={b.url} tabindex="-1" aria-hidden="true"><BookCover book={b} size="m" /></a>
+            <div class="bk-info">
+              <h3><a href={b.url}>{CN[b.grade]}年级{b.volumeName}</a>{n > 0 && <small>{n} 课完整备课</small>}</h3>
+              <ol>{b.units.map(u => <li><a href={u.url}>{u.title}</a></li>)}</ol>
+              <a class="more" href={b.url}>全册目录 →</a>
+            </div>
           </article>
         );
       })}

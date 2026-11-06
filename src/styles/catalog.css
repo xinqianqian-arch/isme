@@ -44,12 +44,23 @@
 }
 .fhero { grid-template-columns: minmax(0, 1fr) 300px; padding: 48px 48px 44px; }
 .chero.has-img { grid-template-columns: minmax(0, 1fr) 340px; }
+.chero.has-book { grid-template-columns: minmax(0, 1fr) auto; padding-right: 64px; }
+.ch-book { display: flex; justify-content: center; }
+.ch-book > .bcover { width: 210px; rotate: 3deg; }
+.ch-books { display: flex; gap: 18px; align-items: flex-end; }
+.ch-books a { display: block; width: 150px; }
+.ch-books a:first-child { rotate: -3deg; }
+.ch-books a:last-child { rotate: 3deg; }
+.ch-books a:hover .bcover { transform: translateY(-4px); }
+.ch-books.fan a { width: 128px; }
+.ch-books.fan a:nth-child(2) { rotate: 0deg; margin-bottom: 14px; }
+.ch-books.fan a:only-child { rotate: 3deg; width: 150px; }
 .ch-eyebrow { display: inline-block; margin: 0 0 12px; font-size: 14px; font-weight: 700; color: var(--c-accent); letter-spacing: .5px; }
 .fhero h1, .chero h1 { margin: 0 0 12px; font-size: clamp(28px, 3.6vw, 42px); font-weight: 800; letter-spacing: 0; line-height: 1.3; }
 .fh-lead, .ch-lead { margin: 0; max-width: 640px; font-size: 16.5px; color: var(--c-text2); line-height: 1.75; }
 .fh-lead { margin-bottom: 22px; }
 .fh-pic img, .ch-pic img { display: block; width: 100%; border-radius: 18px; }
-.fh-pic img { aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; background: var(--c-soft); }
+.fh-pic img { aspect-ratio: 1; object-fit: contain; }
 .ch-pic img { aspect-ratio: 3 / 2; object-fit: cover; object-position: 72% 50%; }
 .hot-words { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; }
 .hot-words > span { font-size: 13.5px; color: var(--muted); margin-right: 2px; }
@@ -70,27 +81,35 @@
 .sec-title > a { color: var(--c-accent); font-size: 15px; font-weight: 600; text-decoration: none; }
 .sec-title > a:hover { text-decoration: underline; }
 
-/* ---------- 选一册：年级格子 ---------- */
+/* ---------- 教材封面：插画 + 网页文字书名 + 书脊阴影 ---------- */
+.bcover {
+  position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px 8px 8px 3px; background: #F3EDE3;
+  box-shadow: 0 1px 2px rgba(46, 58, 89, .08), 0 10px 22px rgba(46, 58, 89, .14); container-type: inline-size; transition: transform .25s, box-shadow .25s;
+}
+.bcover::before { content: ""; position: absolute; z-index: 2; top: 0; bottom: 0; left: 0; width: 7%; background: linear-gradient(90deg, rgba(60, 40, 20, .16), rgba(255, 255, 255, .22) 65%, rgba(60, 40, 20, .05)); }
+.bcover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bc-title { position: absolute; z-index: 2; left: 14%; right: 8%; top: 8%; display: flex; flex-direction: column; color: var(--ink); line-height: 1.15; }
+/* 字号跟着封面宽度走（cqw = 封面宽度的 1%），封面大小不同也不会压到插画 */
+.bc-title b { font-size: 20cqw; font-weight: 900; letter-spacing: .12em; }
+.bc-title span { margin-top: 4cqw; font-size: 10cqw; font-weight: 700; letter-spacing: .04em; }
+.bc-ed { position: absolute; z-index: 2; left: 14%; bottom: 6%; padding: .15em .6em; border-radius: 4px; background: rgba(255, 255, 255, .88); color: var(--c-accent); font-size: 7.5cqw; font-weight: 700; }
+.bcover.s { border-radius: 2px 5px 5px 2px; box-shadow: 0 1px 2px rgba(46, 58, 89, .08), 0 5px 12px rgba(46, 58, 89, .12); }
+.bcover.s .bc-title span, .bcover.s .bc-ed { display: none; }
+.bcover.l { border-radius: 4px 12px 12px 4px; box-shadow: 0 2px 4px rgba(46, 58, 89, .08), 0 22px 40px rgba(46, 58, 89, .18); }
+
+/* ---------- 选一册：每个年级一格，上册、下册两本小封面 ---------- */
 .bpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
-.bp-grade {
-  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; padding: 14px;
-  border-radius: 18px; background: #fff; border: 1px solid var(--c-line); box-shadow: var(--c-shadow); transition: box-shadow .25s, transform .25s;
-}
-.bp-grade:hover { box-shadow: var(--c-shadow-up); transform: translateY(-2px); }
-.bp-pic { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--c-soft); }
-.bp-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.bp-name { display: block; margin: 0 0 8px; font-size: 18px; font-weight: 800; line-height: 1.3; }
-.bp-vols { display: grid; gap: 6px; }
-.bp-vol {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 12px; border-radius: 10px;
-  background: var(--c-soft); text-decoration: none; line-height: 1.4; transition: background .2s;
-}
-.bp-vol strong { font-size: 14.5px; font-weight: 600; color: var(--ink); white-space: nowrap; }
-.bp-vol small { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
-.bp-vol:hover { background: #EFE8DD; }
-.bp-vol.hot { background: var(--c-accent-bg); }
-.bp-vol.hot small { color: var(--c-accent); font-weight: 600; }
-.bp-vol.hot:hover { background: #F7E2D8; }
+.bp-grade { padding: 14px 16px 16px; border-radius: 18px; background: #fff; border: 1px solid var(--c-line); box-shadow: var(--c-shadow); }
+.bp-name { display: block; margin: 0 0 12px; font-size: 17px; font-weight: 800; line-height: 1.3; }
+.bp-books { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bp-book { display: flex; align-items: center; gap: 12px; padding: 6px; margin: -6px; border-radius: 12px; text-decoration: none; transition: background .2s; }
+.bp-book .bcover { flex: none; width: 62px; }
+.bp-book:hover { background: var(--c-soft); }
+.bp-book:hover .bcover { transform: translateY(-2px); }
+.bp-meta { display: flex; flex-direction: column; min-width: 0; line-height: 1.45; }
+.bp-meta strong { font-size: 15.5px; font-weight: 700; color: var(--ink); }
+.bp-meta small { font-size: 12.5px; color: var(--muted); }
+.bp-book.hot .bp-meta small { color: var(--c-accent); font-weight: 600; }
 
 /* ---------- 课时卡片 ---------- */
 .lgrid, .latest { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 16px; }
@@ -154,20 +173,21 @@
 .bunit-cover { flex: none; display: block; width: 190px; aspect-ratio: 1.9; overflow: hidden; border-radius: 12px; background: var(--c-soft); }
 .bunit-cover img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
 
-/* ---------- 版本页：每一册一张卡片 ---------- */
-.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
-.bookcard { display: flex; flex-direction: column; padding: 12px 12px 18px; border-radius: 20px; background: #fff; border: 1px solid var(--c-line); box-shadow: var(--c-shadow); transition: box-shadow .25s, transform .25s; }
-.bookcard:hover { box-shadow: var(--c-shadow-up); transform: translateY(-2px); }
-.bk-pic { display: block; aspect-ratio: 16 / 7; overflow: hidden; border-radius: 12px; background: var(--c-soft); margin-bottom: 14px; }
-.bk-pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
-.bookcard h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 8px 8px; font-size: 19px; font-weight: 800; }
+/* ---------- 版本页：每一册一张卡片，左边封面、右边单元 ---------- */
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 18px; }
+.bookcard { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 18px; align-items: start; padding: 18px; border-radius: 20px; background: #fff; border: 1px solid var(--c-line); box-shadow: var(--c-shadow); transition: box-shadow .25s; }
+.bookcard:hover { box-shadow: var(--c-shadow-up); }
+.bk-cover { display: block; }
+.bk-cover:hover .bcover { transform: translateY(-3px); }
+.bk-info { display: flex; flex-direction: column; min-height: 100%; }
+.bookcard h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 6px; font-size: 18px; font-weight: 800; }
 .bookcard h3 a { text-decoration: none; }
 .bookcard h3 a:hover { color: var(--c-accent); }
 .bookcard h3 small { padding: 1px 8px; border-radius: 6px; background: var(--c-accent-bg); color: var(--c-accent); font-size: 12.5px; font-weight: 600; }
-.bookcard ol { margin: 0 8px 12px; padding-left: 1.4em; color: var(--muted); font-size: 14.5px; line-height: 1.9; }
+.bookcard ol { margin: 0 0 10px; padding-left: 1.3em; color: var(--muted); font-size: 14px; line-height: 1.85; }
 .bookcard ol a { color: var(--ink); text-decoration: none; }
 .bookcard ol a:hover { color: var(--c-accent); }
-.bookcard .more { margin: auto 8px 0; padding-top: 4px; color: var(--c-accent); font-size: 14.5px; font-weight: 600; text-decoration: none; }
+.bookcard .more { margin-top: auto; color: var(--c-accent); font-size: 14.5px; font-weight: 600; text-decoration: none; }
 
 /* ---------- 年级页：上册、下册并排 ---------- */
 .grade-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
@@ -222,9 +242,13 @@
   .fhero { grid-template-columns: minmax(0, 1fr) 220px; }
 }
 @media (max-width: 860px) {
-  .chero, .chero.has-img, .fhero { grid-template-columns: 1fr; gap: 20px; padding: 28px 24px 30px; }
+  .chero, .chero.has-img, .chero.has-book, .fhero { grid-template-columns: 1fr; gap: 20px; padding: 28px 24px 30px; }
   .fh-pic { display: none; }
-  .ch-pic { order: -1; }
+  .ch-pic, .ch-book { order: -1; }
+  .chero.has-book { padding-right: 24px; }
+  .ch-book > .bcover { width: 150px; }
+  .ch-books a { width: 116px; }
+  .bookcard { grid-template-columns: 92px minmax(0, 1fr); }
   .ch-pic img { aspect-ratio: 2.4; }
   .bunit-cover { display: none; }
   .unit-notes { grid-template-columns: 1fr; }
@@ -235,7 +259,8 @@
   .fh-lead, .ch-lead { font-size: 15.5px; }
   .lsearch.big .lsearch-box { height: 52px; padding: 0 16px; }
   .bpick { grid-template-columns: 1fr; gap: 10px; }
-  .bp-grade { grid-template-columns: 72px minmax(0, 1fr); gap: 12px; padding: 10px; }
+  .bp-grade { padding: 12px 14px 14px; }
+  .books { grid-template-columns: 1fr; }
   .lgrid, .latest { grid-template-columns: 1fr 1fr; gap: 10px; }
   .lc-body { padding: 10px 12px 12px; }
   .lc-body strong { font-size: 15.5px; }
