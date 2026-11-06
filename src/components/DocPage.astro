@@ -1,0 +1,130 @@
+---
+/* 文档式阅读页：课时讲解、教学文章、关于我共用。
+   顶部封面 + 黏土图标 + 属性栏；电脑上右侧是跟随滚动的目录，手机上右下角“目录”按钮弹出；顶部有阅读进度条；提示词等代码块带“复制”按钮。 */
+interface Heading { depth: number; slug: string; text: string }
+interface Prop { icon: string; label: string; value?: string; chips?: string[] }
+interface Props {
+  title: string;
+  kicker?: string;
+  byline?: string;
+  /** public/assets/stickers/ 下的贴纸名，比如 o03 */
+  icon?: string;
+  props?: Prop[];
+  headings?: Heading[];
+}
+const { title, kicker, byline, icon = 'o08', props = [], headings = [] } = Astro.props;
+const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
+const showToc = toc.filter(h => h.depth === 2).length >= 2;
+---
+<div class="read-progress" aria-hidden="true"><span></span></div>
+<div class:list={['doc-wrap', { 'has-toc': showToc }]}>
+  <article class="doc">
+    <div class="doc-cover"><img class="doc-icon" src={`/assets/stickers/${icon}.webp`} alt="" width="76" height="76"></div>
+    <div class="doc-main">
+      <header class="doc-head">
+        {kicker && <p class="doc-kicker">{kicker}</p>}
+        <h1>{title}</h1>
+        {byline && <p class="doc-byline">{byline}</p>}
+      </header>
+      {props.length > 0 && (
+        <dl class="doc-props">
+          {props.map(p => (
+            <div>
+              <dt><span aria-hidden="true">{p.icon}</span>{p.label}</dt>
+              <dd>{p.chips ? p.chips.map(c => <span class="chip">{c}</span>) : p.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <div class="doc-body"><slot /></div>
+      <slot name="after" />
+    </div>
+  </article>
+  {showToc && (
+    <aside class="doc-toc" aria-label="目录">
+      <nav>
+        <p class="toc-title">目录</p>
+        <ol data-toc>
+          {toc.map(h => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+        <p class="toc-progress">已读 <b>0%</b></p>
+      </nav>
+    </aside>
+  )}
+</div>
+{showToc && (
+  <>
+    <button class="toc-fab" type="button" aria-controls="toc-sheet" aria-expanded="false">☰ 目录</button>
+    <div class="toc-sheet" id="toc-sheet" hidden>
+      <div class="toc-sheet-panel">
+        <p class="toc-title">目录 <button type="button" class="toc-close" aria-label="关闭目录">×</button></p>
+        <ol data-toc>
+          {toc.map(h => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+      </div>
+    </div>
+  </>
+)}
+
+<script>
+  /* 阅读进度、当前小节高亮、手机目录弹层、代码块复制 */
+  const body = document.querySelector<HTMLElement>('.doc-body');
+  const bar = document.querySelector<HTMLElement>('.read-progress span');
+  const pct = document.querySelector<HTMLElement>('.toc-progress b');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc] a')];
+  const heads = [...new Set(links.map(a => a.hash))].map(h => document.getElementById(decodeURIComponent(h.slice(1))));
+  const tocBox = document.querySelector<HTMLElement>('.doc-toc ol');
+
+  let current = '';
+  function update() {
+    if (!body) return;
+    const top = body.getBoundingClientRect().top + scrollY;
+    const end = top + body.offsetHeight - innerHeight;
+    const p = Math.min(1, Math.max(0, (scrollY - top + 120) / Math.max(1, end - top + 120)));
+    if (bar) bar.style.transform = `scaleX(${p})`;
+    if (pct) pct.textContent = `${Math.round(p * 100)}%`;
+    let id = '';
+    for (const h of heads) if (h && h.getBoundingClientRect().top < 140) id = h.id;
+    if (id === current) return;
+    current = id;
+    links.forEach(a => a.classList.toggle('on', decodeURIComponent(a.hash.slice(1)) === id));
+    const on = tocBox?.querySelector<HTMLElement>('a.on');
+    if (tocBox && on) {
+      const r = on.getBoundingClientRect(), b = tocBox.getBoundingClientRect();
+      if (r.top < b.top || r.bottom > b.bottom) tocBox.scrollTop += r.top - b.top - b.height / 3;
+    }
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+
+  // 手机：右下角“目录”按钮
+  const fab = document.querySelector<HTMLButtonElement>('.toc-fab');
+  const sheet = document.getElementById('toc-sheet');
+  const toggle = (open: boolean) => {
+    if (!sheet || !fab) return;
+    sheet.hidden = !open;
+    fab.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('toc-open', open);
+  };
+  fab?.addEventListener('click', () => toggle(true));
+  sheet?.addEventListener('click', e => {
+    const t = e.target as HTMLElement;
+    if (t === sheet || t.closest('.toc-close') || t.closest('a')) toggle(false);
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+
+  // 代码块（提示词、板书）右上角“复制”
+  document.querySelectorAll<HTMLElement>('.doc-body pre').forEach(pre => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'copy';
+    b.textContent = '复制';
+    b.addEventListener('click', async () => {
+      const text = pre.querySelector('code')?.innerText ?? pre.innerText;
+      try { await navigator.clipboard.writeText(text); b.textContent = '已复制'; } catch { b.textContent = '请手动复制'; }
+      setTimeout(() => { b.textContent = '复制'; }, 1600);
+    });
+    pre.appendChild(b);
+  });
+</script>

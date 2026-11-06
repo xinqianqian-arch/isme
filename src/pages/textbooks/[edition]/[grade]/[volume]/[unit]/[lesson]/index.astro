@@ -4,6 +4,7 @@ import PageLayout from '../../../../../../../layouts/PageLayout.astro';
 import PageHero from '../../../../../../../components/PageHero.astro';
 import Breadcrumb from '../../../../../../../components/Breadcrumb.astro';
 import XhsCta from '../../../../../../../components/XhsCta.astro';
+import DocPage from '../../../../../../../components/DocPage.astro';
 import { getCatalog, CN } from '../../../../../../../lib/catalog';
 import { abs, faq, person } from '../../../../../../../lib/seo';
 import { SITE } from '../../../../../../../site.config';
@@ -16,7 +17,8 @@ const { l } = Astro.props;
 const n = CN[l.grade], u = l.unit, e = l.edition;
 const d = l.entry?.data;
 // 写了课时讲解：按文档版式显示讲解正文；没写：显示所在单元的通用备课参考（这种页面不让搜索引擎收录）
-const Body = l.entry ? (await render(l.entry)).Content : null;
+const rendered = l.entry ? await render(l.entry) : null;
+const Body = rendered?.Content ?? null;
 const UNIT_CN = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 const all = l.book.units.flatMap(x => x.lessons);
 const prev = all[all.indexOf(l) - 1], next = all[all.indexOf(l) + 1];
@@ -47,22 +49,32 @@ const jsonLd = Body
 <PageLayout title={title} description={description} noindex={!l.indexable} type={Body ? 'article' : 'website'} jsonLd={jsonLd}>
   <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
   {Body ? (
-    <article class="doc">
-      <header class="doc-head">
-        <p class="doc-kicker">{e.name} · {n}年级{l.volumeName} · 第{UNIT_CN[u.order] ?? u.order}单元“{u.title}”</p>
-        <h1>{d?.大标题 ?? d?.标题 ?? `《${l.title}》怎么教？`}</h1>
-        <p class="doc-byline">{SITE.author.name} · {SITE.author.description.split('，')[0]} · 更新于 {ymd(l.updated)}</p>
-      </header>
+    <DocPage
+      title={d?.大标题 ?? d?.标题 ?? `《${l.title}》怎么教？`}
+      kicker={`${e.name} · ${n}年级${l.volumeName} · 第${UNIT_CN[u.order] ?? u.order}单元“${u.title}”`}
+      byline={`${SITE.author.name} · ${SITE.author.description.split('，')[0]}`}
+      icon={d?.图标 ?? 'o08'}
+      headings={rendered?.headings}
+      props={[
+        { icon: '📘', label: '教材', value: `${e.name}（${l.revision}）· ${n}年级${l.volumeName}` },
+        { icon: '📍', label: '位置', value: `第${UNIT_CN[u.order] ?? u.order}单元“${u.title}” · 第 ${l.order} 课` },
+        ...(d?.页码 ? [{ icon: '📄', label: '教材页码', value: d.页码 }] : []),
+        ...(d?.课型 ? [{ icon: '🧩', label: '课型', value: d.课型 }] : []),
+        ...(d?.核心素养?.length ? [{ icon: '🎯', label: '核心素养', chips: d.核心素养 }] : []),
+        { icon: '🕒', label: '更新', value: ymd(l.updated) },
+      ]}>
       <Body />
-      <aside class="doc-cta">
-        <p><strong>想看这节课的互动课件和 PPT？</strong>十一课件的原创互动课件在小红书主页持续更新。</p>
-        <a href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a>
-      </aside>
-      <nav class="doc-pager" aria-label="上一课 / 下一课">
-        {prev ? <a href={prev.url}><span>上一课</span>{prev.title}</a> : <span></span>}
-        {next ? <a class="next" href={next.url}><span>下一课</span>{next.title}</a> : <span></span>}
-      </nav>
-    </article>
+      <Fragment slot="after">
+        <aside class="doc-cta">
+          <p><strong>想看这节课的互动课件和 PPT？</strong>十一课件的原创互动课件在小红书主页持续更新。</p>
+          <a href={SITE.xhs.profile} target="_blank" rel="nofollow noopener noreferrer">去小红书看课件 ↗</a>
+        </aside>
+        <nav class="doc-pager" aria-label="上一课 / 下一课">
+          {prev ? <a href={prev.url}><span>上一课</span>{prev.title}</a> : <span></span>}
+          {next ? <a class="next" href={next.url}><span>下一课</span>{next.title}</a> : <span></span>}
+        </nav>
+      </Fragment>
+    </DocPage>
   ) : (
     <article class="lesson-content">
       <PageHero as="header" eyebrow={`课时导航 · ${l.revision}`} title={`《${l.title}》教学内容介绍`} lead={`这节课属于${e.name}${n}年级数学${l.volumeName}“${u.title}”单元，建议从学生已有经验与具体情境出发理解数学概念。`} />

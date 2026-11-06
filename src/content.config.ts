@@ -22,6 +22,8 @@ const articles = defineCollection({
     日期: z.coerce.date(),
     更新: z.coerce.date().optional(),
     草稿: z.boolean().default(false),
+    /** 页头图标：public/assets/stickers/ 下的贴纸名 */
+    图标: z.string().optional(),
   }),
 });
 
@@ -37,6 +39,11 @@ const lessons = defineCollection({
     大标题: z.string().optional(),
     /** 搜索结果里的摘要 */
     简介: z.string().optional(),
+    /** 页头属性栏：教材页码、课型、核心素养；图标是 public/assets/stickers/ 下的贴纸名 */
+    页码: z.string().optional(),
+    课型: z.string().optional(),
+    核心素养: z.array(z.string()).optional(),
+    图标: z.string().optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),
     日期: z.coerce.date().optional(),
