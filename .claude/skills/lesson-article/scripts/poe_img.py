@@ -1,5 +1,5 @@
 # 用法: POE_KEY=... python3 -I poe_img.py <model> <输出文件前缀> <提示词文件> [参考图...]
-# key 只用环境变量临时传入，不要写进任何文件；输出图片放临时目录，挑好的再用 to_webp.py 转进 public/assets/lessons/
+# key 只用环境变量临时传入，不要写进任何文件；输出图片放临时目录，挑好的用 to_webp.py 转好，再用 npm run media -- put 上传到 R2
 import json, os, re, sys, base64, urllib.request
 model, out, prompt_file, *refs = sys.argv[1:]
 prompt = open(prompt_file, encoding='utf-8').read()

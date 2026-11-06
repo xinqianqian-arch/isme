@@ -1,4 +1,5 @@
 /* 结构化数据（JSON-LD）：告诉搜索引擎和 AI 每个页面是什么、谁写的、在网站的哪个位置 */
+import { media } from './media.mjs';
 import { SITE } from '../site.config';
 
 export const abs = (path: string) => new URL(path, SITE.url).href;
@@ -7,7 +8,7 @@ export function person() {
   return {
     '@type': 'Person', '@id': abs('/#author'), name: SITE.author.name, jobTitle: SITE.author.jobTitle,
     description: SITE.author.description, homeLocation: SITE.author.location,
-    url: abs('/about/'), image: abs('/assets/avatar.webp'), sameAs: [SITE.xhs.profile],
+    url: abs('/about/'), image: media('brand/avatar.webp'), sameAs: [SITE.xhs.profile],
   };
 }
 

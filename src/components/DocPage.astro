@@ -2,13 +2,14 @@
 /* 文档式阅读页：课时讲解、教学文章、关于我共用。
    标题区（小图标 + 栏目 + 标题）+ 属性栏；电脑上左侧是跟随滚动、全部展开的目录（参考飞书文档大纲），
    手机上右下角“目录”按钮弹出；顶部有阅读进度条；提示词等代码块带“复制”按钮。 */
+import { media } from '../lib/media.mjs';
 interface Heading { depth: number; slug: string; text: string }
 interface Prop { icon: string; label: string; value?: string; chips?: string[] }
 interface Props {
   title: string;
   kicker?: string;
   byline?: string;
-  /** public/assets/stickers/ 下的贴纸名，比如 o03 */
+  /** 贴纸名（R2 上 brand/stickers/ 下的文件名），比如 o03 */
   icon?: string;
   props?: Prop[];
   headings?: Heading[];
@@ -27,7 +28,7 @@ const showToc = sections.length >= 2;
   <article class="doc">
     <div class="doc-main">
       <header class="doc-head">
-        <p class="doc-kicker"><img class="doc-icon" src={`/assets/stickers/${icon}.webp`} alt="" width="30" height="30">{kicker}</p>
+        <p class="doc-kicker"><img class="doc-icon" src={media(`brand/stickers/${icon}.webp`)} alt="" width="30" height="30">{kicker}</p>
         <h1>{title}</h1>
         {byline && <p class="doc-byline">{byline}</p>}
       </header>

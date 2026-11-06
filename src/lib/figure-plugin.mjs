@@ -1,13 +1,10 @@
-/* 文章里单独占一段的图片：![图片说明](/assets/xx.webp "图注")
-   → <figure><img …><figcaption>图注</figcaption></figure>，并补上宽高（加载时页面不跳）和延迟加载。
-   图片放在 public/ 下；路径写错时构建会报出是哪张图。
-   视频、音频写法一样，但要先上传到 R2（npm run media），用 https://media.11aike.com/ 开头的网址：
-   .mp4 → 带封面的播放器（封面是同名的 -poster.webp），.mp3 → 音频条。 */
-import { readFileSync } from 'node:fs';
+/* 文章里单独占一段的图片、视频、音频：![说明](https://media.11aike.com/lessons/xx/light.webp "图注")
+   图片 → <figure><img …><figcaption>图注</figcaption></figure>，补上宽高（加载时页面不跳）和延迟加载；
+   .mp4 → 带封面的播放器（封面是同名的 -poster.webp），.mp3 → 音频条。
+   这些文件都要先上传到 R2（npm run media -- put …，见 docs/media-storage.md）；文件不存在时构建会报出是哪一个。 */
+import { MEDIA_URL } from './media.mjs';
 
-const PUBLIC = new URL('../../public/', import.meta.url);
-/** R2 公开桶 11aike-media 绑定的域名，见 docs/media-storage.md */
-export const MEDIA_URL = 'https://media.11aike.com';
+export { MEDIA_URL };
 const VIDEO = ['mp4', 'webm'], AUDIO = ['mp3', 'm4a', 'ogg'];
 
 /** 读出图片的宽高：svg 看 viewBox，png / webp / jpg 看文件头 */
@@ -45,26 +42,39 @@ function player(src, ext, alt, caption) {
   return el('figure', {}, caption ? [media, el('figcaption', {}, [text(caption)])] : [media]);
 }
 
+/** 从 R2 读图片开头的一小段，算出宽高。同一次构建里同一张图只读一次 */
+const sizes = new Map();
+function remoteSize(src) {
+  if (!sizes.has(src)) sizes.set(src, (async () => {
+    let res;
+    // 加一次性参数：图片还没上传时，别让 CDN 把“不存在”缓存到正式网址上
+    try { res = await fetch(`${src}?size=${Date.now()}`, { headers: { Range: 'bytes=0-65535' } }); }
+    catch (e) { console.warn(`⚠ 暂时读不到 ${src}（${e.message}），这张图先不写宽高`); return null; }
+    if (res.status === 404) throw new Error(`文章里的图片 ${src} 在 R2 上找不到，先用 npm run media -- put 上传`);
+    if (!res.ok) { console.warn(`⚠ 读取 ${src} 返回 ${res.status}，这张图先不写宽高`); return null; }
+    return size(Buffer.from(await res.arrayBuffer()), src);
+  })());
+  return sizes.get(src);
+}
+
 /** 把 <p><img></p> 换成 <figure><img><figcaption>图注</figcaption></figure> */
-function figure(img) {
+async function figure(img) {
   const p = { ...img.properties };
   const src = String(p.src ?? '');
   const ext = src.split(/[?#]/)[0].split('.').pop().toLowerCase();
   if (VIDEO.includes(ext) || AUDIO.includes(ext)) return player(src, ext, String(p.alt ?? ''), p.title ? String(p.title) : '');
-  if (src.startsWith('/')) {
-    let buf;
-    try { buf = readFileSync(new URL('.' + decodeURI(src), PUBLIC)); }
-    catch { throw new Error(`文章里的图片 ${src} 找不到：图片要放在 public/ 下，路径从 /assets/ 开始写`); }
-    const wh = size(buf, src);
+  if (src.startsWith('/')) throw new Error(`文章里的图片 ${src}：图片都放在 R2 上了，先用 npm run media -- put 上传，再写 ${MEDIA_URL}/ 开头的网址`);
+  if (src.startsWith(MEDIA_URL + '/')) {
+    const wh = await remoteSize(src);
     if (wh) [p.width, p.height] = wh;
   }
   p.loading = 'lazy';
   p.decoding = 'async';
   const caption = p.title;
   delete p.title;
-  const children = [{ type: 'element', tagName: 'img', properties: p, children: [] }];
-  if (caption) children.push({ type: 'element', tagName: 'figcaption', properties: {}, children: [{ type: 'text', value: String(caption) }] });
-  return { type: 'element', tagName: 'figure', properties: {}, children };
+  const children = [el('img', p)];
+  if (caption) children.push(el('figcaption', {}, [text(String(caption))]));
+  return el('figure', {}, children);
 }
 
 const blank = n => n.type === 'text' && !n.value.trim();
@@ -74,9 +84,9 @@ export default {
   name: 'figure',
   element: {
     filter: ['p'],
-    visit(node, ctx) {
+    async visit(node, ctx) {
       const kids = node.children.filter(k => !blank(k));
-      if (kids.length === 1 && kids[0].type === 'element' && kids[0].tagName === 'img') ctx.replaceNode(node, figure(kids[0]));
+      if (kids.length === 1 && kids[0].type === 'element' && kids[0].tagName === 'img') ctx.replaceNode(node, await figure(kids[0]));
     },
   },
 };

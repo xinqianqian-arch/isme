@@ -4,10 +4,6 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# 图片文件名不带版本号，缓存一天，换图后最迟第二天生效
-/assets/*
-  Cache-Control: public, max-age=86400
-
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 

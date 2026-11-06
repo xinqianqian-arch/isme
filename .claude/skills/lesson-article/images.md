@@ -1,19 +1,20 @@
 # 配图规范
 
-每篇的配图大致是：5 张左右示意图（SVG，手绘）、1–2 张情境插画（Poe 生成）、1 张分享封面（Poe 生成）。样板的全部图片都在 `public/assets/lessons/pep-3a-lines/`。
+每篇的配图大致是：5 张左右示意图（SVG，手绘）、1–2 张情境插画（Poe 生成）、1 张分享封面（Poe 生成）。图片都放在 Cloudflare R2 上，样板的全部图片在 `https://media.11aike.com/lessons/pep-3a-lines/`。仓库里不放图片，规则见 `docs/media-storage.md`。
 
 ## 放在哪、怎么写
 
-- **文件夹**：一课一个，放在 `public/assets/lessons/<版本缩写>-<年级册>-<主题英文>/`，比如 `pep-3a-lines/`。三年级上册写 `3a`，下册写 `3b`。
+- **文件夹**：一课一个，R2 路径是 `lessons/<版本缩写>-<年级册>-<主题英文>/`，比如 `lessons/pep-3a-lines/`。三年级上册写 `3a`，下册写 `3b`。
+- **工作流程**：在临时目录（如 `/tmp`）里画图、转 webp，再用 `npm run media -- put <文件> lessons/<文件夹>/<文件名>` 逐个上传（要带 Cloudflare 环境变量）。替换已上线的图加 `--overwrite`。
 - **写法**：Markdown 里单独占一行：
 
   ```markdown
-  ![图片内容的具体描述](/assets/lessons/pep-3a-lines/relation.svg "图下面显示的图注")
+  ![图片内容的具体描述](https://media.11aike.com/lessons/pep-3a-lines/relation.svg "图下面显示的图注")
   ```
 
 - **方括号里写什么**：具体描述画面内容，看不到图的人、搜索引擎和 AI 都会读。
 - **引号里写什么**：图注。练习类的图把答案写在图注里。
-- 单独占一行的图片会自动变成带图注的插图，并补上宽高和延迟加载（见 `src/lib/figure-plugin.mjs`）。路径写错时，构建会报出是哪张图。
+- 单独占一行的图片会自动变成带图注的插图，构建时从 R2 读出宽高，并加上延迟加载（见 `src/lib/figure-plugin.mjs`）。图片还没上传或路径写错时，构建会报出是哪张图。
 
 ## 哪里配什么图
 
@@ -68,7 +69,7 @@
 
 ### 动手画与检查
 
-- 新图从 `pep-3a-lines/` 里最接近的一张改起：`relation.svg`、`variants.svg`、`ai-flow.svg`、`board.svg`、`ray-ab-ba.svg`。
+- 新图从样板里最接近的一张改起（先从 `https://media.11aike.com/lessons/pep-3a-lines/` 下载）：`relation.svg`、`variants.svg`、`ai-flow.svg`、`board.svg`、`ray-ab-ba.svg`。
 - 画完要用浏览器打开检查：文字不溢出、不重叠，手机宽度下也看得清。
 - 用 shell 循环批量生成 SVG 时，含空格的参数要加引号。踩过的坑：“AI 听课伙伴”被拆成了两个参数。
 
@@ -80,7 +81,8 @@
 - 生成命令：
 
   ```bash
-  POE_KEY=… python3 -I .claude/skills/lesson-article/scripts/poe_img.py <模型> <输出前缀> <提示词文件> public/assets/lessons/g3a.webp
+  curl -so /tmp/g3a.webp https://media.11aike.com/courseware/covers/g3a.webp   # 风格参考图
+  POE_KEY=… python3 -I .claude/skills/lesson-article/scripts/poe_img.py <模型> <输出前缀> <提示词文件> /tmp/g3a.webp
   ```
 
   最后一个参数是风格参考图（网站统一的黏土风），每次都传。

@@ -1,5 +1,6 @@
 ---
 /* 首页「按教材找到下一节课」：六个年级的插画卡片 */
+import { media } from '../../lib/media.mjs';
 import '../../styles/home-catalog.css';
 import { getCatalog, CN } from '../../lib/catalog';
 const grades = (await getCatalog()).grades.filter(g => g.edition.slug === 'bsd');
@@ -13,7 +14,7 @@ const grades = (await getCatalog()).grades.filter(g => g.edition.slug === 'bsd')
     <div class="edu-grades">
       {grades.map(g => (
         <article class="edu-grade">
-          <a class="pic" href={g.url} tabindex="-1" aria-hidden="true"><img src={`/assets/lessons/g${g.grade}a.webp`} alt="" loading="lazy"></a>
+          <a class="pic" href={g.url} tabindex="-1" aria-hidden="true"><img src={media(`courseware/covers/g${g.grade}a.webp`)} alt="" loading="lazy"></a>
           <div class="body">
             <span>GRADE {g.grade}</span>
             <h3><a href={g.url}>{CN[g.grade]}年级数学</a></h3>

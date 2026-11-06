@@ -9,7 +9,7 @@
  * 上传需要环境变量 CLOUDFLARE_API_TOKEN 和 CLOUDFLARE_ACCOUNT_ID，只在命令行里临时传入，不要写进任何文件。 */
 import { execFileSync } from 'node:child_process';
 import { existsSync, statSync } from 'node:fs';
-import { MEDIA_URL } from '../src/lib/figure-plugin.mjs';
+import { MEDIA_URL } from '../src/lib/media.mjs';
 
 const BUCKET = { public: '11aike-media', private: '11aike-vault' };
 const ZONE_11AIKE = 'fcfdf137604487cb237b396b6fb582a9';

@@ -9,7 +9,7 @@ const exists = f => fs.existsSync(path.join(root, f));
 
 // 1. 必须有的文件
 for (const f of ['index.html', '404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ai-index.json',
-  '_headers', 'aaa.html', 'assets/avatar.webp', 'textbooks/bsd/index.html', 'courses/index.html', 'about/index.html']) {
+  '_headers', 'aaa.html', 'textbooks/bsd/index.html', 'courses/index.html', 'about/index.html']) {
   assert(exists(f) && fs.statSync(path.join(root, f)).size > 0, `缺少文件或文件为空：${f}`);
 }
 
@@ -59,14 +59,21 @@ for (const f of ['materials', 'xhs-profile.json', 'assets/profile.json', 'src', 
   assert(!exists(f), `不该发布的文件出现在 dist/ 里：${f}`);
 }
 
-// 7. 页面里用到的 R2 素材（视频、音频、视频封面）都要打得开
+// 7. 图片、视频、音频都放在 R2（media.11aike.com）。页面和样式里引用到的每个文件都要打得开
+assert(!exists('assets'), '图片不要放在 public/assets/，用 npm run media -- put 上传到 R2（见 docs/media-storage.md）');
 const media = new Set();
-for (const f of all) for (const m of fs.readFileSync(f, 'utf8').matchAll(/(?:src|poster|href)="(https:\/\/media\.11aike\.com\/[^"]+)"/g)) media.add(m[1]);
-for (const u of media) {
-  let res;
-  // 加一次性参数，避免 CDN 把“还没上传”缓存到正式网址上
-  try { res = await fetch(`${u}${u.includes('?') ? '&' : '?'}check=${Date.now()}`, { method: 'HEAD' }); } catch (e) { console.warn(`⚠ 暂时检查不了 ${u}：${e.message}`); continue; }
-  assert(res.ok, `R2 素材打不开（${res.status}）：${u}，先用 npm run media -- put 上传`);
+const grab = (text, re) => { for (const m of text.matchAll(re)) media.add(m[1]); };
+for (const f of [...all, path.join(root, '404.html')]) grab(fs.readFileSync(f, 'utf8'), /(?:src|poster|href|content)="(https:\/\/media\.11aike\.com\/[^"]+)"/g);
+for (const f of fs.readdirSync(path.join(root, '_astro')).filter(f => f.endsWith('.css'))) grab(read(`_astro/${f}`), /url\((https:\/\/media\.11aike\.com\/[^)]+)\)/g);
+const broken = [];
+const list = [...media];
+for (let i = 0; i < list.length; i += 8) {
+  await Promise.all(list.slice(i, i + 8).map(async u => {
+    // 加一次性参数，避免 CDN 把“还没上传”缓存到正式网址上
+    try { const res = await fetch(`${u}${u.includes('?') ? '&' : '?'}check=${Date.now()}`, { method: 'HEAD' }); if (!res.ok) broken.push(`${res.status} ${u}`); }
+    catch (e) { console.warn(`⚠ 暂时检查不了 ${u}：${e.message}`); }
+  }));
 }
+assert(broken.length === 0, `R2 上找不到这些文件，先用 npm run media -- put 上传：\n${broken.join('\n')}`);
 
 console.log(`构建检查通过：${all.length} 个页面，网站地图 ${urls.length} 个网址，${noindex} 个页面不让收录${media.size ? `，${media.size} 个 R2 素材` : ''}`);

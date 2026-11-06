@@ -1,12 +1,13 @@
 ---
 /* 首页第一屏：人物介绍 + 跟随鼠标、会弹跳的黏土贴纸（从原来的 index.html 搬过来） */
+import { media } from '../../lib/media.mjs';
 import { SITE } from '../../site.config';
 ---
 <section class="hero" id="hero">
   <div class="stickers" id="stickers"></div>
   <div class="intro wrap">
     <div class="me" id="me">
-      <img class="avatar" id="avatar" src="/assets/avatar.webp" alt="十一老师">
+      <img class="avatar" id="avatar" src={media('brand/avatar.webp')} alt="十一老师">
       <div class="bubble">嗨，我是十一老师 👋<small>一线数学老师 · 天津</small></div>
     </div>
     <h1>让数学课<span class="hl"><span>动</span><span>起</span><span>来</span>
@@ -27,6 +28,7 @@ import { SITE } from '../../site.config';
 </section>
 
 <script>
+import { media } from '../../lib/media.mjs';
 /* ---------- 跟随鼠标、会弹跳的黏土贴纸 ---------- */
 const STICKERS = ['n01', 'o08', 'o05', 'n09', 'o10', 'n02', 'n07', 'o03', 'o11', 'n03', 'o01', 'n12', 'o06', 'n10'];
 /* 位置（百分比）和大小；中间留给人物介绍 */
@@ -66,7 +68,7 @@ function buildStickers() {
   for (let i = 0; i < n; i++) {
     const el = document.createElement('img');
     el.className = 'sticker';
-    el.src = `/assets/stickers/${STICKERS[i]}.webp`;
+    el.src = media(`brand/stickers/${STICKERS[i]}.webp`);
     el.alt = '';
     el.draggable = false;
     layer.appendChild(el);

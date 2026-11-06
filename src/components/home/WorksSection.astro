@@ -1,5 +1,6 @@
 ---
 /* 首页「1–6 年级课件」：卡片在构建时就生成好（搜索引擎和 AI 也能看到），年级按钮只负责显示/隐藏 */
+import { media } from '../../lib/media.mjs';
 import { getCollection } from 'astro:content';
 import { SITE } from '../../site.config';
 import ShopBanner from './ShopBanner.astro';
@@ -23,7 +24,7 @@ const nth: Record<number, number> = {};
         return (
           <a class="work" data-g={w.年级} hidden={w.年级 !== 1} href={SITE.xhs.profile} target="_blank" rel="noopener"
              style={`--tint:${TINT[w.色调]};animation-delay:${(k - 1) * 0.05}s`}>
-            <div class="pic"><img src={`/assets/lessons/${w.图片}.webp`} alt={w.标题} loading="lazy"><span class="go">去小红书看 ↗</span></div>
+            <div class="pic"><img src={media(`courseware/covers/${w.图片}.webp`)} alt={w.标题} loading="lazy"><span class="go">去小红书看 ↗</span></div>
             <div class="info"><div><h3>{w.标题}</h3><div class="meta">{w.说明}</div></div><span class="arrow">→</span></div>
           </a>
         );

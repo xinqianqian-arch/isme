@@ -4,6 +4,7 @@ import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { parse } from 'yaml';
 import { EDITIONS } from './lib/editions';
+import { MEDIA_URL } from './lib/media.mjs';
 
 /** “四年级上册”这样的写法 */
 const 年级册 = z.string().regex(/^[一二三四五六]年级[上下]册$/, '请写成“四年级上册”这样的格式');
@@ -22,7 +23,7 @@ const articles = defineCollection({
     日期: z.coerce.date(),
     更新: z.coerce.date().optional(),
     草稿: z.boolean().default(false),
-    /** 页头图标：public/assets/stickers/ 下的贴纸名 */
+    /** 页头图标：贴纸名（R2 上 brand/stickers/ 下的文件名，如 o02） */
     图标: z.string().optional(),
   }),
 });
@@ -39,13 +40,13 @@ const lessons = defineCollection({
     大标题: z.string().optional(),
     /** 搜索结果里的摘要 */
     简介: z.string().optional(),
-    /** 页头属性栏：教材页码、课型、核心素养；图标是 public/assets/stickers/ 下的贴纸名 */
+    /** 页头属性栏：教材页码、课型、核心素养；图标是贴纸名（R2 上 brand/stickers/ 下的文件名） */
     页码: z.string().optional(),
     课型: z.string().optional(),
     核心素养: z.array(z.string()).optional(),
     图标: z.string().optional(),
-    /** 分享到微信、搜索结果里的配图，比如 /assets/lessons/pep-3a-lines/cover.webp（建议 1200×630） */
-    封面: z.string().startsWith('/assets/', '封面要放在 public/assets/ 下，从 /assets/ 开始写').optional(),
+    /** 分享到微信、搜索结果里的配图，先上传到 R2，比如 https://media.11aike.com/lessons/pep-3a-lines/cover.webp（建议 1200×630） */
+    封面: z.string().startsWith(MEDIA_URL + '/', `封面要先上传到 R2，写 ${MEDIA_URL}/ 开头的网址`).optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),
     日期: z.coerce.date().optional(),

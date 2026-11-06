@@ -1,5 +1,6 @@
 ---
 /* <head> 里的搜索信息：标题、描述、规范网址、分享卡片、结构化数据 */
+import { media, MEDIA_URL } from '../lib/media.mjs';
 import { SITE } from '../site.config';
 import { abs } from '../lib/seo';
 import Analytics from './Analytics.astro';
@@ -31,5 +32,6 @@ const ld = (o: object) => JSON.stringify(o).replace(/</g, '\\u003c');
 <meta property="og:description" content={description}>
 {canonical && <meta property="og:url" content={url}>}
 <meta property="og:image" content={abs(image)}>
-<link rel="icon" href="/assets/avatar.webp" type="image/webp">
+<link rel="icon" href={media('brand/avatar.webp')} type="image/webp">
+<link rel="preconnect" href={MEDIA_URL}>
 {jsonLd.map(o => <script type="application/ld+json" set:html={ld(o)} />)}
