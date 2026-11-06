@@ -1,15 +1,15 @@
 # 配图规范
 
-每篇的配图大致是：5 张左右示意图（SVG，手绘）、1–2 张情境插画（Poe 生成）、1 张分享封面（Poe 生成）。图片都放在 Cloudflare R2 上，样板的全部图片在 `https://media.11aike.com/lessons/pep-3a-lines/`。仓库里不放图片，规则见 `docs/media-storage.md`。
+每篇的配图大致是：5 张左右示意图（SVG，手绘）、1–2 张情境插画（Poe 生成）、1 张分享封面（Poe 生成）。图片都放在 Cloudflare R2 上，样板的全部图片在 `https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/`。仓库里不放图片，规则见 `docs/media-storage.md`。
 
 ## 放在哪、怎么写
 
-- **文件夹**：一课一个，R2 路径是 `lessons/<版本缩写>-<年级册>-<主题英文>/`，比如 `lessons/pep-3a-lines/`。三年级上册写 `3a`，下册写 `3b`。
-- **工作流程**：在临时目录（如 `/tmp`）里画图、转 webp，再用 `npm run media -- put <文件> lessons/<文件夹>/<文件名>` 逐个上传（要带 Cloudflare 环境变量）。替换已上线的图加 `--overwrite`。
+- **文件夹**：图片和网页同路径。网页是 `11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/`，图片就放在 R2 的 `textbooks/pep/grade-3/volume-1/unit-05/lesson-01/` 下。课时网址看构建输出或教材目录页。
+- **工作流程**：在临时目录（如 `/tmp`）里画图、转 webp，再用 `npm run media -- put <文件> <网址路径>/<文件名>` 逐个上传（要带 Cloudflare 环境变量）。替换已上线的图加 `--overwrite`。
 - **写法**：Markdown 里单独占一行：
 
   ```markdown
-  ![图片内容的具体描述](https://media.11aike.com/lessons/pep-3a-lines/relation.svg "图下面显示的图注")
+  ![图片内容的具体描述](https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/relation.svg "图下面显示的图注")
   ```
 
 - **方括号里写什么**：具体描述画面内容，看不到图的人、搜索引擎和 AI 都会读。
@@ -69,7 +69,7 @@
 
 ### 动手画与检查
 
-- 新图从样板里最接近的一张改起（先从 `https://media.11aike.com/lessons/pep-3a-lines/` 下载）：`relation.svg`、`variants.svg`、`ai-flow.svg`、`board.svg`、`ray-ab-ba.svg`。
+- 新图从样板里最接近的一张改起（先从 `https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/` 下载）：`relation.svg`、`variants.svg`、`ai-flow.svg`、`board.svg`、`ray-ab-ba.svg`。
 - 画完要用浏览器打开检查：文字不溢出、不重叠，手机宽度下也看得清。
 - 用 shell 循环批量生成 SVG 时，含空格的参数要加引号。踩过的坑：“AI 听课伙伴”被拆成了两个参数。
 
@@ -127,10 +127,10 @@ python3 .claude/skills/lesson-article/scripts/to_webp.py <输入.png> <输出.we
 
 ### 备份原图
 
-挑剩的图和原图，连同提示词文件，一起备份到 R2 私有桶，放在 `originals/lessons/<文件夹>/`：
+挑剩的图和原图，连同提示词文件，一起备份到 R2 私有桶，放在 `originals/<网址路径>/`：
 
 ```bash
-npm run media -- put <原图.png> originals/lessons/pep-3a-lines/<原图.png> --private
+npm run media -- put <原图.png> originals/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/<原图.png> --private
 ```
 
 同样要带上 Cloudflare 的环境变量。备份完再删掉临时目录。

@@ -13,8 +13,8 @@ import { MEDIA_URL } from '../src/lib/media.mjs';
 
 const BUCKET = { public: '11aike-media', private: '11aike-vault' };
 const ZONE_11AIKE = 'fcfdf137604487cb237b396b6fb582a9';
-/** 公开桶的一级目录，网址只用小写英文、数字、- _ . / */
-const PUBLIC_DIRS = ['lessons', 'articles', 'courseware', 'brand'];
+/** 公开桶的一级目录。课时、文章的素材和网页同路径：textbooks/…/lesson-01/、articles/<文件名>/。网址只用小写英文、数字、- _ . / */
+const PUBLIC_DIRS = ['textbooks', 'articles', 'courseware', 'brand'];
 const PRIVATE_DIRS = ['originals', 'courseware-src', 'backup'];
 const TYPES = {
   webp: 'image/webp', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', svg: 'image/svg+xml',

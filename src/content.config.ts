@@ -45,7 +45,7 @@ const lessons = defineCollection({
     课型: z.string().optional(),
     核心素养: z.array(z.string()).optional(),
     图标: z.string().optional(),
-    /** 分享到微信、搜索结果里的配图，先上传到 R2，比如 https://media.11aike.com/lessons/pep-3a-lines/cover.webp（建议 1200×630） */
+    /** 分享到微信、搜索结果里的配图，先上传到 R2，和网页同路径，比如 https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/cover.webp（建议 1200×630） */
     封面: z.string().startsWith(MEDIA_URL + '/', `封面要先上传到 R2，写 ${MEDIA_URL}/ 开头的网址`).optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),

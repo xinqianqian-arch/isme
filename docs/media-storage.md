@@ -17,15 +17,15 @@
   brand/stickers/o01.webp …               黏土贴纸（首页漂浮贴纸、文章页头图标）
   courseware/covers/g1a.webp …            课件作品封面（works.yaml 的“图片”字段）
   courseware/xhs-notes/00.webp …          小红书笔记封面和课件截图（旧首页用过，暂未使用）
-  lessons/pep-3a-lines/…                  一节课的插图、示意图（svg）、分享封面、视频、音频
-  articles/<文章文件名>/…                 教学文章的配图
+  textbooks/pep/grade-3/volume-1/unit-05/lesson-01/…   一节课的插图、示意图（svg）、分享封面、视频、音频——和网页网址同路径
+  articles/<文章文件名>/…                 教学文章的配图——同样和网页同路径
   courseware/<课件名>/…                   互动课件用的贴图、音效、模型
 
 11aike-vault（私有）
-  originals/lessons/pep-3a-lines/…        AI 生成原图 + 提示词 + 说明.txt
+  originals/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/…   AI 生成原图 + 提示词 + 说明.txt
 ```
 
-- **一节课一个文件夹**：`lessons/<版本缩写>-<年级册>-<主题英文>/`，比如人教版三上《线段、射线、直线》是 `pep-3a-lines`。
+- **和网页同路径**：网页 `11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/` 的素材，就放在 `media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/` 下，看网址就知道是哪一课的图。教材目录的单元、课时顺序决定网址编号，所以非必要不要调整顺序；如果调整了，旧路径的素材照样能用，只是名字对不上，可以顺手搬过去。
 - **视频封面**：视频必须配一张封面，文件名 = 视频名 + `-poster.webp`，比如 `intro.mp4` 配 `intro-poster.webp`。
 - **命名**：公开桶的路径会出现在网址里，只用小写英文、数字和 `- _ . /`。
 - **换文件**：要换成新的，就直接覆盖（加 `--overwrite`），工具会马上刷新 CDN 缓存。版本管理以后再定。
@@ -52,15 +52,15 @@ npm run media -- audio 录音.m4a narration.mp3
 
 # 上传到公开桶（会打印网址和 Markdown 写法）
 CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put light.webp lessons/pep-3a-lines/light.webp
+  npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp
 
 # 替换已有文件
 CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put light.webp lessons/pep-3a-lines/light.webp --overwrite
+  npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp --overwrite
 
 # 上传到私有桶
 CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put 原图.png originals/lessons/pep-3a-lines/原图.png --private
+  npm run media -- put 原图.png originals/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/原图.png --private
 ```
 
 - **token 只在命令行里临时写，不要存进任何文件。** 这个仓库是公开的。
@@ -72,9 +72,9 @@ CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 
 **文章（Markdown）**：单独占一行，图片、视频、音频写法一样：
 
 ```markdown
-![图片内容的具体描述](https://media.11aike.com/lessons/pep-3a-lines/light.webp "图注")
-![课件演示：拖动端点，射线一直延伸](https://media.11aike.com/lessons/pep-3a-lines/intro.mp4 "图注")
-![课文朗读](https://media.11aike.com/lessons/pep-3a-lines/narration.mp3 "图注")
+![图片内容的具体描述](https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp "图注")
+![课件演示：拖动端点，射线一直延伸](https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/intro.mp4 "图注")
+![课文朗读](https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/narration.mp3 "图注")
 ```
 
 - **图片**：显示成带图注的插图，宽高在构建时从 R2 读出来。
@@ -82,7 +82,7 @@ CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 
 - **音频**：`.mp3` 显示成音频条。
 
 **开头信息里的图片字段**：
-- `封面` 写完整网址，比如 `https://media.11aike.com/lessons/pep-3a-lines/cover.webp`；
+- `封面` 写完整网址，比如 `https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/cover.webp`；
 - `图标`（贴纸名）和 works.yaml 里的 `图片`（作品封面名）只写文件名，不带 `.webp`。
 
 **网站代码**：用 `src/lib/media.mjs` 里的 `media('brand/avatar.webp')` 拼网址，不要写死域名。
