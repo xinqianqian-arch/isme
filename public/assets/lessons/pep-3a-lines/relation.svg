@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 430" width="600" height="430">
+<style>text{font-family:'PingFang SC','HarmonyOS Sans SC','MiSans','Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#2E3A59} .tag{font-size:20px;font-weight:700;fill:#fff}.pt{font-size:21px;font-weight:700;font-style:italic}.note{font-size:19px;fill:#5B6170}.ext{font-size:17px;font-weight:700;fill:#E0603F}</style>
+<defs>
+<linearGradient id="r" gradientUnits="userSpaceOnUse" x1="390" y1="0" x2="590" y2="0"><stop offset="0" stop-color="#FF7B5C"/><stop offset="1" stop-color="#FF7B5C" stop-opacity="0"/></linearGradient>
+<linearGradient id="l" gradientUnits="userSpaceOnUse" x1="220" y1="0" x2="106" y2="0"><stop offset="0" stop-color="#FF7B5C"/><stop offset="1" stop-color="#FF7B5C" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="600" height="430" rx="18" fill="#FFFBF5"/>
+<rect x="16" y="48" width="80" height="36" rx="18" fill="#FFC845"/><text class="tag" x="56" y="73" text-anchor="middle" style="fill:#6B4A00">线段</text>
+<line x1="220" y1="66" x2="390" y2="66" stroke="#2E3A59" stroke-width="4" stroke-linecap="round"/>
+<circle cx="220" cy="66" r="7" fill="#2E3A59"/><circle cx="390" cy="66" r="7" fill="#2E3A59"/>
+<text class="pt" x="220" y="101" text-anchor="middle">A</text><text class="pt" x="390" y="101" text-anchor="middle">B</text>
+<text class="note" x="120" y="134">2 个端点 · 能量出长度 · 有始有终</text>
+<rect x="16" y="188" width="80" height="36" rx="18" fill="#FF7B5C"/><text class="tag" x="56" y="213" text-anchor="middle">射线</text>
+<line x1="390" y1="206" x2="590" y2="206" stroke="url(#r)" stroke-width="4"/>
+<line x1="220" y1="206" x2="390" y2="206" stroke="#2E3A59" stroke-width="4" stroke-linecap="round"/>
+<circle cx="220" cy="206" r="7" fill="#2E3A59"/><circle cx="390" cy="206" r="5.5" fill="#2E3A59"/>
+<text class="pt" x="220" y="241" text-anchor="middle">A</text><text class="pt" x="390" y="241" text-anchor="middle">B</text>
+<text class="ext" x="490" y="191" text-anchor="middle">一端无限延长 →</text>
+<text class="note" x="120" y="274">1 个端点 · 不能量长度 · 有始无终</text>
+<rect x="16" y="328" width="80" height="36" rx="18" fill="#5B9DFF"/><text class="tag" x="56" y="353" text-anchor="middle">直线</text>
+<line x1="106" y1="346" x2="220" y2="346" stroke="url(#l)" stroke-width="4"/>
+<line x1="390" y1="346" x2="590" y2="346" stroke="url(#r)" stroke-width="4"/>
+<line x1="220" y1="346" x2="390" y2="346" stroke="#2E3A59" stroke-width="4"/>
+<circle cx="220" cy="346" r="5.5" fill="#2E3A59"/><circle cx="390" cy="346" r="5.5" fill="#2E3A59"/>
+<text class="pt" x="220" y="381" text-anchor="middle">A</text><text class="pt" x="390" y="381" text-anchor="middle">B</text>
+<text class="ext" x="166" y="331" text-anchor="middle">← 无限延长</text><text class="ext" x="490" y="331" text-anchor="middle">无限延长 →</text>
+<text class="note" x="120" y="414">没有端点 · 不能量长度 · 无始无终</text>
+</svg>

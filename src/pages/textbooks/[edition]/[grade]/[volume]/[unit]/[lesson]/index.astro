@@ -40,13 +40,14 @@ const jsonLd = Body
       educationalLevel: `小学${n}年级`, learningResourceType: '教学设计', teaches: l.title,
       isPartOf: { '@type': 'CreativeWork', name: `${e.name}小学数学${n}年级${l.volumeName}` },
       author: person(), datePublished: ymd(d?.日期 ?? l.updated), dateModified: ymd(l.updated),
+      ...(d?.封面 ? { image: abs(d.封面) } : {}),
     }, ...(qa.length ? [faq(qa)] : [])]
   : [{
       '@context': 'https://schema.org', '@type': 'WebPage', name: `${e.name}${n}年级${l.volumeName}《${l.title}》教学内容介绍`,
       url: abs(l.url), description: u.focus, inLanguage: 'zh-CN', isPartOf: { '@type': 'CreativeWork', name: `${e.name}${n}年级${l.volumeName}` },
     }];
 ---
-<PageLayout title={title} description={description} noindex={!l.indexable} type={Body ? 'article' : 'website'} jsonLd={jsonLd}>
+<PageLayout title={title} description={description} noindex={!l.indexable} type={Body ? 'article' : 'website'} jsonLd={jsonLd} image={d?.封面}>
   <Breadcrumb items={[{ name: e.name, url: `/textbooks/${e.slug}/` }, { name: `${n}年级${l.volumeName}`, url: l.book.url }, { name: u.title, url: u.url }, { name: l.title }]} />
   {Body ? (
     <DocPage

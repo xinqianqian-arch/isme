@@ -16,6 +16,8 @@ interface Props {
   canonical?: boolean;
   type?: 'website' | 'article';
   jsonLd?: object[];
+  /** 分享卡片配图，不写用网站默认图 */
+  image?: string;
 }
 const { title, fullTitle, ...seo } = Astro.props;
 ---

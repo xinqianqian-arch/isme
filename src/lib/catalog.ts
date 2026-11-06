@@ -1,5 +1,7 @@
 /* 教材目录：把 textbooks/<版本>/*.yaml 和 lessons、units 里的 Markdown 对应起来，算出每一页的网址。
    网址规则（北师大版和旧站一致）：/textbooks/<版本>/grade-4/volume-1/unit-04/lesson-02/ */
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { EDITIONS, editionByName, type Edition } from './editions';
 
@@ -107,6 +109,7 @@ async function build(): Promise<Catalog> {
     if (hits.length > 1) throw new Error(`${file}：${b.label}有 ${hits.length} 个《${e.data.课题}》，请加一行“单元: 单元名称”区分`);
     const l = hits[0];
     if (l.entry) throw new Error(`${file}：《${l.title}》已经有一篇课时讲解了（${l.entry.filePath}）`);
+    if (e.data.封面 && !existsSync(join(process.cwd(), 'public', e.data.封面))) throw new Error(`${file}：封面 ${e.data.封面} 找不到，图片要放在 public/ 下`);
     l.entry = e;
     l.indexable = plainLength(e.body) >= SEO_MIN_CHARS;
     l.updated = later(l.updated, e.data.日期);

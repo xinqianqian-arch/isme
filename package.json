@@ -12,6 +12,7 @@
     "check": "astro sync"
   },
   "devDependencies": {
+    "@astrojs/markdown-satteri": "0.4.4",
     "astro": "^7.4.1",
     "wrangler": "^4.155.0",
     "yaml": "^2.9.1"

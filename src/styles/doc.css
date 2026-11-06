@@ -57,7 +57,12 @@
 .doc-body pre .copy:hover { opacity: 1; color: var(--coral); border-color: #F3C9B8; }
 .doc-body :not(pre) > code { padding: 1px 6px; background: #F3F0EA; border-radius: 4px; font-size: .92em; }
 .doc-body hr { border: 0; border-top: 1px solid #F2EEE8; margin: 2em 0; }
-.doc-body img { max-width: 100%; border-radius: 10px; }
+.doc-body img { max-width: 100%; height: auto; border-radius: 10px; }
+/* 单独一段的图片 = 带图注的插图；示意图（svg）不放得太大 */
+.doc-body figure { margin: 1.5em 0 1.7em; text-align: center; }
+.doc-body figure img { display: block; width: 100%; margin: 0 auto; border-radius: 12px; }
+.doc-body figure img[src$=".svg"] { max-width: 640px; }
+.doc-body figcaption { margin: 10px auto 0; max-width: 640px; font-size: 14px; line-height: 1.6; color: #8A8F99; text-wrap: pretty; }
 
 /* ---------- 文末：引流 + 上一课 / 下一课 ---------- */
 .doc-cta { margin: 2.6em 0 0; padding: 16px 18px; border: 1px solid #F6D6CA; background: linear-gradient(110deg, #FFF6F1, #FFF9EE); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }

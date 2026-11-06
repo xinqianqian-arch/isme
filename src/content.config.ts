@@ -44,6 +44,8 @@ const lessons = defineCollection({
     课型: z.string().optional(),
     核心素养: z.array(z.string()).optional(),
     图标: z.string().optional(),
+    /** 分享到微信、搜索结果里的配图，比如 /assets/lessons/pep-3a-lines/cover.webp（建议 1200×630） */
+    封面: z.string().startsWith('/assets/', '封面要放在 public/assets/ 下，从 /assets/ 开始写').optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),
     日期: z.coerce.date().optional(),
