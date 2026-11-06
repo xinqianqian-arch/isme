@@ -1,6 +1,6 @@
 ---
 /* 文档式阅读页：课时讲解、教学文章、关于我共用。
-   标题区（小图标 + 栏目 + 标题）+ 属性栏；电脑上右侧是跟随滚动的目录（只展开当前小节），
+   标题区（小图标 + 栏目 + 标题）+ 属性栏；电脑上左侧是跟随滚动、全部展开的目录（参考飞书文档大纲），
    手机上右下角“目录”按钮弹出；顶部有阅读进度条；提示词等代码块带“复制”按钮。 */
 interface Heading { depth: number; slug: string; text: string }
 interface Prop { icon: string; label: string; value?: string; chips?: string[] }
@@ -70,7 +70,7 @@ const showToc = sections.length >= 2;
         <p class="toc-title">目录 <button type="button" class="toc-close" aria-label="关闭目录">×</button></p>
         <ol data-toc>
           {sections.map(sec => (
-            <li class="open">
+            <li>
               <a href={`#${sec.h.slug}`}>{sec.h.text}</a>
               {sec.subs.length > 0 && <ol>{sec.subs.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>}
             </li>
@@ -103,8 +103,6 @@ const showToc = sections.length >= 2;
     if (id === current) return;
     current = id;
     links.forEach(a => a.classList.toggle('on', decodeURIComponent(a.hash.slice(1)) === id));
-    // 电脑目录：只展开当前所在的那一节
-    document.querySelectorAll('.doc-toc [data-toc] > li').forEach(li => li.classList.toggle('open', !!li.querySelector('a.on')));
     const on = tocBox?.querySelector<HTMLElement>('a.on');
     if (tocBox && on) {
       const r = on.getBoundingClientRect(), b = tocBox.getBoundingClientRect();
