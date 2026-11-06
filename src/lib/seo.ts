@@ -35,7 +35,7 @@ export function article(a: { title: string; description: string; url: string; da
   };
 }
 
-/** 单元页的“学什么 / 易错点 / 课堂活动”按问答标注，方便 AI 直接引用 */
+/** 把“问题 + 回答”按问答标注（全册目录的单元要点、课时页的常见问题），方便搜索引擎和 AI 直接引用 */
 export function faq(qa: [string, string][]) {
   return {
     '@context': 'https://schema.org', '@type': 'FAQPage',
