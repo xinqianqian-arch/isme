@@ -3,25 +3,19 @@
 
 /* ---------- 布局：正文 + 右侧目录 ---------- */
 .doc-wrap { max-width: 1120px; margin: 4px auto 0; }
-.doc-wrap.has-toc { display: grid; grid-template-columns: minmax(0, 1fr) 232px; gap: 28px; }
+.doc-wrap.has-toc { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 28px; }
 /* 目录这一栏和正文一样高，里面的 nav 才能一路吸顶 */
 .doc-toc { align-self: stretch; }
 .doc { background: #fff; border: 1px solid #F0E6D8; border-radius: 16px; overflow: hidden; color: #2B3141; font-size: 16.5px; line-height: 1.85; }
 .doc-main { padding: 0 56px 40px; }
 .doc-wrap:not(.has-toc) .doc { max-width: 860px; margin: 0 auto; }
 
-/* ---------- 封面 + 图标 + 标题（Notion 式页头） ---------- */
-.doc-cover {
-  position: relative; height: 128px;
-  background:
-    radial-gradient(circle at 12% 30%, #FFE9B0 0, transparent 45%),
-    radial-gradient(circle at 70% 120%, #DDEBFF 0, transparent 50%),
-    linear-gradient(110deg, #FFF1D2 0%, #FFE4DA 55%, #E6EEFF 100%);
-}
-.doc-icon { position: absolute; left: 50px; bottom: -34px; width: 76px; height: 76px; object-fit: contain; filter: drop-shadow(0 8px 10px rgba(46, 58, 89, .16)); }
-.doc-head { padding: 48px 0 18px; }
-.doc-kicker { margin: 0 0 8px; font-size: 14px; color: #C25E3F; font-weight: 600; }
-.doc-head h1 { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.35; font-weight: 800; margin: 0 0 10px; letter-spacing: 0; color: #232838; text-wrap: balance; }
+/* ---------- 标题区：小图标 + 栏目 + 标题 + 作者 ---------- */
+.doc-head { padding: 36px 0 16px; }
+.doc-kicker { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 14px; color: #C25E3F; font-weight: 600; }
+.doc-icon { width: 30px; height: 30px; object-fit: contain; flex: none; filter: drop-shadow(0 3px 4px rgba(46, 58, 89, .14)); }
+.doc-head h1 { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.35; font-weight: 800; margin: 0 0 10px; letter-spacing: 0; color: #232838; text-wrap: pretty; }
+@media (min-width: 900px) { .doc-head h1 { text-wrap: balance; } }
 .doc-byline { margin: 0; font-size: 14px; color: #8A8F99; }
 
 /* ---------- 属性栏（教材、单元、页码……） ---------- */
@@ -80,8 +74,12 @@
 .toc-title { display: flex; justify-content: space-between; align-items: center; margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #8A8F99; letter-spacing: 1px; }
 [data-toc] { list-style: none; margin: 0; padding: 0 0 0 2px; border-left: 2px solid #F0E8DC; max-height: calc(100vh - 190px); overflow-y: auto; }
 [data-toc] li { margin: 0; }
-[data-toc] a { display: block; padding: 4px 10px 4px 12px; margin-left: -4px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.5; color: #5F6676; text-decoration: none; transition: color .15s; }
-[data-toc] li.d3 a { padding-left: 24px; font-size: 13.5px; color: #8A8F99; }
+[data-toc] ol { list-style: none; margin: 0; padding: 0; display: none; }
+[data-toc] > li.open > ol { display: block; }
+[data-toc] a { display: block; padding: 4px 10px 4px 12px; margin-left: -4px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.55; color: #5F6676; text-decoration: none; transition: color .15s; }
+[data-toc] ol a { padding-left: 24px; font-size: 13.5px; color: #8A8F99; }
+/* 电脑目录每项只占一行，太长显示省略号（鼠标悬停可看全文） */
+.doc-toc [data-toc] a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 [data-toc] a:hover { color: var(--ink); }
 [data-toc] a.on { color: #C25E3F; font-weight: 700; border-left-color: var(--coral); }
 .toc-progress { margin: 12px 0 0; font-size: 12.5px; color: #8A8F99; }
@@ -111,9 +109,7 @@ html.toc-open { overflow: hidden; }
   .doc-wrap { margin: 0 -14px; }
   .doc { border-left: 0; border-right: 0; border-radius: 0; font-size: 16px; }
   .doc-main { padding: 0 18px 28px; }
-  .doc-cover { height: 96px; }
-  .doc-icon { left: 18px; width: 60px; height: 60px; bottom: -26px; }
-  .doc-head { padding-top: 38px; }
+  .doc-head { padding-top: 24px; }
   .doc-props > div { grid-template-columns: 96px 1fr; gap: 8px; }
   .doc-body h2 { font-size: 20px; }
   .doc-body h3 { font-size: 17px; }

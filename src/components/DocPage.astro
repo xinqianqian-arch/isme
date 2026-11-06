@@ -1,6 +1,7 @@
 ---
 /* 文档式阅读页：课时讲解、教学文章、关于我共用。
-   顶部封面 + 黏土图标 + 属性栏；电脑上右侧是跟随滚动的目录，手机上右下角“目录”按钮弹出；顶部有阅读进度条；提示词等代码块带“复制”按钮。 */
+   标题区（小图标 + 栏目 + 标题）+ 属性栏；电脑上右侧是跟随滚动的目录（只展开当前小节），
+   手机上右下角“目录”按钮弹出；顶部有阅读进度条；提示词等代码块带“复制”按钮。 */
 interface Heading { depth: number; slug: string; text: string }
 interface Prop { icon: string; label: string; value?: string; chips?: string[] }
 interface Props {
@@ -13,16 +14,20 @@ interface Props {
   headings?: Heading[];
 }
 const { title, kicker, byline, icon = 'o08', props = [], headings = [] } = Astro.props;
-const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
-const showToc = toc.filter(h => h.depth === 2).length >= 2;
+// 目录按二级标题分组，三级标题挂在所属的二级标题下面
+const sections: { h: Heading; subs: Heading[] }[] = [];
+for (const h of headings) {
+  if (h.depth === 2) sections.push({ h, subs: [] });
+  else if (h.depth === 3 && sections.length) sections[sections.length - 1].subs.push(h);
+}
+const showToc = sections.length >= 2;
 ---
 <div class="read-progress" aria-hidden="true"><span></span></div>
 <div class:list={['doc-wrap', { 'has-toc': showToc }]}>
   <article class="doc">
-    <div class="doc-cover"><img class="doc-icon" src={`/assets/stickers/${icon}.webp`} alt="" width="76" height="76"></div>
     <div class="doc-main">
       <header class="doc-head">
-        {kicker && <p class="doc-kicker">{kicker}</p>}
+        <p class="doc-kicker"><img class="doc-icon" src={`/assets/stickers/${icon}.webp`} alt="" width="30" height="30">{kicker}</p>
         <h1>{title}</h1>
         {byline && <p class="doc-byline">{byline}</p>}
       </header>
@@ -45,7 +50,12 @@ const showToc = toc.filter(h => h.depth === 2).length >= 2;
       <nav>
         <p class="toc-title">目录</p>
         <ol data-toc>
-          {toc.map(h => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+          {sections.map(sec => (
+            <li>
+              <a href={`#${sec.h.slug}`} title={sec.h.text}>{sec.h.text}</a>
+              {sec.subs.length > 0 && <ol>{sec.subs.map(h => <li><a href={`#${h.slug}`} title={h.text}>{h.text}</a></li>)}</ol>}
+            </li>
+          ))}
         </ol>
         <p class="toc-progress">已读 <b>0%</b></p>
       </nav>
@@ -59,7 +69,12 @@ const showToc = toc.filter(h => h.depth === 2).length >= 2;
       <div class="toc-sheet-panel">
         <p class="toc-title">目录 <button type="button" class="toc-close" aria-label="关闭目录">×</button></p>
         <ol data-toc>
-          {toc.map(h => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+          {sections.map(sec => (
+            <li class="open">
+              <a href={`#${sec.h.slug}`}>{sec.h.text}</a>
+              {sec.subs.length > 0 && <ol>{sec.subs.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>}
+            </li>
+          ))}
         </ol>
       </div>
     </div>
@@ -88,6 +103,8 @@ const showToc = toc.filter(h => h.depth === 2).length >= 2;
     if (id === current) return;
     current = id;
     links.forEach(a => a.classList.toggle('on', decodeURIComponent(a.hash.slice(1)) === id));
+    // 电脑目录：只展开当前所在的那一节
+    document.querySelectorAll('.doc-toc [data-toc] > li').forEach(li => li.classList.toggle('open', !!li.querySelector('a.on')));
     const on = tocBox?.querySelector<HTMLElement>('a.on');
     if (tocBox && on) {
       const r = on.getBoundingClientRect(), b = tocBox.getBoundingClientRect();
