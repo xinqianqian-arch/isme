@@ -33,7 +33,7 @@
 │   │   └── home/                 首页各栏目：第一屏、教材栏目、作品栏目、底部横幅
 │   ├── lib/                      教材目录与 Markdown 的对应、网站地图、结构化数据
 │   └── styles/                   tokens.css（共用配色）、home.css（首页）、pages.css（内页）、topbar.css（导航）
-├── public/                       原样发布：天安门课件 aaa.html、_headers、robots.txt（图片都在 R2：media.11aike.com）
+├── public/                       原样发布：天安门课件 aaa.html、_headers、_redirects（旧图片网址跳转）、robots.txt；图片都在 R2：media.11aike.com
 ├── scripts/verify-build.mjs      构建后检查（不通过就不发布）
 ├── scripts/media.mjs             视频、音频转换，上传到 Cloudflare R2（npm run media）
 ├── materials/                    素材留档（小红书原始资料等），不发布

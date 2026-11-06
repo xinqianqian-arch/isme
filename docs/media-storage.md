@@ -104,5 +104,6 @@ CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 
 - [x] 跨域只允许 `https://11aike.com`、`https://www.11aike.com` 和本地预览 `http://localhost:4321`，方法限 GET/HEAD。
 - [x] 两个桶都会在 7 天后自动清理没传完的上传。
 - [x] 原来 `public/assets/` 下的 87 张图片已全部搬到 R2，网站改为从 `media.11aike.com` 加载。
+- [x] 旧的 `11aike.com/assets/…` 网址用 `public/_redirects` 永久跳转到 R2，搜索引擎收录过的图片、分享出去的链接不会失效。
 - [x] 已验证：再次访问走 CDN 缓存；支持分段下载（视频可以拖动进度）；覆盖后刷新 CDN 缓存。
 - [ ] 以后再定：课件版本管理；课件源文件是否从百度网盘搬到 `11aike-vault`；付费资源用临时链接发放；防盗链规则（发现被盗用时再加）。

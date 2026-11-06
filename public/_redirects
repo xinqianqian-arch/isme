@@ -1,0 +1,6 @@
+# 图片已搬到 Cloudflare R2（media.11aike.com，见 docs/media-storage.md）。旧的 /assets/ 网址永久跳转过去，搜索引擎收录过的图片和分享出去的链接不会失效
+/assets/avatar.webp https://media.11aike.com/brand/avatar.webp 301
+/assets/art/teacher.webp https://media.11aike.com/brand/teacher.webp 301
+/assets/stickers/* https://media.11aike.com/brand/stickers/:splat 301
+/assets/covers/* https://media.11aike.com/courseware/xhs-notes/:splat 301
+/assets/lessons/* https://media.11aike.com/courseware/covers/:splat 301
