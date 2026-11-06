@@ -1,0 +1,23 @@
+---
+/* 最新完整备课：按写作日期排，最新的在前 */
+import '../styles/catalog.css';
+import { getCatalog, CN } from '../lib/catalog';
+interface Props { limit?: number }
+const { limit = 8 } = Astro.props;
+const { lessons } = await getCatalog();
+const latest = lessons.filter(l => l.indexable)
+  .sort((a, b) => b.updated.getTime() - a.updated.getTime() || a.book.url.localeCompare(b.book.url) || a.unit.order - b.unit.order || a.order - b.order)
+  .slice(0, limit);
+---
+<div class="latest">
+  {latest.map(l => (
+    <a class="lcard" href={l.url}>
+      <span class="lc-pic">{l.thumb ? <img src={l.thumb} alt="" loading="lazy"> : <span class="lc-ph">{l.title}</span>}</span>
+      <span class="lc-body">
+        <span class="lc-no">{l.edition.name}{CN[l.grade]}年级{l.volumeName} · {l.unit.title}</span>
+        <strong>{l.title}</strong>
+        {l.topic && <span class="lc-topic">{l.topic}</span>}
+      </span>
+    </a>
+  ))}
+</div>

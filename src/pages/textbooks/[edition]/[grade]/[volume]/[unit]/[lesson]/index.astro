@@ -5,6 +5,7 @@ import PageHero from '../../../../../../../components/PageHero.astro';
 import Breadcrumb from '../../../../../../../components/Breadcrumb.astro';
 import XhsCta from '../../../../../../../components/XhsCta.astro';
 import DocPage from '../../../../../../../components/DocPage.astro';
+import UnitLessons from '../../../../../../../components/UnitLessons.astro';
 import { getCatalog, CN } from '../../../../../../../lib/catalog';
 import { abs, faq, person } from '../../../../../../../lib/seo';
 import { SITE } from '../../../../../../../site.config';
@@ -74,6 +75,7 @@ const jsonLd = Body
           {prev ? <a href={prev.url}><span>上一课</span>{prev.title}</a> : <span></span>}
           {next ? <a class="next" href={next.url}><span>下一课</span>{next.title}</a> : <span></span>}
         </nav>
+        <UnitLessons lesson={l} />
       </Fragment>
     </DocPage>
   ) : (
@@ -82,6 +84,7 @@ const jsonLd = Body
       <section><h2>本课所在单元的核心目标</h2><p>{u.focus}</p></section>
       <section><h2>课堂教学如何组织？</h2><p>围绕《{l.title}》的课题情境，引导学生先提出数学问题，再尝试用实物、示意图或算式表达自己的思考。{u.activity}</p></section>
       <section><h2>备课时值得关注的易错点</h2><p>{u.pitfall}</p><p>可以让学生在解释方法时指出每个数字、图形元素或计量单位的含义，避免只凭记忆给出结果。</p></section>
+      <UnitLessons lesson={l} />
       <XhsCta title={`《${l.title}》互动课件`} text="想看这节课的动画演示和课堂互动设计？十一课件的原创互动课件在小红书主页持续更新。" />
     </article>
   )}

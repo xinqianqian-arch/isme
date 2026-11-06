@@ -27,7 +27,7 @@
 │   │   ├── textbooks/…           教材目录 → 年级 → 册 → 单元 → 课时
 │   │   ├── articles/…            文章列表、文章页
 │   │   ├── about.astro、courses.astro、404.astro
-│   │   └── sitemap.xml.ts、llms.txt.ts、llms-full.txt.ts、ai-index.json.ts
+│   │   └── sitemap.xml.ts、llms.txt.ts、llms-full.txt.ts、ai-index.json.ts、search.json.ts（找课搜索索引）
 │   ├── layouts/PageLayout.astro  内页骨架（<head>、导航、页脚）
 │   ├── components/               导航、页脚、面包屑、页头卡片、引流卡片、各种卡片
 │   │   └── home/                 首页各栏目：第一屏、教材栏目、作品栏目、底部横幅

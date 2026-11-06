@@ -3,14 +3,16 @@
 import { media } from '../../lib/media.mjs';
 import '../../styles/home-catalog.css';
 import { getCatalog, CN } from '../../lib/catalog';
+import LessonSearch from '../LessonSearch.astro';
 const grades = (await getCatalog()).grades.filter(g => g.edition.slug === 'bsd');
 ---
 <section class="edu-catalog" id="curriculum">
   <div class="wrap">
     <div class="sec-head">
       <h2>按教材找到下一节课 📚</h2>
-      <p>北师大版 · 一到六年级 · 按上下册和单元查看教学重点</p>
+      <p>输入课题或知识点直接找到那一课，或者按年级、上下册一页看全册目录</p>
     </div>
+    <div class="edu-search"><LessonSearch big /></div>
     <div class="edu-grades">
       {grades.map(g => (
         <article class="edu-grade">

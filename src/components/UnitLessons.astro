@@ -1,0 +1,20 @@
+---
+/* 课时页底部：本单元的其他课，当前这课高亮，方便接着看下一课 */
+import '../styles/catalog.css';
+import type { Lesson } from '../lib/catalog';
+interface Props { lesson: Lesson }
+const { lesson } = Astro.props;
+const u = lesson.unit;
+---
+<nav class="ulessons" aria-label={`第${u.order}单元“${u.title}”的课时`}>
+  <p class="ul-head"><span>本单元 · {u.title}</span><a href={u.book.url}>全册目录 →</a></p>
+  <ol>
+    {u.lessons.map(l => (
+      <li>
+        {l === lesson
+          ? <span class="on" aria-current="page"><b>{l.order}</b>{l.title}</span>
+          : <a href={l.url}><b>{l.order}</b>{l.title}{l.indexable && <i>完整备课</i>}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>

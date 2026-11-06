@@ -47,6 +47,8 @@ const lessons = defineCollection({
     图标: z.string().optional(),
     /** 分享到微信、搜索结果里的配图，先上传到 R2，和网页同路径，比如 https://media.11aike.com/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/cover.webp（建议 1200×630） */
     封面: z.string().startsWith(MEDIA_URL + '/', `封面要先上传到 R2，写 ${MEDIA_URL}/ 开头的网址`).optional(),
+    /** 列表和搜索里显示的知识点（如“两、三位数乘一位数”），不写就从“标题”里取 */
+    知识点: z.string().optional(),
     /** 同一册里有重名的课题时才需要写 */
     单元: z.string().optional(),
     日期: z.coerce.date().optional(),

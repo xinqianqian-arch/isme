@@ -1,0 +1,27 @@
+---
+/* 一个教材版本的“选一册”：每个年级一格，上册、下册直接点进全册目录；有完整备课的册标出课数 */
+import '../styles/catalog.css';
+import { CN, type Book } from '../lib/catalog';
+interface Props { books: Book[] }
+const { books } = Astro.props;
+const grades = [1, 2, 3, 4, 5, 6].filter(g => books.some(b => b.grade === g));
+const done = (b: Book) => b.units.reduce((n, u) => n + u.lessons.filter(l => l.indexable).length, 0);
+---
+<div class="bpick">
+  {grades.map(g => (
+    <div class="bp-grade">
+      <span class="bp-name">{CN[g]}年级</span>
+      <div class="bp-vols">
+        {books.filter(b => b.grade === g).map(b => {
+          const n = done(b);
+          return (
+            <a class:list={['bp-vol', { hot: n > 0 }]} href={b.url}>
+              <strong>{b.volumeName}</strong>
+              <small>{n > 0 ? `${n} 课完整备课` : `${b.units.length} 个单元`}</small>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</div>

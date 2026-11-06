@@ -1,6 +1,8 @@
 /* 首页上由构建脚本加进去的“按教材找到下一节课”栏目：沿用首页 .sec-head 标题和作品卡片的样子 */
 .edu-catalog { padding: 64px 0 24px; }
 .edu-catalog a:focus-visible { outline: 3px solid #5B9DFF; outline-offset: 4px; }
+.edu-search { display: flex; justify-content: center; margin: -6px 0 30px; }
+.edu-search .lsearch { width: 100%; }
 .edu-grades { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .edu-grade {
   position: relative; background: var(--card, #fff); border-radius: var(--radius, 24px); padding: 10px 10px 16px;

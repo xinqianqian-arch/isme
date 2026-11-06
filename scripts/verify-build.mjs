@@ -9,7 +9,7 @@ const exists = f => fs.existsSync(path.join(root, f));
 
 // 1. 必须有的文件
 for (const f of ['index.html', '404.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'ai-index.json',
-  '_headers', 'aaa.html', 'textbooks/bsd/index.html', 'courses/index.html', 'about/index.html']) {
+  '_headers', 'aaa.html', 'search.json', 'textbooks/bsd/index.html', 'courses/index.html', 'about/index.html']) {
   assert(exists(f) && fs.statSync(path.join(root, f)).size > 0, `缺少文件或文件为空：${f}`);
 }
 
@@ -49,7 +49,9 @@ for (const f of all) {
   if (!inMap.has(page)) { assert(/<meta name="robots" content="noindex/.test(html), `页面既不在网站地图也没有 noindex：${page}`); noindex++; }
 }
 
-// 5. robots、AI 索引
+// 5. 找课搜索索引、robots、AI 索引
+const search = JSON.parse(read('search.json'));
+assert(search.length > 300 && search.some(x => x.a === 1), `search.json 内容不对：${search.length} 条`);
 assert(read('robots.txt').includes('Sitemap: https://11aike.com/sitemap.xml'), 'robots.txt 没有声明网站地图');
 const ai = JSON.parse(read('ai-index.json'));
 assert(ai.url === 'https://11aike.com' && ai.catalog.length >= 12, 'ai-index.json 内容不对');

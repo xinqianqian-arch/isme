@@ -1,0 +1,92 @@
+---
+/* 找课搜索框：输入课题、知识点，或“三下 周长”这样的组合，直接跳到那一课。
+   索引是构建时生成的 /search.json，第一次点进输入框时才下载；有完整备课的课排在前面。 */
+import '../styles/catalog.css';
+interface Props {
+  placeholder?: string;
+  /** 大号用在教材目录页和首页 */
+  big?: boolean;
+  /** 读取网址里的 ?q= 自动搜索（教材目录页用） */
+  readQuery?: boolean;
+}
+const { placeholder = '搜课题或知识点，如：两位数乘一位数、轴对称、三下 周长', big = false, readQuery = false } = Astro.props;
+---
+<div class:list={['lsearch', { big }]} data-lsearch data-read-query={readQuery ? '' : undefined}>
+  <label class="lsearch-box">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <input type="search" placeholder={placeholder} aria-label="搜索课题或知识点" autocomplete="off" enterkeyhint="search">
+  </label>
+  <div class="lsearch-panel" hidden>
+    <ul class="lsearch-list"></ul>
+    <p class="lsearch-empty" hidden>没有找到这一课。换个说法试试，比如只输入课题里的两三个字。</p>
+  </div>
+</div>
+
+<script>
+  type Item = { t: string; k: string; u: string; b: string; n: string; p: string; a: number; s: string; unit?: number };
+  let data: Promise<Item[]> | undefined;
+  const load = () => (data ??= fetch('/search.json').then(r => r.json()));
+  const norm = (s: string) => s.toLowerCase().replace(/[\s、，,。.（）()《》“”"'·：:]/g, '');
+  const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string);
+
+  /** 每个词都要出现；课题里命中比知识点、单元里命中分高，有完整备课的排前面 */
+  function score(it: Item, toks: string[]) {
+    const t = norm(it.t), k = norm(it.k), all = norm(`${it.t}${it.k}${it.n}${it.b}${it.s}`);
+    if (!toks.every(x => all.includes(x))) return -1;
+    let s = 0;
+    for (const x of toks) {
+      if (t === x) s += 60; else if (t.includes(x)) s += 25;
+      if (k.includes(x)) s += 12;
+    }
+    return s + (it.a ? 30 : 0) + (it.unit ? 8 : 0);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-lsearch]').forEach(root => {
+    const input = root.querySelector('input')!;
+    const panel = root.querySelector<HTMLElement>('.lsearch-panel')!;
+    const list = root.querySelector<HTMLElement>('.lsearch-list')!;
+    const empty = root.querySelector<HTMLElement>('.lsearch-empty')!;
+    let found: Item[] = [];
+    let active = -1;
+
+    const paint = () => {
+      list.innerHTML = found.map((it, i) => `<li><a href="${it.u}"${i === active ? ' class="on"' : ''}>
+        <span class="ls-t">${esc(it.t)}${it.unit ? '<em>单元</em>' : ''}${it.a ? '<b>完整备课</b>' : ''}</span>
+        <span class="ls-m">${esc(it.b)} · ${esc(it.n)}${it.k && !it.unit ? ' · ' + esc(it.k) : ''}${it.p ? ' · ' + esc(it.p) : ''}</span></a></li>`).join('');
+    };
+    const run = async () => {
+      const q = input.value.trim();
+      if (!q) { panel.hidden = true; return; }
+      const toks = q.split(/\s+/).map(norm).filter(Boolean);
+      const items = await load();
+      found = items.map(it => [score(it, toks), it] as const).filter(([s]) => s >= 0)
+        .sort((x, y) => y[0] - x[0]).slice(0, 10).map(([, it]) => it);
+      active = -1;
+      paint();
+      empty.hidden = found.length > 0;
+      panel.hidden = false;
+    };
+
+    input.addEventListener('focus', () => { load(); if (input.value.trim()) panel.hidden = false; });
+    input.addEventListener('input', run);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        if (!found.length) return;
+        e.preventDefault();
+        active = (active + (e.key === 'ArrowDown' ? 1 : -1) + found.length) % found.length;
+        paint();
+      } else if (e.key === 'Enter' && found.length) {
+        e.preventDefault();
+        location.href = found[Math.max(active, 0)].u;
+      } else if (e.key === 'Escape') {
+        panel.hidden = true;
+      }
+    });
+    document.addEventListener('click', e => { if (!root.contains(e.target as Node)) panel.hidden = true; });
+
+    if (root.dataset.readQuery !== undefined) {
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) { input.value = q; run(); }
+    }
+  });
+</script>

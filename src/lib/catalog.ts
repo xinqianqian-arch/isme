@@ -12,8 +12,15 @@ export interface Lesson {
   edition: Edition; grade: number; volume: number; volumeName: string; revision: string;
   unit: Unit; book: Book;
   entry?: CollectionEntry<'lessons'>;
+  /** 有完整备课（正文够长，会被搜索引擎收录） */
   indexable: boolean;
   updated: Date;
+  /** 知识点：开头信息的“知识点”，不写就从“标题”里《课题》后面那段取 */
+  topic?: string;
+  /** 列表缩略图：正文里第一张 webp 插画 */
+  thumb?: string;
+  /** 教材页码，如“第 2–3 页” */
+  pages?: string;
 }
 export interface Unit {
   id: string; order: number; title: string; url: string;
@@ -109,6 +116,9 @@ async function build(): Promise<Catalog> {
     if (l.entry) throw new Error(`${file}：《${l.title}》已经有一篇课时讲解了（${l.entry.filePath}）`);
     l.entry = e;
     l.indexable = plainLength(e.body) >= SEO_MIN_CHARS;
+    l.topic = e.data.知识点 ?? /》([^：:》]+?)教学设计/.exec(e.data.标题 ?? '')?.[1]?.trim();
+    l.thumb = /\]\((https:\/\/media\.11aike\.com\/[^\s)]+\.webp)/.exec(e.body ?? '')?.[1];
+    l.pages = e.data.页码;
     l.updated = later(l.updated, e.data.日期);
   }
 
