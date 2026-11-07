@@ -16,7 +16,8 @@
 # - 每行字的开头可以加：
 #     "!"  大字加粗（结论、算式），"~" 小字（补充说明），"^" 这一行居中，"[]" 给这一行加粉笔框（可以叠用，如 "^![]"）
 # - 行内彩色粉笔：[y]黄[/]  [p]粉[/]  [b]蓝[/]  [g]绿[/]
-# - 一行太长会自动折行。数学符号用全角：×、÷、＝、＋、－（和课本一致）。
+# - 一行太长会自动折行。数学符号用全角：×、÷、＝、＋、－（和课本一致）。行首可以用全角空格“　”缩进（接续上一行的算式）。
+# - raw 里的彩色字直接写 fill 属性即可，例如 <text x='0' y='20' fill='#FFE38A'>。
 import json, re, sys, html
 
 W, FRAME, PAD = 600, 12, 36
@@ -29,7 +30,8 @@ CHALK = '#F4F1E8'
 def char_w(ch, size):
     o = ord(ch)
     if ch == ' ': return size * 0.32
-    if o < 0x2E80 and ch not in '×÷': return size * (0.62 if ch.isupper() else 0.56)
+    if 0x2000 <= o < 0x2E80 or ch in '×÷': return size * 1.0   # 箭头、≥、弯引号等按整字宽算，宁宽勿窄
+    if o < 0x2000: return size * (0.62 if ch.isupper() else 0.56)
     return size * 1.0
 
 def parse(line):
@@ -60,7 +62,7 @@ def wrap(segs, size, width):
             w = sum(char_w(ch, size) for ch in tok)
             if cw + w > width and cur and tok not in NO_START and not tok.isspace():
                 lines.append(cur); cur, cw = [], 0.0
-            if tok.isspace() and not cur:
+            if tok.isspace() and not cur and lines:   # 折行后的新行不以空格开头；第一行的缩进（如全角空格）保留
                 continue
             if cur and cur[-1][1] == color:
                 cur[-1] = (cur[-1][0] + tok, color)
@@ -122,7 +124,7 @@ def build(spec):
     h = int(y + 42)
     font = "'Kaiti SC','STKaiti','KaiTi','楷体','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',serif"
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {h}" width="{W}" height="{h}">'
-            f'<style>text{{font-family:{font};fill:{CHALK}}}.h{{font-size:30px;font-weight:700;letter-spacing:4px}}'
+            f'<style>text{{font-family:{font}}}text:not([fill]){{fill:{CHALK}}}.h{{font-size:30px;font-weight:700;letter-spacing:4px}}'
             f'.k{{font-size:24px;font-weight:700}}.d{{font-size:20px}}.s{{font-size:18px;opacity:.92}}</style>'
             f'<rect width="{W}" height="{h}" rx="18" fill="#B98A5A"/>'
             f'<rect x="{FRAME}" y="{FRAME}" width="{W - 2 * FRAME}" height="{h - 2 * FRAME}" rx="10" fill="#2F5545" stroke="#264536" stroke-width="3"/>'
