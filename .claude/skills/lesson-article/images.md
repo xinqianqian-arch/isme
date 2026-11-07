@@ -124,7 +124,7 @@ python3 -I .claude/skills/lesson-article/scripts/board.py <板书.json> board.sv
 
 ## Poe 插画
 
-> **生成接口**：Poe 积分用完时改用 glbgpt：`GLB_KEY=… python3 -I .claude/skills/lesson-article/scripts/glb_img.py <模型> <输出前缀> <提示词文件> <参考图>`，参数和 poe_img.py 一样（异步任务，一张约 1–2 分钟；默认 16:9，`--ratio 1:1` 换比例）。参考图要写网址，本机的 g3a.webp 会自动换成它在 R2 上的网址。常用模型：gpt-image-2（320 积分）、seedream-4.5（200）、nano-banana-pro（500）。key 由用户在对话里给，只在命令行用。
+> **生成接口**：Poe 积分用完时改用 glbgpt：`GLB_KEY=… python3 -I .claude/skills/lesson-article/scripts/glb_img.py <模型> <输出前缀> <提示词文件> <参考图>`，参数和 poe_img.py 一样（异步任务，一张约 1–2 分钟；默认 16:9，`--ratio 1:1` 换比例）。参考图要写网址，本机的 g3a.webp 会自动换成它在 R2 上的网址。常用模型：gpt-image-2（320 积分）、seedream-4.5（200）、nano-banana-pro（500）。key 在 `/home/ec2-user/jnb/.env.cloudflare` 里（`set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a` 后直接运行），不要写进任何文件。
 
 ### Key 与生成
 

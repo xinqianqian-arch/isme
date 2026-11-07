@@ -37,7 +37,7 @@ GitHub Actions（`.github/workflows/static.yml`）只做构建检查，不负责
 
 ```bash
 npm ci && npm run build
-export CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 CLOUDFLARE_API_TOKEN=...   # 不要写进仓库
+set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a   # 本机文件（权限 600），放 CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOKEN，不要复制进仓库
 npx wrangler deploy --env preview   # 发布到固定的预览网址 https://11ai-preview.xinqianqian951210.workers.dev ，不影响线上
 npx wrangler deploy                 # 发布到 11aike.com
 ```

@@ -50,20 +50,21 @@ npm run media -- video 录屏.mov intro.mp4
 # 音频：朗读；配乐加 --music
 npm run media -- audio 录音.m4a narration.mp3
 
+# 先把 token 读进环境变量（本机文件，见下方说明）
+set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a
+
 # 上传到公开桶（会打印网址和 Markdown 写法）
-CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp
+npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp
 
 # 替换已有文件
-CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp --overwrite
+npm run media -- put light.webp textbooks/pep/grade-3/volume-1/unit-05/lesson-01/light.webp --overwrite
 
 # 上传到私有桶
-CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 \
-  npm run media -- put 原图.png originals/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/原图.png --private
+npm run media -- put 原图.png originals/textbooks/pep/grade-3/volume-1/unit-05/lesson-01/原图.png --private
 ```
 
-- **token 只在命令行里临时写，不要存进任何文件。** 这个仓库是公开的。
+- **token 放在本机 `/home/ec2-user/jnb/.env.cloudflare`**（权限 600，不在任何 git 仓库里），内容是 `CLOUDFLARE_ACCOUNT_ID`、`CLOUDFLARE_API_TOKEN`（还有配图用的 `GLB_KEY`）。**不要复制进这个仓库**，这个仓库是公开的。换 token 后只改这个文件。
+- 没有单独的 R2 S3 Access Key：上传、清缓存、发布 Worker 都用这一个 Cloudflare API token。
 - **token 需要的权限**：R2 编辑（上传）；11aike.com 的“缓存清除”（覆盖后刷新 CDN）。
 - **修改已上线的 svg**：先下载 `https://media.11aike.com/…/xx.svg`，改好后再用 `--overwrite` 传回去。
 

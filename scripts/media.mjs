@@ -6,7 +6,7 @@
  *   npm run media -- audio <输入音频> <输出.mp3> [--music]  转成 MP3：朗读 64kbps 单声道；--music 用 128kbps 立体声
  *
  * 公开桶里已经有同名文件时，要加 --overwrite 才会覆盖，覆盖后自动刷新 CDN 缓存。
- * 上传需要环境变量 CLOUDFLARE_API_TOKEN 和 CLOUDFLARE_ACCOUNT_ID，只在命令行里临时传入，不要写进任何文件。 */
+ * 上传需要环境变量 CLOUDFLARE_API_TOKEN 和 CLOUDFLARE_ACCOUNT_ID：先 set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a（本机文件，不要写进仓库）。 */
 import { execFileSync } from 'node:child_process';
 import { existsSync, statSync } from 'node:fs';
 import { MEDIA_URL } from '../src/lib/media.mjs';

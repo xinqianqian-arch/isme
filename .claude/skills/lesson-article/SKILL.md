@@ -130,6 +130,6 @@ description: 按十一课件网站的标准写一节课的深度备课文章（�
    - 表格在手机上可以左右滑动；
    - 图注正确。
 3. 在需求分支上提交并推送。需要给用户预览时，运行 `npx wrangler deploy --env preview`，发布到固定的预览网址 https://11ai-preview.xinqianqian951210.workers.dev（每次覆盖，不影响线上；不要再用 `wrangler versions upload`，它会留下一堆清不掉的版本网址）。
-   - 这一步需要用户提供 Cloudflare token，只用环境变量临时传入，不保存。
+   - 这一步要用 Cloudflare token：先 `set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a`（本机文件，权限 600，不在任何仓库里；R2 上传、清缓存、发布 Worker、glbgpt 配图的 key 都在里面）。
 4. 推到 `main` 就是上线。用户已授权（2026-11-07）：改完检查没问题就直接合并到 main 上线，再核对线上；需要用户拍板的事（按未出版教材写、删页面、改设计方向等）先问。
-5. **任何 key 和 token（Poe、Cloudflare）都不能写进文件或提交。**
+5. **任何 key 和 token（Poe、Cloudflare、glbgpt）都不能写进仓库文件或提交**；只放在 `/home/ec2-user/jnb/.env.cloudflare`，用的时候 source 进环境变量。派助手时 key 写在派活消息里（助手自己读这个文件会被权限检查拦下），不要抄进简报、提示词文件或临时文件。
