@@ -129,7 +129,7 @@ description: 按十一课件网站的标准写一节课的深度备课文章（�
    - 示意图文字看得清；
    - 表格在手机上可以左右滑动；
    - 图注正确。
-3. 在需求分支上提交并推送。需要给用户预览时，运行 `npx wrangler versions upload` 上传预览版本，不影响线上。
+3. 在需求分支上提交并推送。需要给用户预览时，运行 `npx wrangler deploy --env preview`，发布到固定的预览网址 https://11ai-preview.xinqianqian951210.workers.dev（每次覆盖，不影响线上；不要再用 `wrangler versions upload`，它会留下一堆清不掉的版本网址）。
    - 这一步需要用户提供 Cloudflare token，只用环境变量临时传入，不保存。
-4. 推到 `main` 就是上线，用户明确说了才合并。
+4. 推到 `main` 就是上线。用户已授权（2026-11-07）：改完检查没问题就直接合并到 main 上线，再核对线上；需要用户拍板的事（按未出版教材写、删页面、改设计方向等）先问。
 5. **任何 key 和 token（Poe、Cloudflare）都不能写进文件或提交。**

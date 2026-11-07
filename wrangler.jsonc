@@ -15,6 +15,16 @@
     { "pattern": "11edu.cc", "custom_domain": true }
   ],
   "workers_dev": true,
-  "preview_urls": true,
-  "observability": { "enabled": true }
+  // 不给每次上传的版本单独生成预览网址（Cloudflare 不会自动清理，会越积越多）。要预览就用下面的 preview 环境
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "env": {
+    // 预览专用：npx wrangler deploy --env preview → 固定网址 https://11ai-preview.xinqianqian951210.workers.dev ，每次覆盖，不挂正式域名
+    "preview": {
+      "name": "11ai-preview",
+      "routes": [],
+      "workers_dev": true,
+      "preview_urls": false
+    }
+  }
 }

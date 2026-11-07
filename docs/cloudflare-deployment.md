@@ -38,9 +38,11 @@ GitHub Actions（`.github/workflows/static.yml`）只做构建检查，不负责
 ```bash
 npm ci && npm run build
 export CLOUDFLARE_ACCOUNT_ID=b71f81b110b4503677894266360bc757 CLOUDFLARE_API_TOKEN=...   # 不要写进仓库
-npx wrangler versions upload   # 只生成预览网址，不影响线上
-npx wrangler deploy            # 发布到 11aike.com
+npx wrangler deploy --env preview   # 发布到固定的预览网址 https://11ai-preview.xinqianqian951210.workers.dev ，不影响线上
+npx wrangler deploy                 # 发布到 11aike.com
 ```
+
+预览只用这一个固定网址，每次覆盖。`wrangler.jsonc` 里关掉了 `preview_urls`：以前每次 `wrangler versions upload` 都会生成一个 `xxxx-11ai.….workers.dev` 版本预览网址，Cloudflare 不会自动清理，越积越多，所以不再用这种方式。workers.dev 上的网址都带 `X-Robots-Tag: noindex`（见 `public/_headers`），不会被搜索引擎收录。
 
 ## 回退
 
