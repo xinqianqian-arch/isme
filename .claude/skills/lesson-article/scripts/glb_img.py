@@ -1,7 +1,7 @@
 # 用法: GLB_KEY=... python3 -I glb_img.py <模型> <输出文件前缀> <提示词文件> [参考图...] [--ratio 16:9]
 # 用 glbgpt 开放接口生成图片（异步任务：提交 → 每 6 秒查一次 → 下载）。参数和 poe_img.py 一样，可以直接替换。
 # 参考图：写 https 网址；本机文件只认得 g3a.webp（会换成它在 R2 上的网址），其他本机图片要先传到 R2。
-# 常用模型：gpt-image-2（320 积分）、nano-banana-pro（500）、seedream-4.5（200）。可用模型：GET /v1/models?type=image
+# 默认模型 gpt-image-2.6（87 积分，画风和 gpt-image-2 一致）；其他：gpt-image-2（320）、nano-banana-pro（500）、seedream-4.5（200）。可用模型：GET /v1/models?type=image
 # key 从环境变量 GLB_KEY 读：先 set -a; source /home/ec2-user/jnb/.env.cloudflare; set +a。不要把 key 写进仓库或提示词文件。
 import json, os, sys, time, urllib.request
 
